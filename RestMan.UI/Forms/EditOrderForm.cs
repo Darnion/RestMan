@@ -16,9 +16,12 @@ namespace RestMan.UI.Forms
     public partial class EditOrderForm : Form
     {
         public Order Order { get; set; }
-        public EditOrderForm()
+        public EditOrderForm(Order order)
         {
             InitializeComponent();
+            this.Order = order;
+            OrderMenuItemsHandler();
+            OrderPaymentsHandler();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -31,7 +34,51 @@ namespace RestMan.UI.Forms
             toolStripStatusLabelFullname.Text = CurrentUser.User.Fullname;
             toolStripStatusLabelRole.Text = CurrentUser.User.Role.Title;
 
+            panelControls.Visible = !Order.DeletedAt.HasValue;
+            buttonEditWaiter.Visible = buttonCloseOrder.Visible = CurrentUser.IsCashier() || CurrentUser.IsManager();
+            buttonEditOrderMenuItem.Visible = buttonDeleteOrderMenuItem.Visible = CurrentUser.IsManager();
+        }
 
+        private void OrderMenuItemsHandler()
+        {
+            using (var db = new RestManDbContext())
+            {
+                dataGridViewOrderMenuItems.DataSource = db.OrderMenuItems
+                    .Include(x => x.Order)
+                    .Include(x => x.MenuItem)
+                    .ToList()
+                    .Where(x => x.OrderId == this.Order.Id)
+                    .Select(x => new
+                    {
+                        Title = x.MenuItem.Title,
+                        Cost = x.MenuItem.Cost,
+                        Count = x.Count,
+                        Total = x.MenuItem.Cost * x.Count
+                    })
+                    .ToList();
+            }
+        }
+
+        private void OrderPaymentsHandler()
+        {
+            using (var db = new RestManDbContext())
+            {
+                dataGridViewPayments.DataSource = db.Orders
+                    .Where(x => x.Id == this.Order.Id)
+                    .Join(db.Orders, cred => cred.Id, cash => cash.Id, (cred, cash) => new { cred, cash })
+                    .Join(db.Orders, credCash => credCash.cred.Id, qr => qr.Id, (credCash, qr) => new { credCash, qr })
+                    .Join(db.Orders, credCashQR => credCashQR.credCash.cred.Id, gift => gift.Id, (credCashQR, gift) => new
+                    {
+                        Description = "",
+                        Amount = 0,
+                    });
+            }
+        }
+
+        private void dataGridViewOrderMenuItems_SelectionChanged(object sender, EventArgs e)
+        {
+            buttonEditOrderMenuItem.Enabled = dataGridViewOrderMenuItems.SelectedRows.Count == 1;
+            buttonDeleteOrderMenuItem.Enabled = dataGridViewOrderMenuItems.SelectedRows.Count > 0;
         }
     }
 }

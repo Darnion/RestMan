@@ -38,12 +38,24 @@
             this.flowLayoutPanelMenuItems = new System.Windows.Forms.FlowLayoutPanel();
             this.dataGridViewOrderMenuItems = new System.Windows.Forms.DataGridView();
             this.dataGridViewPayments = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.panelControls = new System.Windows.Forms.Panel();
+            this.buttonEditWaiter = new System.Windows.Forms.Button();
+            this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonEditOrderMenuItem = new System.Windows.Forms.Button();
+            this.buttonDeleteOrderMenuItem = new System.Windows.Forms.Button();
+            this.buttonCloseOrder = new System.Windows.Forms.Button();
+            this.ColumnTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panelInfo = new System.Windows.Forms.Panel();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderMenuItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPayments)).BeginInit();
+            this.panelControls.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -56,7 +68,7 @@
             this.menuStrip.Padding = new System.Windows.Forms.Padding(11, 4, 0, 4);
             this.menuStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.menuStrip.ShowItemToolTips = true;
-            this.menuStrip.Size = new System.Drawing.Size(869, 30);
+            this.menuStrip.Size = new System.Drawing.Size(990, 30);
             this.menuStrip.TabIndex = 4;
             // 
             // exitToolStripMenuItem
@@ -77,7 +89,7 @@
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
             this.statusStrip.ShowItemToolTips = true;
-            this.statusStrip.Size = new System.Drawing.Size(869, 23);
+            this.statusStrip.Size = new System.Drawing.Size(990, 23);
             this.statusStrip.SizingGrip = false;
             this.statusStrip.TabIndex = 5;
             // 
@@ -99,28 +111,29 @@
             // 
             this.tableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel.ColumnCount = 3;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel.Controls.Add(this.flowLayoutPanelMenuItems, 1, 1);
             this.tableLayoutPanel.Controls.Add(this.dataGridViewOrderMenuItems, 1, 0);
             this.tableLayoutPanel.Controls.Add(this.dataGridViewPayments, 2, 0);
-            this.tableLayoutPanel.Controls.Add(this.button1, 2, 1);
+            this.tableLayoutPanel.Controls.Add(this.panelControls, 2, 1);
+            this.tableLayoutPanel.Controls.Add(this.panelInfo, 0, 0);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 30);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 2;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(869, 535);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(990, 535);
             this.tableLayoutPanel.TabIndex = 6;
             // 
             // flowLayoutPanelMenuItems
             // 
             this.flowLayoutPanelMenuItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelMenuItems.Location = new System.Drawing.Point(178, 324);
+            this.flowLayoutPanelMenuItems.Location = new System.Drawing.Point(152, 324);
             this.flowLayoutPanelMenuItems.Name = "flowLayoutPanelMenuItems";
-            this.flowLayoutPanelMenuItems.Size = new System.Drawing.Size(513, 207);
+            this.flowLayoutPanelMenuItems.Size = new System.Drawing.Size(585, 207);
             this.flowLayoutPanelMenuItems.TabIndex = 0;
             // 
             // dataGridViewOrderMenuItems
@@ -128,39 +141,151 @@
             this.dataGridViewOrderMenuItems.AllowUserToAddRows = false;
             this.dataGridViewOrderMenuItems.AllowUserToDeleteRows = false;
             this.dataGridViewOrderMenuItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewOrderMenuItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnTitle,
+            this.ColumnCost,
+            this.ColumnCount,
+            this.ColumnTotal});
             this.dataGridViewOrderMenuItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewOrderMenuItems.Location = new System.Drawing.Point(178, 4);
+            this.dataGridViewOrderMenuItems.Location = new System.Drawing.Point(152, 4);
             this.dataGridViewOrderMenuItems.Name = "dataGridViewOrderMenuItems";
             this.dataGridViewOrderMenuItems.ReadOnly = true;
-            this.dataGridViewOrderMenuItems.Size = new System.Drawing.Size(513, 313);
+            this.dataGridViewOrderMenuItems.Size = new System.Drawing.Size(585, 313);
             this.dataGridViewOrderMenuItems.TabIndex = 1;
+            this.dataGridViewOrderMenuItems.SelectionChanged += new System.EventHandler(this.dataGridViewOrderMenuItems_SelectionChanged);
             // 
             // dataGridViewPayments
             // 
             this.dataGridViewPayments.AllowUserToAddRows = false;
             this.dataGridViewPayments.AllowUserToDeleteRows = false;
+            this.dataGridViewPayments.AllowUserToResizeColumns = false;
+            this.dataGridViewPayments.AllowUserToResizeRows = false;
             this.dataGridViewPayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPayments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnDescription,
+            this.ColumnAmount});
             this.dataGridViewPayments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewPayments.Location = new System.Drawing.Point(698, 4);
+            this.dataGridViewPayments.Location = new System.Drawing.Point(744, 4);
             this.dataGridViewPayments.Name = "dataGridViewPayments";
             this.dataGridViewPayments.ReadOnly = true;
-            this.dataGridViewPayments.Size = new System.Drawing.Size(167, 313);
+            this.dataGridViewPayments.Size = new System.Drawing.Size(242, 313);
             this.dataGridViewPayments.TabIndex = 2;
             // 
-            // button1
+            // panelControls
             // 
-            this.button1.Location = new System.Drawing.Point(698, 324);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.panelControls.Controls.Add(this.buttonCloseOrder);
+            this.panelControls.Controls.Add(this.buttonDeleteOrderMenuItem);
+            this.panelControls.Controls.Add(this.buttonEditOrderMenuItem);
+            this.panelControls.Controls.Add(this.buttonEditWaiter);
+            this.panelControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControls.Location = new System.Drawing.Point(744, 324);
+            this.panelControls.Name = "panelControls";
+            this.panelControls.Size = new System.Drawing.Size(242, 207);
+            this.panelControls.TabIndex = 3;
+            // 
+            // buttonEditWaiter
+            // 
+            this.buttonEditWaiter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonEditWaiter.Location = new System.Drawing.Point(0, 0);
+            this.buttonEditWaiter.Name = "buttonEditWaiter";
+            this.buttonEditWaiter.Size = new System.Drawing.Size(242, 46);
+            this.buttonEditWaiter.TabIndex = 0;
+            this.buttonEditWaiter.Text = "Изменить официанта";
+            this.buttonEditWaiter.UseVisualStyleBackColor = true;
+            // 
+            // ColumnDescription
+            // 
+            this.ColumnDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnDescription.DataPropertyName = "Description";
+            this.ColumnDescription.HeaderText = "Описание";
+            this.ColumnDescription.Name = "ColumnDescription";
+            this.ColumnDescription.ReadOnly = true;
+            // 
+            // ColumnAmount
+            // 
+            this.ColumnAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnAmount.DataPropertyName = "Amount";
+            this.ColumnAmount.HeaderText = "Количество";
+            this.ColumnAmount.Name = "ColumnAmount";
+            this.ColumnAmount.ReadOnly = true;
+            // 
+            // buttonEditOrderMenuItem
+            // 
+            this.buttonEditOrderMenuItem.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonEditOrderMenuItem.Enabled = false;
+            this.buttonEditOrderMenuItem.Location = new System.Drawing.Point(0, 46);
+            this.buttonEditOrderMenuItem.Name = "buttonEditOrderMenuItem";
+            this.buttonEditOrderMenuItem.Size = new System.Drawing.Size(242, 46);
+            this.buttonEditOrderMenuItem.TabIndex = 1;
+            this.buttonEditOrderMenuItem.Text = "Изменить позицию";
+            this.buttonEditOrderMenuItem.UseVisualStyleBackColor = true;
+            // 
+            // buttonDeleteOrderMenuItem
+            // 
+            this.buttonDeleteOrderMenuItem.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonDeleteOrderMenuItem.Enabled = false;
+            this.buttonDeleteOrderMenuItem.Location = new System.Drawing.Point(0, 92);
+            this.buttonDeleteOrderMenuItem.Name = "buttonDeleteOrderMenuItem";
+            this.buttonDeleteOrderMenuItem.Size = new System.Drawing.Size(242, 46);
+            this.buttonDeleteOrderMenuItem.TabIndex = 2;
+            this.buttonDeleteOrderMenuItem.Text = "Удалить позицию";
+            this.buttonDeleteOrderMenuItem.UseVisualStyleBackColor = true;
+            // 
+            // buttonCloseOrder
+            // 
+            this.buttonCloseOrder.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonCloseOrder.Location = new System.Drawing.Point(0, 138);
+            this.buttonCloseOrder.Name = "buttonCloseOrder";
+            this.buttonCloseOrder.Size = new System.Drawing.Size(242, 46);
+            this.buttonCloseOrder.TabIndex = 3;
+            this.buttonCloseOrder.Text = "Оплатить заказ";
+            this.buttonCloseOrder.UseVisualStyleBackColor = true;
+            // 
+            // ColumnTitle
+            // 
+            this.ColumnTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnTitle.DataPropertyName = "Title";
+            this.ColumnTitle.HeaderText = "Название";
+            this.ColumnTitle.Name = "ColumnTitle";
+            this.ColumnTitle.ReadOnly = true;
+            // 
+            // ColumnCost
+            // 
+            this.ColumnCost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnCost.DataPropertyName = "Cost";
+            this.ColumnCost.HeaderText = "Цена";
+            this.ColumnCost.Name = "ColumnCost";
+            this.ColumnCost.ReadOnly = true;
+            // 
+            // ColumnCount
+            // 
+            this.ColumnCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnCount.DataPropertyName = "Count";
+            this.ColumnCount.HeaderText = "Количество";
+            this.ColumnCount.Name = "ColumnCount";
+            this.ColumnCount.ReadOnly = true;
+            // 
+            // ColumnTotal
+            // 
+            this.ColumnTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnTotal.DataPropertyName = "Total";
+            this.ColumnTotal.HeaderText = "Итого";
+            this.ColumnTotal.Name = "ColumnTotal";
+            this.ColumnTotal.ReadOnly = true;
+            // 
+            // panelInfo
+            // 
+            this.panelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelInfo.Location = new System.Drawing.Point(4, 4);
+            this.panelInfo.Name = "panelInfo";
+            this.panelInfo.Size = new System.Drawing.Size(141, 313);
+            this.panelInfo.TabIndex = 4;
             // 
             // EditOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(869, 588);
+            this.ClientSize = new System.Drawing.Size(990, 588);
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
@@ -178,6 +303,7 @@
             this.tableLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderMenuItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPayments)).EndInit();
+            this.panelControls.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,6 +320,17 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelMenuItems;
         private System.Windows.Forms.DataGridView dataGridViewOrderMenuItems;
         private System.Windows.Forms.DataGridView dataGridViewPayments;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panelControls;
+        private System.Windows.Forms.Button buttonEditWaiter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAmount;
+        private System.Windows.Forms.Button buttonEditOrderMenuItem;
+        private System.Windows.Forms.Button buttonDeleteOrderMenuItem;
+        private System.Windows.Forms.Button buttonCloseOrder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTotal;
+        private System.Windows.Forms.Panel panelInfo;
     }
 }
