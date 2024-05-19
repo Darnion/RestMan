@@ -9,8 +9,10 @@ namespace RestMan.Context.Models
 {
     public class Hall
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
+        
         [Required]
+        [MaxLength(255)]
         public string Title { get; set; }
         public ICollection<Table> Tables { get; set; }
     }

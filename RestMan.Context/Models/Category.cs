@@ -6,8 +6,10 @@ namespace RestMan.Context.Models
 {
     public class Category
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
+
         [Required]
+        [MaxLength(255)]
         public string Title { get; set; }
         public int ShopId { get; set; }
         public Shop Shop { get; set; }

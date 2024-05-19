@@ -10,9 +10,12 @@ namespace RestMan.Context.Models
 {
     public class MenuItem
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
+        
         [Required]
+        [MaxLength(255)]
         public string Title { get; set; }
+
         [Required]
         public int Cost { get; set; }
         public int CategoryId { get; set; }

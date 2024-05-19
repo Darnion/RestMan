@@ -67,6 +67,18 @@
     <Compile Include="Migrations\202405191107294_PayOptionsAdded1.Designer.cs">
       <DependentUpon>202405191107294_PayOptionsAdded1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202405191931591_UniqueLogin.cs" />
+    <Compile Include="Migrations\202405191931591_UniqueLogin.Designer.cs">
+      <DependentUpon>202405191931591_UniqueLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405191944292_AddSalt.cs" />
+    <Compile Include="Migrations\202405191944292_AddSalt.Designer.cs">
+      <DependentUpon>202405191944292_AddSalt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405191952060_Fix.cs" />
+    <Compile Include="Migrations\202405191952060_Fix.Designer.cs">
+      <DependentUpon>202405191952060_Fix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Hall.cs" />
@@ -97,6 +109,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405191107294_PayOptionsAdded1.resx">
       <DependentUpon>202405191107294_PayOptionsAdded1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405191931591_UniqueLogin.resx">
+      <DependentUpon>202405191931591_UniqueLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405191944292_AddSalt.resx">
+      <DependentUpon>202405191944292_AddSalt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405191952060_Fix.resx">
+      <DependentUpon>202405191952060_Fix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

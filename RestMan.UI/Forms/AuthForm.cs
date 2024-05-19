@@ -1,4 +1,5 @@
 ﻿using RestMan.Context;
+using RestMan.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,11 +29,23 @@ namespace RestMan.UI.Forms
             using (var db = new RestManDbContext())
             {
                 var user = db.Users.Include(x => x.Role)
-                                   .SingleOrDefault(x => x.Login == textBoxLogin.Text
-                                                    && x.Password == textBoxPassword.Text);
+                                   .FirstOrDefault(x => x.Login == textBoxLogin.Text);
 
                 if (user != null)
                 {
+                    var hashPassword = new Authorizator()
+                        .GenerateSHA256Hash(textBoxPassword.Text, user.Salt);
+
+                    if (hashPassword != user.Password)
+                    {
+                        MessageBox.Show("Введенные данные неверны!",
+                        "Пользователь не существует!",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
+                        return;
+                    }
+
                     CurrentUser.User = user;
 
                     if (!CurrentUser.IsAdmin() &&

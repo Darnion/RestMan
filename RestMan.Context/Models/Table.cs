@@ -10,6 +10,7 @@ namespace RestMan.Context.Models
     public class Table
     {
         public int Id { get; set; }
+        [MaxLength(255)]
         [Required]
         public string Title { get; set; }
         public int HallId { get; set; } 
