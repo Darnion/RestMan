@@ -63,15 +63,7 @@ namespace RestMan.UI.Forms
         {
             using (var db = new RestManDbContext())
             {
-                dataGridViewPayments.DataSource = db.Orders
-                    .Where(x => x.Id == this.Order.Id)
-                    .Join(db.Orders, cred => cred.Id, cash => cash.Id, (cred, cash) => new { cred, cash })
-                    .Join(db.Orders, credCash => credCash.cred.Id, qr => qr.Id, (credCash, qr) => new { credCash, qr })
-                    .Join(db.Orders, credCashQR => credCashQR.credCash.cred.Id, gift => gift.Id, (credCashQR, gift) => new
-                    {
-                        Description = "",
-                        Amount = 0,
-                    });
+                
             }
         }
 

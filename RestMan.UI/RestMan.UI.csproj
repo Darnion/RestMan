@@ -102,6 +102,12 @@
     <Compile Include="UserControls\OrderCard.Designer.cs">
       <DependentUpon>OrderCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\PaymentRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PaymentRow.Designer.cs">
+      <DependentUpon>PaymentRow.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AuthForm.resx">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,6 +138,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\OrderCard.resx">
       <DependentUpon>OrderCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PaymentRow.resx">
+      <DependentUpon>PaymentRow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

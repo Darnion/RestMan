@@ -25,7 +25,7 @@ namespace RestMan.UI.UserControls
             Initialize(order, orderMenuItems);
         }
 
-        public void Initialize(Order order, List<OrderMenuItem> orderMenuItems)
+        private void Initialize(Order order, List<OrderMenuItem> orderMenuItems)
         {
             labelTableNumber.Text += order.Table.Title;
             labelWaiter.Text = order.Waiter.Fullname;
