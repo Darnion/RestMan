@@ -239,6 +239,7 @@ namespace RestMan.UI.Forms
             paidByCredit = Order.PaidByCredit ?? 0;
             paidByGiftCard = Order.PaidByGiftCard ?? 0;
             paidByQR = Order.PaidByQR ?? 0;
+            change = Order.ChangeGiven ?? 0;
             totalPaid = paidByCash + paidByCredit + paidByGiftCard + paidByQR;
             remainToPay = total - totalPaid;
         }
