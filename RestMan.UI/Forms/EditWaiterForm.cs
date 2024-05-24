@@ -30,8 +30,9 @@ namespace RestMan.UI.Forms
                     .ToArray();
 
                 comboBoxWaiter.DisplayMember = nameof(User.Fullname);
-                comboBoxWaiter.ValueMember = nameof(User.Id);
-                comboBoxWaiter.SelectedValue = Waiter.Id;
+                comboBoxWaiter.SelectedItem = comboBoxWaiter.Items
+                    .Cast<User>()
+                    .FirstOrDefault(x => x.Id == Waiter.Id);
             }
         }
 

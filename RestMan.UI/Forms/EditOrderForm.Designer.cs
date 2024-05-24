@@ -266,11 +266,12 @@
             // 
             // ColumnTitle
             // 
-            this.ColumnTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.ColumnTitle.DataPropertyName = "Title";
             this.ColumnTitle.HeaderText = "Название";
             this.ColumnTitle.Name = "ColumnTitle";
             this.ColumnTitle.ReadOnly = true;
+            this.ColumnTitle.Width = 97;
             // 
             // ColumnCost
             // 

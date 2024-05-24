@@ -16,10 +16,11 @@ namespace RestMan.UI.Forms
 {
     public partial class EditOrderForm : Form
     {
-        private Shop CurrentShop = null;
-        private Category CurrentCategory = null;
-        private List<Shop> ShopList = null;
-        private List<Category> CategoryList = null;
+        private Shop currentShop = null;
+        private Category currentCategory = null;
+        private List<Shop> shopList = null;
+        private List<Category> categoryList = null;
+        private List<OrderMenuItem> orderMenuItemsCurrent = new List<OrderMenuItem>();
         public Order Order { get; set; }
         public List<OrderMenuItem> OrderMenuItems { get; set; }
         public EditOrderForm(Order order)
@@ -52,11 +53,11 @@ namespace RestMan.UI.Forms
         {
             using (var db = new RestManDbContext())
             {
-                ShopList = db.Shops
+                shopList = db.Shops
                     .OrderBy(x => x.Title)
                     .ToList();
 
-                CategoryList = db.Categories
+                categoryList = db.Categories
                     .OrderBy(x => x.Title)
                     .ToList();
             }
@@ -72,12 +73,12 @@ namespace RestMan.UI.Forms
 
                 using (var db = new RestManDbContext())
                 {
-                    var categoryId = CurrentCategory == null
+                    var categoryId = currentCategory == null
                         ? -1
-                        : CurrentCategory.Id;
-                    var shopId = CurrentShop == null
+                        : currentCategory.Id;
+                    var shopId = currentShop == null
                         ? -1
-                        : CurrentShop.Id;
+                        : currentShop.Id;
 
                     var actualMenuItems = db.MenuItems
                         .Include(x => x.Category)
@@ -105,7 +106,7 @@ namespace RestMan.UI.Forms
                 }
             }
 
-            if (CurrentCategory != null)
+            if (currentCategory != null)
             {
                 flowLayoutPanelMenuItems.Controls.Clear();
 
@@ -114,7 +115,7 @@ namespace RestMan.UI.Forms
                 using (var db = new RestManDbContext())
                 {
                     var actualMenuItems = db.MenuItems
-                        .Where(x => x.IsStopListed == false && x.CategoryId == CurrentCategory.Id)
+                        .Where(x => x.IsStopListed == false && x.CategoryId == currentCategory.Id)
                         .OrderBy(x => x.Title)
                         .ToList();
 
@@ -134,13 +135,13 @@ namespace RestMan.UI.Forms
                 return;
             }
 
-            if (CurrentShop != null)
+            if (currentShop != null)
             {
                 flowLayoutPanelMenuItems.Controls.Clear();
 
                 AddBackButton();
 
-                foreach (var category in CategoryList.Where(x => x.ShopId == CurrentShop.Id))
+                foreach (var category in categoryList.Where(x => x.ShopId == currentShop.Id))
                 {
                     var button = new Button
                     {
@@ -156,7 +157,7 @@ namespace RestMan.UI.Forms
             }
 
             flowLayoutPanelMenuItems.Controls.Clear();
-            foreach (var shop in ShopList)
+            foreach (var shop in shopList)
             {
                 var button = new Button
                 {
@@ -202,6 +203,8 @@ namespace RestMan.UI.Forms
 
         private void OrderPaymentsHandler()
         {
+            panelPayments.Controls.Clear();
+
             using (var db = new RestManDbContext())
             {
                 var orderMenuItems = dataGridViewOrderMenuItems.Rows;
@@ -316,7 +319,7 @@ namespace RestMan.UI.Forms
         {
             if (int.TryParse(((Button)sender).Tag.ToString(), out var shopId))
             {
-                CurrentShop = ShopList.FirstOrDefault(x => x.Id == shopId);
+                currentShop = shopList.FirstOrDefault(x => x.Id == shopId);
 
                 MenuControlsHandler();
             }
@@ -326,7 +329,7 @@ namespace RestMan.UI.Forms
         {
             if (int.TryParse(((Button)sender).Tag.ToString(), out var categoryId))
             {
-                CurrentCategory = CategoryList.FirstOrDefault(x => x.Id == categoryId);
+                currentCategory = categoryList.FirstOrDefault(x => x.Id == categoryId);
 
                 MenuControlsHandler();
             }
@@ -338,29 +341,16 @@ namespace RestMan.UI.Forms
             {
                 using (var db = new RestManDbContext())
                 {
-                    var currentItems = new List<OrderMenuItem>();
-
-                    foreach (DataGridViewRow row in dataGridViewOrderMenuItems.Rows)
+                    if (orderMenuItemsCurrent.Exists(x => x.MenuItemId == menuItemId))
                     {
-                        int.TryParse(row.Cells["ColumnId"].Value.ToString(), out var orderMenuItemId);
-
-                        if (OrderMenuItems.Exists(x => x.Id == orderMenuItemId))
-                        {
-                            continue;
-                        }
-
-                        currentItems.Add(db.OrderMenuItems.FirstOrDefault(x => x.Id == orderMenuItemId));
-                    }
-
-                    if (currentItems.Exists(x => x.MenuItemId == menuItemId))
-                    {
-                        var currentItemId = currentItems
-                            .FirstOrDefault(y => y.MenuItemId == menuItemId).Id;
+                        var currentItem = orderMenuItemsCurrent
+                            .FirstOrDefault(x => x.MenuItemId == menuItemId);
 
                         var orderMenuItem = db.OrderMenuItems
-                                              .FirstOrDefault(x => x.Id == currentItemId);
+                                              .FirstOrDefault(x => x.Id == currentItem.Id);
 
                         orderMenuItem.Count++;
+                        currentItem.Count++;
                     }
                     else
                     {
@@ -371,6 +361,7 @@ namespace RestMan.UI.Forms
                         };
 
                         db.OrderMenuItems.Add(orderMenuItem);
+                        orderMenuItemsCurrent.Add(orderMenuItem);
                     }
                     
                     db.SaveChanges();
@@ -383,16 +374,34 @@ namespace RestMan.UI.Forms
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            if (CurrentCategory != null)
+            if (currentCategory != null)
             {
-                CurrentCategory = null;
+                currentCategory = null;
             }
-            else if (CurrentShop != null)
+            else if (currentShop != null)
             {
-                CurrentShop = null;
+                currentShop = null;
             }
 
             MenuControlsHandler();
+        }
+
+        private void SetOrderMenuItemsCurrent()
+        {
+            using (var db = new RestManDbContext())
+            {
+                foreach (DataGridViewRow row in dataGridViewOrderMenuItems.Rows)
+                {
+                    int.TryParse(row.Cells["ColumnId"].Value.ToString(), out var orderMenuItemId);
+
+                    if (OrderMenuItems.Exists(x => x.Id == orderMenuItemId))
+                    {
+                        continue;
+                    }
+
+                    orderMenuItemsCurrent.Add(db.OrderMenuItems.FirstOrDefault(x => x.Id == orderMenuItemId));
+                }
+            }
         }
 
         private void textBoxMenuSearch_TextChanged(object sender, EventArgs e)
