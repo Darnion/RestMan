@@ -238,6 +238,8 @@
             // 
             // buttonDeleteFromStopList
             // 
+            this.buttonDeleteFromStopList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonDeleteFromStopList.Location = new System.Drawing.Point(81, 276);
             this.buttonDeleteFromStopList.Name = "buttonDeleteFromStopList";
             this.buttonDeleteFromStopList.Size = new System.Drawing.Size(178, 33);
@@ -279,6 +281,7 @@
             this.Font = new System.Drawing.Font("Book Antiqua", 10F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(883, 630);
             this.Name = "StopListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Стоп-лист";

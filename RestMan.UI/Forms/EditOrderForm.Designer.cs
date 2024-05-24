@@ -180,6 +180,7 @@
             this.buttonCloseOrder.TabIndex = 3;
             this.buttonCloseOrder.Text = "Оплатить заказ";
             this.buttonCloseOrder.UseVisualStyleBackColor = true;
+            this.buttonCloseOrder.Click += new System.EventHandler(this.buttonCloseOrder_Click);
             // 
             // buttonDeleteOrderMenuItem
             // 
@@ -191,6 +192,7 @@
             this.buttonDeleteOrderMenuItem.TabIndex = 2;
             this.buttonDeleteOrderMenuItem.Text = "Удалить позиции";
             this.buttonDeleteOrderMenuItem.UseVisualStyleBackColor = true;
+            this.buttonDeleteOrderMenuItem.Click += new System.EventHandler(this.buttonDeleteOrderMenuItem_Click);
             // 
             // buttonEditOrderMenuItem
             // 
@@ -202,6 +204,7 @@
             this.buttonEditOrderMenuItem.TabIndex = 1;
             this.buttonEditOrderMenuItem.Text = "Изменить позицию";
             this.buttonEditOrderMenuItem.UseVisualStyleBackColor = true;
+            this.buttonEditOrderMenuItem.Click += new System.EventHandler(this.buttonEditOrderMenuItem_Click);
             // 
             // buttonEditWaiter
             // 
@@ -212,6 +215,7 @@
             this.buttonEditWaiter.TabIndex = 0;
             this.buttonEditWaiter.Text = "Изменить официанта";
             this.buttonEditWaiter.UseVisualStyleBackColor = true;
+            this.buttonEditWaiter.Click += new System.EventHandler(this.buttonEditWaiter_Click);
             // 
             // panelInfo
             // 

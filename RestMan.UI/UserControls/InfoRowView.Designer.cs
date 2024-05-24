@@ -1,6 +1,6 @@
 ﻿namespace RestMan.UI.UserControls
 {
-    partial class InfoRow
+    partial class InfoRowView
     {
         /// <summary> 
         /// Обязательная переменная конструктора.

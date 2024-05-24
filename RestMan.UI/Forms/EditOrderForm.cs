@@ -45,7 +45,7 @@ namespace RestMan.UI.Forms
             buttonCloseOrder.Enabled = dataGridViewOrderMenuItems.RowCount > 0;
             buttonEditWaiter.Visible = buttonCloseOrder.Visible = CurrentUser.IsCashier() || CurrentUser.IsManager();
 
-
+            ShowOrderInfo();
         }
 
         private void InitializeMenuControls()
@@ -232,7 +232,7 @@ namespace RestMan.UI.Forms
 
                     if (totalPaid > 0)
                     {
-                        new InfoRow("Осталось оплатить: ", (total - totalPaid).ToString())
+                        new InfoRowView("Осталось оплатить: ", (total - totalPaid).ToString())
                         {
                             Parent = panelPayments,
                             Dock = DockStyle.Top,
@@ -242,7 +242,7 @@ namespace RestMan.UI.Forms
 
                     if (paidByGiftCard > 0)
                     {
-                        new InfoRow("Оплачено подарочной картой: ", paidByGiftCard.ToString())
+                        new InfoRowView("Оплачено подарочной картой: ", paidByGiftCard.ToString())
                         {
                             Parent = panelPayments,
                             Dock = DockStyle.Top,
@@ -251,7 +251,7 @@ namespace RestMan.UI.Forms
 
                     if (paidByQR > 0)
                     {
-                        new InfoRow("Оплачено СБП: ", paidByQR.ToString())
+                        new InfoRowView("Оплачено СБП: ", paidByQR.ToString())
                         {
                             Parent = panelPayments,
                             Dock = DockStyle.Top,
@@ -260,7 +260,7 @@ namespace RestMan.UI.Forms
 
                     if (paidByCredit > 0)
                     {
-                        new InfoRow("Оплачено банковской картой: ", paidByCredit.ToString())
+                        new InfoRowView("Оплачено банковской картой: ", paidByCredit.ToString())
                         {
                             Parent = panelPayments,
                             Dock = DockStyle.Top,
@@ -269,14 +269,14 @@ namespace RestMan.UI.Forms
 
                     if (paidByCash > 0)
                     {
-                        new InfoRow("Оплачено наличными: ", paidByCash.ToString())
+                        new InfoRowView("Оплачено наличными: ", paidByCash.ToString())
                         {
                             Parent = panelPayments,
                             Dock = DockStyle.Top,
                         };
                     }
 
-                    new InfoRow("Итого: ", total.ToString())
+                    new InfoRowView("Итого: ", total.ToString())
                     {
                         Parent = panelPayments,
                         Dock = DockStyle.Top,
@@ -329,6 +329,10 @@ namespace RestMan.UI.Forms
                 if (OrderMenuItems.Exists(x => x.MenuItemId == menuItemId))
                 {
                     row.DefaultCellStyle.BackColor = Color.Silver;
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = Color.White;
                 }
             }
         }
@@ -390,6 +394,55 @@ namespace RestMan.UI.Forms
         private void textBoxMenuSearch_TextChanged(object sender, EventArgs e)
         {
             MenuControlsHandler();
+        }
+
+        private void buttonEditWaiter_Click(object sender, EventArgs e)
+        {
+            var editWaiterForm = new EditWaiterForm(Order.Waiter);
+
+            if (editWaiterForm.ShowDialog() == DialogResult.OK)
+            {
+                using (var db = new RestManDbContext())
+                {
+                    var order = db.Orders.FirstOrDefault(x => x.Id == Order.Id);
+
+                    order.WaiterId = editWaiterForm.Waiter.Id;
+
+                    db.SaveChanges();
+
+                    Order = db.Orders
+                        .Include(x => x.Table)
+                        .Include(x => x.Waiter)
+                        .FirstOrDefault(x => x.Id == Order.Id);
+                }
+            };
+
+            ShowOrderInfo();
+        }
+
+        private void buttonEditOrderMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonDeleteOrderMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonCloseOrder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ShowOrderInfo()
+        {
+            panelInfo.Controls.Clear();
+
+            var orderInfo = new OrderCardView(Order, new List<OrderMenuItem>(), false);
+
+            orderInfo.Parent = panelInfo;
+            orderInfo.Dock = DockStyle.Top;
         }
     }
 }

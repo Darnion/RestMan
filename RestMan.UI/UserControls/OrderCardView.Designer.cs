@@ -1,6 +1,6 @@
 ﻿namespace RestMan.UI.UserControls
 {
-    partial class OrderCard
+    partial class OrderCardView
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -148,7 +148,7 @@
             this.labelTableNumber.Text = "Стол ";
             this.labelTableNumber.Click += new System.EventHandler(this.OrderCard_Click);
             // 
-            // OrderCard
+            // OrderCardView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -156,7 +156,7 @@
             this.Controls.Add(this.panel);
             this.Font = new System.Drawing.Font("Book Antiqua", 10F);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "OrderCard";
+            this.Name = "OrderCardView";
             this.Size = new System.Drawing.Size(200, 200);
             this.Click += new System.EventHandler(this.OrderCard_Click);
             this.panel.ResumeLayout(false);

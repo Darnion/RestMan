@@ -71,6 +71,12 @@
     <Compile Include="Forms\EditOrderForm.Designer.cs">
       <DependentUpon>EditOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\EditWaiterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditWaiterForm.Designer.cs">
+      <DependentUpon>EditWaiterForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,23 +103,26 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControls\OrderCard.cs">
+    <Compile Include="UserControls\OrderCardView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\OrderCard.Designer.cs">
-      <DependentUpon>OrderCard.cs</DependentUpon>
+    <Compile Include="UserControls\OrderCardView.Designer.cs">
+      <DependentUpon>OrderCardView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\InfoRow.cs">
+    <Compile Include="UserControls\InfoRowView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\InfoRow.Designer.cs">
-      <DependentUpon>InfoRow.cs</DependentUpon>
+    <Compile Include="UserControls\InfoRowView.Designer.cs">
+      <DependentUpon>InfoRowView.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\AuthForm.resx">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditOrderForm.resx">
       <DependentUpon>EditOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditWaiterForm.resx">
+      <DependentUpon>EditWaiterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -137,11 +146,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UserControls\OrderCard.resx">
-      <DependentUpon>OrderCard.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\OrderCardView.resx">
+      <DependentUpon>OrderCardView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\InfoRow.resx">
-      <DependentUpon>InfoRow.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\InfoRowView.resx">
+      <DependentUpon>InfoRowView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

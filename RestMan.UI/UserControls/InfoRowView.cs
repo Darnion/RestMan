@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace RestMan.UI.UserControls
 {
-    public partial class InfoRow : UserControl
+    public partial class InfoRowView : UserControl
     {
         public string Title { get; set; }
         public string Value { get; set; }
 
-        public InfoRow(string title, string value)
+        public InfoRowView(string title, string value)
         {
             InitializeComponent();
             this.Title = title;

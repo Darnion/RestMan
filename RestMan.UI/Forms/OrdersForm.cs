@@ -20,11 +20,12 @@ namespace RestMan.UI.Forms
         {
             InitializeComponent();
             this.IsActualOrders = isActualOrders;
-            InitOrderCards(isActualOrders);
         }
 
         private void InitOrderCards(bool isActualOrders)
         {
+            flowLayoutPanelOrders.Controls.Clear();
+
             using (var db = new RestManDbContext())
             {
                 var amICashier = CurrentUser.IsCashier();
@@ -49,10 +50,12 @@ namespace RestMan.UI.Forms
                                         .Where(x => x.OrderId == order.Id)
                                         .ToList();
 
-                    var orderCard = new OrderCard(order, orderMenuItems);
+                    var orderCard = new OrderCardView(order, orderMenuItems, true);
                     orderCard.Parent = flowLayoutPanelOrders;
                 }
             }
+
+            Filter();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -79,8 +82,6 @@ namespace RestMan.UI.Forms
                 comboBoxHalls.DisplayMember = nameof(Hall.Title);
                 comboBoxHalls.SelectedIndex = 0;
             }
-
-            Filter();
         }
 
         private void comboBoxHalls_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,7 +100,7 @@ namespace RestMan.UI.Forms
 
             foreach (var control in flowLayoutPanelOrders.Controls)
             {
-                if (control is OrderCard orderCard)
+                if (control is OrderCardView orderCard)
                 {
                     var visible = true;
 
@@ -116,6 +117,14 @@ namespace RestMan.UI.Forms
         private void buttonAddOrder_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void OrdersForm_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+            {
+                InitOrderCards(IsActualOrders);
+            }
         }
     }
 }

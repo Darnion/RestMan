@@ -202,10 +202,12 @@
             this.Font = new System.Drawing.Font("Book Antiqua", 10F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(882, 635);
             this.Name = "OrdersForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Заказы";
             this.Load += new System.EventHandler(this.OrdersForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.OrdersForm_VisibleChanged);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);

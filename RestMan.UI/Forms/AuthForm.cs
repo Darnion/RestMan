@@ -31,47 +31,46 @@ namespace RestMan.UI.Forms
                 var user = db.Users.Include(x => x.Role)
                                    .FirstOrDefault(x => x.Login == textBoxLogin.Text);
 
-                if (user != null)
-                {
-                    var hashPassword = new Authorizator()
-                        .GenerateSHA256Hash(textBoxPassword.Text, user.Salt);
-
-                    if (hashPassword != user.Password)
-                    {
-                        MessageBox.Show("Введенные данные неверны!",
-                        "Пользователь не существует!",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-
-                        return;
-                    }
-
-                    CurrentUser.User = user;
-
-                    if (!CurrentUser.IsAdmin() &&
-                        (db.Shifts.ToList().LastOrDefault() == null 
-                       || db.Shifts.ToList().LastOrDefault().ClosedAt != null))
-                    {
-                        db.Shifts.Add(new Context.Models.Shift());
-                        db.SaveChanges();
-                    }
-
-                    var mainForm = new MainForm();
-                    this.Hide();
-                    CurrentShift.Shift = db.Shifts.ToList().LastOrDefault();
-                    mainForm.ShowDialog();
-                    CurrentUser.User = null;
-                    textBoxLogin.Clear();
-                    textBoxPassword.Clear();
-                    this.Show();
-                }
-                else
+                if (user == null)
                 {
                     MessageBox.Show("Введенные данные неверны!",
                         "Пользователь не существует!",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
+                    return;
                 }
+
+                var hashPassword = new Authorizator()
+                    .GenerateSHA256Hash(textBoxPassword.Text, user.Salt);
+
+                if (hashPassword != user.Password)
+                {
+                    MessageBox.Show("Введенные данные неверны!",
+                    "Пользователь не существует!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                    return;
+                }
+
+                CurrentUser.User = user;
+
+                if (!CurrentUser.IsAdmin() &&
+                    (db.Shifts.ToList().LastOrDefault() == null 
+                    || db.Shifts.ToList().LastOrDefault().ClosedAt != null))
+                {
+                    db.Shifts.Add(new Context.Models.Shift());
+                    db.SaveChanges();
+                }
+
+                var mainForm = new MainForm();
+                this.Hide();
+                CurrentShift.Shift = db.Shifts.ToList().LastOrDefault();
+                mainForm.ShowDialog();
+                CurrentUser.User = null;
+                textBoxLogin.Clear();
+                textBoxPassword.Clear();
+                this.Show();
             }
         }
 

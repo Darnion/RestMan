@@ -13,15 +13,17 @@ using System.Windows.Forms;
 
 namespace RestMan.UI.UserControls
 {
-    public partial class OrderCard : UserControl
+    public partial class OrderCardView : UserControl
     {
         public Order Order { get; set; }
         public List<OrderMenuItem> OrderMenuItems { get; set; }
-        public OrderCard(Order order, List<OrderMenuItem> orderMenuItems)
+        public bool IsOrderCard = true;
+        public OrderCardView(Order order, List<OrderMenuItem> orderMenuItems, bool isOrderCard)
         {
             InitializeComponent();
             this.Order = order;
             this.OrderMenuItems = orderMenuItems;
+            this.IsOrderCard = isOrderCard;
             Initialize(order, orderMenuItems);
         }
 
@@ -33,21 +35,30 @@ namespace RestMan.UI.UserControls
             labelDeletedAt.Text = order.DeletedAt.ToString();
 
             labelDeletedAt.Visible = labelDeletedCaption.Visible = order.DeletedAt != null;
-            this.BackColor = order.DeletedAt != null
+
+            if (IsOrderCard)
+            {
+                this.BackColor = order.DeletedAt != null
                 ? Color.RosyBrown
                 : Color.PaleGreen;
 
-            var sum = 0;
+                var sum = 0;
 
-            foreach (var menuItem in orderMenuItems)
-            {
-                var cost = menuItem.MenuItem.Cost;
-                var count = menuItem.Count;
+                foreach (var menuItem in orderMenuItems)
+                {
+                    var cost = menuItem.MenuItem.Cost;
+                    var count = menuItem.Count;
 
-                sum += cost * count;
+                    sum += cost * count;
+                }
+
+                labelSum.Text += sum + " руб.";
+
+                return;
             }
 
-            labelSum.Text += sum + " руб.";
+            this.BackColor = Color.White;
+            labelSum.Text = string.Empty;
         }
 
         private void OrderCard_Click(object sender, EventArgs e)
