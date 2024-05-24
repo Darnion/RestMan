@@ -91,13 +91,13 @@ namespace RestMan.UI.Forms
 
                     foreach (var menuItem in actualMenuItems)
                     {
-                        var button = new Button()
+                        var button = new Button
                         {
                             Text = menuItem.Title,
-                            Tag = menuItem.Id
+                            Tag = menuItem.Id,
+                            Size = new Size(100, 100),
+                            Parent = flowLayoutPanelMenuItems
                         };
-                        button.Size = new Size(100, 100);
-                        button.Parent = flowLayoutPanelMenuItems;
                         button.Click += buttonMenuItem_Click;
                     }
 
@@ -120,13 +120,13 @@ namespace RestMan.UI.Forms
 
                     foreach (var menuItem in actualMenuItems)
                     {
-                        var button = new Button()
+                        var button = new Button
                         {
                             Text = menuItem.Title,
-                            Tag = menuItem.Id
+                            Tag = menuItem.Id,
+                            Size = new Size(100, 100),
+                            Parent = flowLayoutPanelMenuItems
                         };
-                        button.Size = new Size(100, 100);
-                        button.Parent = flowLayoutPanelMenuItems;
                         button.Click += buttonMenuItem_Click;
                     }
                 }
@@ -142,13 +142,13 @@ namespace RestMan.UI.Forms
 
                 foreach (var category in CategoryList.Where(x => x.ShopId == CurrentShop.Id))
                 {
-                    var button = new Button()
+                    var button = new Button
                     {
                         Text = category.Title,
-                        Tag = category.Id
+                        Tag = category.Id,
+                        Size = new Size(100, 100),
+                        Parent = flowLayoutPanelMenuItems
                     };
-                    button.Size = new Size(100, 100);
-                    button.Parent = flowLayoutPanelMenuItems;
                     button.Click += buttonCategory_Click;
                 }
 
@@ -158,24 +158,24 @@ namespace RestMan.UI.Forms
             flowLayoutPanelMenuItems.Controls.Clear();
             foreach (var shop in ShopList)
             {
-                var button = new Button()
+                var button = new Button
                 {
                     Text = shop.Title,
-                    Tag = shop.Id
+                    Tag = shop.Id,
+                    Size = new Size(100, 100),
+                    Parent = flowLayoutPanelMenuItems
                 };
-                button.Size = new Size(100, 100);
-                button.Parent = flowLayoutPanelMenuItems;
                 button.Click += buttonShop_Click;
             }
         }
         private void AddBackButton()
         {
-            var buttonBack = new Button()
+            var buttonBack = new Button
             {
                 Text = "Назад",
+                Size = new Size(100, 100),
+                Parent = flowLayoutPanelMenuItems
             };
-            buttonBack.Size = new Size(100, 100);
-            buttonBack.Parent = flowLayoutPanelMenuItems;
             buttonBack.Click += buttonBack_Click;
         }
 
@@ -190,7 +190,7 @@ namespace RestMan.UI.Forms
                     .ToList()
                     .Select(x => new
                     {
-                        MenuItemId = x.MenuItemId,
+                        Id = x.Id,
                         Title = x.MenuItem.Title,
                         Cost = x.MenuItem.Cost,
                         Count = x.Count,
@@ -216,18 +216,10 @@ namespace RestMan.UI.Forms
                         total += itemCost;
                     }
 
-                    var paidByCash = Order.PaidByCash.HasValue
-                        ? Order.PaidByCash.Value
-                        : 0;
-                    var paidByCredit = Order.PaidByCredit.HasValue
-                        ? Order.PaidByCredit.Value
-                        : 0;
-                    var paidByGiftCard = Order.PaidByGiftCard.HasValue
-                        ? Order.PaidByGiftCard.Value
-                        : 0;
-                    var paidByQR = Order.PaidByQR.HasValue
-                        ? Order.PaidByQR.Value
-                        : 0;
+                    var paidByCash = Order.PaidByCash ?? 0;
+                    var paidByCredit = Order.PaidByCredit ?? 0;
+                    var paidByGiftCard = Order.PaidByGiftCard ?? 0;
+                    var paidByQR = Order.PaidByQR ?? 0;
                     var totalPaid = paidByCash + paidByCredit + paidByGiftCard + paidByQR;
 
                     if (totalPaid > 0)
@@ -297,19 +289,19 @@ namespace RestMan.UI.Forms
                 return;
             }
 
-            int.TryParse(selection[0].Cells["ColumnMenuItemId"].Value.ToString(), out var menuItemId);
+            int.TryParse(selection[0].Cells["ColumnId"].Value.ToString(), out var orderMenuItemId);
 
             buttonEditOrderMenuItem.Enabled = selection.Count == 1
                                                 && (CurrentUser.IsManager()
-                                                    || !OrderMenuItems.Exists(x => x.MenuItemId == menuItemId));
+                                                    || !OrderMenuItems.Exists(x => x.Id == orderMenuItemId));
 
             var isAllowToDelete = true;
 
             for (var i = 0; i < selection.Count - 1; i++)
             {
-                int.TryParse(selection[i].Cells["ColumnMenuItemId"].Value.ToString(), out menuItemId);
+                int.TryParse(selection[i].Cells["ColumnId"].Value.ToString(), out orderMenuItemId);
 
-                if (OrderMenuItems.Exists(x => x.MenuItemId == menuItemId))
+                if (OrderMenuItems.Exists(x => x.Id == orderMenuItemId))
                 {
                     isAllowToDelete = false;
                 }
@@ -318,23 +310,6 @@ namespace RestMan.UI.Forms
             buttonDeleteOrderMenuItem.Enabled = dataGridViewOrderMenuItems.SelectedRows.Count > 0
                                                 && (CurrentUser.IsManager()
                                                     || isAllowToDelete);
-        }
-
-        private void dataGridViewOrderMenuItems_Paint(object sender, PaintEventArgs e)
-        {
-            foreach (DataGridViewRow row in dataGridViewOrderMenuItems.Rows)
-            {
-                int.TryParse(row.Cells["ColumnMenuItemId"].Value.ToString(), out var menuItemId);
-
-                if (OrderMenuItems.Exists(x => x.MenuItemId == menuItemId))
-                {
-                    row.DefaultCellStyle.BackColor = Color.Silver;
-                }
-                else
-                {
-                    row.DefaultCellStyle.BackColor = Color.White;
-                }
-            }
         }
 
         private void buttonShop_Click(object sender, EventArgs e)
@@ -363,17 +338,46 @@ namespace RestMan.UI.Forms
             {
                 using (var db = new RestManDbContext())
                 {
-                    var orderMenuItem = new OrderMenuItem()
-                    {
-                        MenuItemId = menuItemId,
-                        OrderId = this.Order.Id,
-                    };
+                    var currentItems = new List<OrderMenuItem>();
 
-                    db.OrderMenuItems.Add(orderMenuItem);
+                    foreach (DataGridViewRow row in dataGridViewOrderMenuItems.Rows)
+                    {
+                        int.TryParse(row.Cells["ColumnId"].Value.ToString(), out var orderMenuItemId);
+
+                        if (OrderMenuItems.Exists(x => x.Id == orderMenuItemId))
+                        {
+                            continue;
+                        }
+
+                        currentItems.Add(db.OrderMenuItems.FirstOrDefault(x => x.Id == orderMenuItemId));
+                    }
+
+                    if (currentItems.Exists(x => x.MenuItemId == menuItemId))
+                    {
+                        var currentItemId = currentItems
+                            .FirstOrDefault(y => y.MenuItemId == menuItemId).Id;
+
+                        var orderMenuItem = db.OrderMenuItems
+                                              .FirstOrDefault(x => x.Id == currentItemId);
+
+                        orderMenuItem.Count++;
+                    }
+                    else
+                    {
+                        var orderMenuItem = new OrderMenuItem()
+                        {
+                            MenuItemId = menuItemId,
+                            OrderId = this.Order.Id,
+                        };
+
+                        db.OrderMenuItems.Add(orderMenuItem);
+                    }
+                    
                     db.SaveChanges();
                 }
 
                 OrderMenuItemsHandler();
+                OrderPaymentsHandler();
             }
         }
 
@@ -439,10 +443,28 @@ namespace RestMan.UI.Forms
         {
             panelInfo.Controls.Clear();
 
-            var orderInfo = new OrderCardView(Order, new List<OrderMenuItem>(), false);
+            new OrderCardView(Order, new List<OrderMenuItem>(), false)
+            {
+                Parent = panelInfo,
+                Dock = DockStyle.Top
+            };
+        }
 
-            orderInfo.Parent = panelInfo;
-            orderInfo.Dock = DockStyle.Top;
+        private void dataGridViewOrderMenuItems_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            int.TryParse(dataGridViewOrderMenuItems.Rows[e.RowIndex]
+                .Cells["ColumnId"]
+                .Value
+                .ToString(),
+                out var orderMenuItemId);
+
+            if (OrderMenuItems.Exists(x => x.Id == orderMenuItemId))
+            {
+                dataGridViewOrderMenuItems.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Silver;
+                return;
+            }
+
+            dataGridViewOrderMenuItems.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
         }
     }
 }

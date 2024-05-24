@@ -63,12 +63,15 @@ namespace RestMan.UI.UserControls
 
         private void OrderCard_Click(object sender, EventArgs e)
         {
-            var editOrderForm = new EditOrderForm(Order);
-            this.ParentForm.Hide();
-            editOrderForm.Order = this.Order;
-            editOrderForm.OrderMenuItems = this.OrderMenuItems;
-            editOrderForm.ShowDialog();
-            this.ParentForm.Show();
+            if (IsOrderCard)
+            {
+                var editOrderForm = new EditOrderForm(Order);
+                this.ParentForm.Hide();
+                editOrderForm.Order = this.Order;
+                editOrderForm.OrderMenuItems = this.OrderMenuItems;
+                editOrderForm.ShowDialog();
+                this.ParentForm.Show();
+            }
         }
     }
 }

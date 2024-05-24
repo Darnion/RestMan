@@ -50,8 +50,10 @@ namespace RestMan.UI.Forms
                                         .Where(x => x.OrderId == order.Id)
                                         .ToList();
 
-                    var orderCard = new OrderCardView(order, orderMenuItems, true);
-                    orderCard.Parent = flowLayoutPanelOrders;
+                    var orderCard = new OrderCardView(order, orderMenuItems, true)
+                    {
+                        Parent = flowLayoutPanelOrders
+                    };
                 }
             }
 

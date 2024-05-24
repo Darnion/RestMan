@@ -44,13 +44,13 @@
             this.buttonEditWaiter = new System.Windows.Forms.Button();
             this.panelInfo = new System.Windows.Forms.Panel();
             this.panelPayments = new System.Windows.Forms.Panel();
-            this.ColumnMenuItemId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBoxMenuSearch = new System.Windows.Forms.GroupBox();
+            this.textBoxMenuSearch = new System.Windows.Forms.TextBox();
+            this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBoxMenuSearch = new System.Windows.Forms.GroupBox();
-            this.textBoxMenuSearch = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
@@ -145,7 +145,7 @@
             this.dataGridViewOrderMenuItems.AllowUserToDeleteRows = false;
             this.dataGridViewOrderMenuItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewOrderMenuItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnMenuItemId,
+            this.ColumnId,
             this.ColumnTitle,
             this.ColumnCost,
             this.ColumnCount,
@@ -156,8 +156,8 @@
             this.dataGridViewOrderMenuItems.ReadOnly = true;
             this.dataGridViewOrderMenuItems.Size = new System.Drawing.Size(585, 313);
             this.dataGridViewOrderMenuItems.TabIndex = 1;
+            this.dataGridViewOrderMenuItems.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridViewOrderMenuItems_RowPostPaint);
             this.dataGridViewOrderMenuItems.SelectionChanged += new System.EventHandler(this.dataGridViewOrderMenuItems_SelectionChanged);
-            this.dataGridViewOrderMenuItems.Paint += new System.Windows.Forms.PaintEventHandler(this.dataGridViewOrderMenuItems_Paint);
             // 
             // panelControls
             // 
@@ -234,13 +234,35 @@
             this.panelPayments.Size = new System.Drawing.Size(242, 313);
             this.panelPayments.TabIndex = 5;
             // 
-            // ColumnMenuItemId
+            // groupBoxMenuSearch
             // 
-            this.ColumnMenuItemId.DataPropertyName = "MenuItemId";
-            this.ColumnMenuItemId.HeaderText = "Id";
-            this.ColumnMenuItemId.Name = "ColumnMenuItemId";
-            this.ColumnMenuItemId.ReadOnly = true;
-            this.ColumnMenuItemId.Visible = false;
+            this.groupBoxMenuSearch.Controls.Add(this.textBoxMenuSearch);
+            this.groupBoxMenuSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxMenuSearch.Location = new System.Drawing.Point(4, 324);
+            this.groupBoxMenuSearch.Name = "groupBoxMenuSearch";
+            this.groupBoxMenuSearch.Size = new System.Drawing.Size(141, 207);
+            this.groupBoxMenuSearch.TabIndex = 6;
+            this.groupBoxMenuSearch.TabStop = false;
+            this.groupBoxMenuSearch.Text = "Поиск по меню";
+            // 
+            // textBoxMenuSearch
+            // 
+            this.textBoxMenuSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxMenuSearch.Location = new System.Drawing.Point(6, 23);
+            this.textBoxMenuSearch.Multiline = true;
+            this.textBoxMenuSearch.Name = "textBoxMenuSearch";
+            this.textBoxMenuSearch.Size = new System.Drawing.Size(129, 48);
+            this.textBoxMenuSearch.TabIndex = 0;
+            this.textBoxMenuSearch.TextChanged += new System.EventHandler(this.textBoxMenuSearch_TextChanged);
+            // 
+            // ColumnId
+            // 
+            this.ColumnId.DataPropertyName = "Id";
+            this.ColumnId.HeaderText = "Id";
+            this.ColumnId.Name = "ColumnId";
+            this.ColumnId.ReadOnly = true;
+            this.ColumnId.Visible = false;
             // 
             // ColumnTitle
             // 
@@ -273,28 +295,6 @@
             this.ColumnTotal.HeaderText = "Итого";
             this.ColumnTotal.Name = "ColumnTotal";
             this.ColumnTotal.ReadOnly = true;
-            // 
-            // groupBoxMenuSearch
-            // 
-            this.groupBoxMenuSearch.Controls.Add(this.textBoxMenuSearch);
-            this.groupBoxMenuSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxMenuSearch.Location = new System.Drawing.Point(4, 324);
-            this.groupBoxMenuSearch.Name = "groupBoxMenuSearch";
-            this.groupBoxMenuSearch.Size = new System.Drawing.Size(141, 207);
-            this.groupBoxMenuSearch.TabIndex = 6;
-            this.groupBoxMenuSearch.TabStop = false;
-            this.groupBoxMenuSearch.Text = "Поиск по меню";
-            // 
-            // textBoxMenuSearch
-            // 
-            this.textBoxMenuSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxMenuSearch.Location = new System.Drawing.Point(6, 23);
-            this.textBoxMenuSearch.Multiline = true;
-            this.textBoxMenuSearch.Name = "textBoxMenuSearch";
-            this.textBoxMenuSearch.Size = new System.Drawing.Size(129, 48);
-            this.textBoxMenuSearch.TabIndex = 0;
-            this.textBoxMenuSearch.TextChanged += new System.EventHandler(this.textBoxMenuSearch_TextChanged);
             // 
             // EditOrderForm
             // 
@@ -343,12 +343,12 @@
         private System.Windows.Forms.Button buttonCloseOrder;
         private System.Windows.Forms.Panel panelInfo;
         private System.Windows.Forms.Panel panelPayments;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMenuItemId;
+        private System.Windows.Forms.GroupBox groupBoxMenuSearch;
+        private System.Windows.Forms.TextBox textBoxMenuSearch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTotal;
-        private System.Windows.Forms.GroupBox groupBoxMenuSearch;
-        private System.Windows.Forms.TextBox textBoxMenuSearch;
     }
 }

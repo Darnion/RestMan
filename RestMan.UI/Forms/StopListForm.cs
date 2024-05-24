@@ -138,13 +138,13 @@ namespace RestMan.UI.Forms
 
                     foreach (var menuItem in actualMenuItems)
                     {
-                        var button = new Button()
+                        var button = new Button
                         {
                             Text = menuItem.Title,
-                            Tag = menuItem.Id
+                            Tag = menuItem.Id,
+                            Size = new Size(100, 100),
+                            Parent = flowLayoutPanelActualList
                         };
-                        button.Size = new Size(100, 100);
-                        button.Parent = flowLayoutPanelActualList;
                         button.Click += buttonMenuItem_Click;
                     }
                 }
@@ -167,13 +167,13 @@ namespace RestMan.UI.Forms
 
                     foreach (var menuItem in actualMenuItems)
                     {
-                        var button = new Button()
+                        var button = new Button
                         {
                             Text = menuItem.Title,
-                            Tag = menuItem.Id
+                            Tag = menuItem.Id,
+                            Size = new Size(100, 100),
+                            Parent = flowLayoutPanelActualList
                         };
-                        button.Size = new Size(100, 100);
-                        button.Parent = flowLayoutPanelActualList;
                         button.Click += buttonMenuItem_Click;
                     }
                 }
@@ -189,13 +189,13 @@ namespace RestMan.UI.Forms
 
                 foreach (var category in CategoryList.Where(x => x.ShopId == CurrentShop.Id))
                 {
-                    var button = new Button()
+                    var button = new Button
                     {
                         Text = category.Title,
-                        Tag = category.Id
+                        Tag = category.Id,
+                        Size = new Size(100, 100),
+                        Parent = flowLayoutPanelActualList
                     };
-                    button.Size = new Size(100, 100);
-                    button.Parent = flowLayoutPanelActualList;
                     button.Click += buttonCategory_Click;
                 }
 
@@ -205,13 +205,13 @@ namespace RestMan.UI.Forms
             flowLayoutPanelActualList.Controls.Clear();
             foreach (var shop in ShopList)
             {
-                var button = new Button()
+                var button = new Button
                 {
                     Text = shop.Title,
-                    Tag = shop.Id
+                    Tag = shop.Id,
+                    Size = new Size(100, 100),
+                    Parent = flowLayoutPanelActualList
                 };
-                button.Size = new Size(100, 100);
-                button.Parent = flowLayoutPanelActualList;
                 button.Click += buttonShop_Click;
             }
         }
@@ -333,12 +333,12 @@ namespace RestMan.UI.Forms
 
         private void AddBackButton()
         {
-            var buttonBack = new Button()
+            var buttonBack = new Button
             {
                 Text = "Назад",
+                Size = new Size(100, 100),
+                Parent = flowLayoutPanelActualList
             };
-            buttonBack.Size = new Size(100, 100);
-            buttonBack.Parent = flowLayoutPanelActualList;
             buttonBack.Click += buttonBack_Click;
         }
     }
