@@ -255,36 +255,6 @@ namespace RestMan.UI.Forms
             }
         }
 
-        private void GetPayments()
-        {
-            total = 0;
-
-            foreach (DataGridViewRow row in dataGridViewOrderMenuItems.Rows)
-            {
-                int.TryParse(row.Cells["ColumnTotal"].Value.ToString(), out var value);
-                total += value;
-            }
-
-            paidByCash = Order.PaidByCash ?? 0;
-            paidByCredit = Order.PaidByCredit ?? 0;
-            paidByGiftCard = Order.PaidByGiftCard ?? 0;
-            paidByQR = Order.PaidByQR ?? 0;
-            change = Order.ChangeGiven ?? 0;
-            totalPaid = paidByCash + paidByCredit + paidByGiftCard + paidByQR;
-            remainToPay = total - totalPaid;
-        }
-
-        private void GetCurrentOrder()
-        {
-            using (var db = new RestManDbContext())
-            {
-                this.Order = db.Orders
-                    .Include(x => x.Waiter)
-                    .Include(x => x.Table)
-                    .FirstOrDefault(x => x.Id == Order.Id);
-            }
-        }
-
         private void OrderPaymentsHandler()
         {
             panelPayments.Controls.Clear();
