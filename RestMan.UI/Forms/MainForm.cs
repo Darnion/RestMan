@@ -1,5 +1,6 @@
 ﻿using RestMan.Context;
 using RestMan.Context.Models;
+using RestMan.UI.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -100,7 +101,8 @@ namespace RestMan.UI.Forms
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var changePasswordForm = new AuthForm(false);
+            changePasswordForm.ShowDialog();
         }
 
         private void finishShiftToolStripMenuItem_Click(object sender, EventArgs e)

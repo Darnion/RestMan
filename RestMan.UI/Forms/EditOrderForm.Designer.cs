@@ -86,7 +86,7 @@
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelFullname,
             this.toolStripStatusLabelRole});
-            this.statusStrip.Location = new System.Drawing.Point(0, 565);
+            this.statusStrip.Location = new System.Drawing.Point(0, 576);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
             this.statusStrip.ShowItemToolTips = true;
@@ -127,16 +127,16 @@
             this.tableLayoutPanel.RowCount = 2;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(990, 535);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(990, 546);
             this.tableLayoutPanel.TabIndex = 6;
             // 
             // flowLayoutPanelMenuItems
             // 
             this.flowLayoutPanelMenuItems.AutoScroll = true;
             this.flowLayoutPanelMenuItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelMenuItems.Location = new System.Drawing.Point(152, 324);
+            this.flowLayoutPanelMenuItems.Location = new System.Drawing.Point(152, 330);
             this.flowLayoutPanelMenuItems.Name = "flowLayoutPanelMenuItems";
-            this.flowLayoutPanelMenuItems.Size = new System.Drawing.Size(585, 207);
+            this.flowLayoutPanelMenuItems.Size = new System.Drawing.Size(585, 212);
             this.flowLayoutPanelMenuItems.TabIndex = 0;
             // 
             // dataGridViewOrderMenuItems
@@ -156,10 +156,52 @@
             this.dataGridViewOrderMenuItems.Location = new System.Drawing.Point(152, 4);
             this.dataGridViewOrderMenuItems.Name = "dataGridViewOrderMenuItems";
             this.dataGridViewOrderMenuItems.ReadOnly = true;
-            this.dataGridViewOrderMenuItems.Size = new System.Drawing.Size(585, 313);
+            this.dataGridViewOrderMenuItems.Size = new System.Drawing.Size(585, 319);
             this.dataGridViewOrderMenuItems.TabIndex = 1;
             this.dataGridViewOrderMenuItems.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridViewOrderMenuItems_RowPostPaint);
             this.dataGridViewOrderMenuItems.SelectionChanged += new System.EventHandler(this.dataGridViewOrderMenuItems_SelectionChanged);
+            this.dataGridViewOrderMenuItems.Paint += new System.Windows.Forms.PaintEventHandler(this.dataGridViewOrderMenuItems_Paint);
+            // 
+            // ColumnId
+            // 
+            this.ColumnId.DataPropertyName = "Id";
+            this.ColumnId.HeaderText = "Id";
+            this.ColumnId.Name = "ColumnId";
+            this.ColumnId.ReadOnly = true;
+            this.ColumnId.Visible = false;
+            // 
+            // ColumnTitle
+            // 
+            this.ColumnTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ColumnTitle.DataPropertyName = "Title";
+            this.ColumnTitle.HeaderText = "Название";
+            this.ColumnTitle.Name = "ColumnTitle";
+            this.ColumnTitle.ReadOnly = true;
+            this.ColumnTitle.Width = 97;
+            // 
+            // ColumnCost
+            // 
+            this.ColumnCost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnCost.DataPropertyName = "Cost";
+            this.ColumnCost.HeaderText = "Цена";
+            this.ColumnCost.Name = "ColumnCost";
+            this.ColumnCost.ReadOnly = true;
+            // 
+            // ColumnCount
+            // 
+            this.ColumnCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnCount.DataPropertyName = "Count";
+            this.ColumnCount.HeaderText = "Количество";
+            this.ColumnCount.Name = "ColumnCount";
+            this.ColumnCount.ReadOnly = true;
+            // 
+            // ColumnTotal
+            // 
+            this.ColumnTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColumnTotal.DataPropertyName = "Total";
+            this.ColumnTotal.HeaderText = "Итого";
+            this.ColumnTotal.Name = "ColumnTotal";
+            this.ColumnTotal.ReadOnly = true;
             // 
             // ColumnId
             // 
@@ -209,9 +251,9 @@
             this.panelControls.Controls.Add(this.buttonEditOrderMenuItem);
             this.panelControls.Controls.Add(this.buttonEditWaiter);
             this.panelControls.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControls.Location = new System.Drawing.Point(744, 324);
+            this.panelControls.Location = new System.Drawing.Point(744, 330);
             this.panelControls.Name = "panelControls";
-            this.panelControls.Size = new System.Drawing.Size(242, 207);
+            this.panelControls.Size = new System.Drawing.Size(242, 212);
             this.panelControls.TabIndex = 3;
             // 
             // buttonCloseOrder
@@ -265,7 +307,7 @@
             this.panelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelInfo.Location = new System.Drawing.Point(4, 4);
             this.panelInfo.Name = "panelInfo";
-            this.panelInfo.Size = new System.Drawing.Size(141, 313);
+            this.panelInfo.Size = new System.Drawing.Size(141, 319);
             this.panelInfo.TabIndex = 4;
             // 
             // panelPayments
@@ -274,16 +316,16 @@
             this.panelPayments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPayments.Location = new System.Drawing.Point(744, 4);
             this.panelPayments.Name = "panelPayments";
-            this.panelPayments.Size = new System.Drawing.Size(242, 313);
+            this.panelPayments.Size = new System.Drawing.Size(242, 319);
             this.panelPayments.TabIndex = 5;
             // 
             // groupBoxMenuSearch
             // 
             this.groupBoxMenuSearch.Controls.Add(this.textBoxMenuSearch);
             this.groupBoxMenuSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxMenuSearch.Location = new System.Drawing.Point(4, 324);
+            this.groupBoxMenuSearch.Location = new System.Drawing.Point(4, 330);
             this.groupBoxMenuSearch.Name = "groupBoxMenuSearch";
-            this.groupBoxMenuSearch.Size = new System.Drawing.Size(141, 207);
+            this.groupBoxMenuSearch.Size = new System.Drawing.Size(141, 212);
             this.groupBoxMenuSearch.TabIndex = 6;
             this.groupBoxMenuSearch.TabStop = false;
             this.groupBoxMenuSearch.Text = "Поиск по меню";
@@ -299,59 +341,18 @@
             this.textBoxMenuSearch.TabIndex = 0;
             this.textBoxMenuSearch.TextChanged += new System.EventHandler(this.textBoxMenuSearch_TextChanged);
             // 
-            // ColumnId
-            // 
-            this.ColumnId.DataPropertyName = "Id";
-            this.ColumnId.HeaderText = "Id";
-            this.ColumnId.Name = "ColumnId";
-            this.ColumnId.ReadOnly = true;
-            this.ColumnId.Visible = false;
-            // 
-            // ColumnTitle
-            // 
-            this.ColumnTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ColumnTitle.DataPropertyName = "Title";
-            this.ColumnTitle.HeaderText = "Название";
-            this.ColumnTitle.Name = "ColumnTitle";
-            this.ColumnTitle.ReadOnly = true;
-            this.ColumnTitle.Width = 97;
-            // 
-            // ColumnCost
-            // 
-            this.ColumnCost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColumnCost.DataPropertyName = "Cost";
-            this.ColumnCost.HeaderText = "Цена";
-            this.ColumnCost.Name = "ColumnCost";
-            this.ColumnCost.ReadOnly = true;
-            // 
-            // ColumnCount
-            // 
-            this.ColumnCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColumnCount.DataPropertyName = "Count";
-            this.ColumnCount.HeaderText = "Количество";
-            this.ColumnCount.Name = "ColumnCount";
-            this.ColumnCount.ReadOnly = true;
-            // 
-            // ColumnTotal
-            // 
-            this.ColumnTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColumnTotal.DataPropertyName = "Total";
-            this.ColumnTotal.HeaderText = "Итого";
-            this.ColumnTotal.Name = "ColumnTotal";
-            this.ColumnTotal.ReadOnly = true;
-            // 
             // EditOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(990, 588);
+            this.ClientSize = new System.Drawing.Size(990, 599);
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.Font = new System.Drawing.Font("Book Antiqua", 10F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(1006, 627);
+            this.MinimumSize = new System.Drawing.Size(1006, 638);
             this.Name = "EditOrderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Заказ";

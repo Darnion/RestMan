@@ -4,6 +4,7 @@ using RestMan.UI.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing;
@@ -22,6 +23,15 @@ namespace RestMan.UI.Forms
         private List<Shop> shopList = null;
         private List<Category> categoryList = null;
         private List<OrderMenuItem> orderMenuItemsCurrent = new List<OrderMenuItem>();
+        private bool isPaymentsState = false;
+        private int total = 0;
+        private int paidByCash = 0;
+        private int paidByCredit = 0;
+        private int paidByGiftCard = 0;
+        private int paidByQR = 0;
+        private int totalPaid = 0;
+        private int remainToPay = 0;
+        private int change = 0;
         public Order Order { get; set; }
         public List<OrderMenuItem> OrderMenuItems { get; set; }
         public EditOrderForm(Order order)
@@ -43,7 +53,10 @@ namespace RestMan.UI.Forms
             toolStripStatusLabelFullname.Text = CurrentUser.User.Fullname;
             toolStripStatusLabelRole.Text = CurrentUser.User.Role.Title;
 
-            panelControls.Enabled = flowLayoutPanelMenuItems.Enabled = groupBoxMenuSearch.Enabled = !Order.DeletedAt.HasValue;
+            panelControls.Enabled 
+                = flowLayoutPanelMenuItems.Enabled 
+                = groupBoxMenuSearch.Enabled 
+                = !Order.DeletedAt.HasValue;
             buttonCloseOrder.Enabled = dataGridViewOrderMenuItems.RowCount > 0;
             buttonEditWaiter.Visible = buttonCloseOrder.Visible = CurrentUser.IsCashier() || CurrentUser.IsManager();
             dataGridViewOrderMenuItems.ClearSelection();
@@ -69,10 +82,10 @@ namespace RestMan.UI.Forms
 
         private void MenuControlsHandler()
         {
+            flowLayoutPanelMenuItems.Controls.Clear();
+
             if (!string.IsNullOrEmpty(textBoxMenuSearch.Text))
             {
-                flowLayoutPanelMenuItems.Controls.Clear();
-
                 using (var db = new RestManDbContext())
                 {
                     var categoryId = currentCategory == null
@@ -110,8 +123,6 @@ namespace RestMan.UI.Forms
 
             if (currentCategory != null)
             {
-                flowLayoutPanelMenuItems.Controls.Clear();
-
                 AddBackButton();
 
                 using (var db = new RestManDbContext())
@@ -139,8 +150,6 @@ namespace RestMan.UI.Forms
 
             if (currentShop != null)
             {
-                flowLayoutPanelMenuItems.Controls.Clear();
-
                 AddBackButton();
 
                 foreach (var category in categoryList.Where(x => x.ShopId == currentShop.Id))
@@ -158,7 +167,6 @@ namespace RestMan.UI.Forms
                 return;
             }
 
-            flowLayoutPanelMenuItems.Controls.Clear();
             foreach (var shop in shopList)
             {
                 var button = new Button
@@ -205,33 +213,57 @@ namespace RestMan.UI.Forms
             dataGridViewOrderMenuItems.ClearSelection();
         }
 
+        private void GetPayments()
+        {
+            total = 0;
+
+            foreach (DataGridViewRow row in dataGridViewOrderMenuItems.Rows)
+            {
+                int.TryParse(row.Cells["ColumnTotal"].Value.ToString(), out var value);
+                total += value;
+            }
+
+            paidByCash = Order.PaidByCash ?? 0;
+            paidByCredit = Order.PaidByCredit ?? 0;
+            paidByGiftCard = Order.PaidByGiftCard ?? 0;
+            paidByQR = Order.PaidByQR ?? 0;
+            totalPaid = paidByCash + paidByCredit + paidByGiftCard + paidByQR;
+            remainToPay = total - totalPaid;
+        }
+
+        private void GetCurrentOrder()
+        {
+            using (var db = new RestManDbContext())
+            {
+                this.Order = db.Orders
+                    .Include(x => x.Waiter)
+                    .Include(x => x.Table)
+                    .FirstOrDefault(x => x.Id == Order.Id);
+            }
+        }
+
         private void OrderPaymentsHandler()
         {
             panelPayments.Controls.Clear();
 
             using (var db = new RestManDbContext())
             {
-                var orderMenuItems = dataGridViewOrderMenuItems.Rows;
-
-                if (orderMenuItems.Count > 0)
+                if (dataGridViewOrderMenuItems.RowCount > 0)
                 {
-                    var total = 0;
+                    GetPayments();
 
-                    foreach (DataGridViewRow orderMenuItem in orderMenuItems)
+                    if (change > 0)
                     {
-                        int.TryParse(orderMenuItem.Cells["ColumnTotal"].Value.ToString(), out var itemCost);
-                        total += itemCost;
+                        new InfoRowView("Выдано сдачи: ", change.ToString())
+                        {
+                            Parent = panelPayments,
+                            Dock = DockStyle.Top,
+                        };
                     }
-
-                    var paidByCash = Order.PaidByCash ?? 0;
-                    var paidByCredit = Order.PaidByCredit ?? 0;
-                    var paidByGiftCard = Order.PaidByGiftCard ?? 0;
-                    var paidByQR = Order.PaidByQR ?? 0;
-                    var totalPaid = paidByCash + paidByCredit + paidByGiftCard + paidByQR;
 
                     if (totalPaid > 0)
                     {
-                        new InfoRowView("Осталось оплатить: ", (total - totalPaid).ToString())
+                        new InfoRowView("Осталось оплатить: ", remainToPay.ToString())
                         {
                             Parent = panelPayments,
                             Dock = DockStyle.Top,
@@ -378,6 +410,13 @@ namespace RestMan.UI.Forms
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
+            if (isPaymentsState)
+            {
+                SetPaymentsState();
+
+                return;
+            }
+
             if (currentCategory != null)
             {
                 currentCategory = null;
@@ -528,7 +567,281 @@ namespace RestMan.UI.Forms
 
         private void buttonCloseOrder_Click(object sender, EventArgs e)
         {
+            isPaymentsState = !isPaymentsState;
 
+            SetPaymentsState();
+        }
+
+        private void SetPaymentsState()
+        {
+            if (isPaymentsState && remainToPay < 0)
+            {
+                buttonCloseOrder.Enabled = false;
+                flowLayoutPanelMenuItems.Controls.Clear();
+
+                var buttonChange = new Button
+                {
+                    Text = "Дать сдачу",
+                    Size = new Size(100, 100),
+                    Parent = flowLayoutPanelMenuItems
+                };
+                buttonChange.Click += buttonChange_Click;
+
+                AddResetButton();
+
+                return;
+            }
+
+            if (remainToPay == 0)
+            {
+                if (MessageBox.Show("Вы уверены, что хотите закрыть заказ?",
+                    "Подтвердите действие",
+                    MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    ChangeOrderState(true);
+
+                    this.Close();
+                    return;
+                }
+                
+
+            }
+
+            buttonEditWaiter.Visible
+                = buttonEditOrderMenuItem.Visible
+                = buttonDeleteOrderMenuItem.Visible
+                = groupBoxMenuSearch.Visible
+                = !isPaymentsState;
+
+            buttonCloseOrder.Enabled = totalPaid == 0;
+            buttonCloseOrder.Text = isPaymentsState
+                ? "Меню"
+                : "Оплатить заказ";
+
+            if (!isPaymentsState)
+            {
+                MenuControlsHandler();
+                return;
+            }
+
+            FillPaymentsControls();
+        }
+
+        private void buttonChange_Click(object sender, EventArgs e)
+        {
+            using (var db = new RestManDbContext())
+            {
+                var order = db.Orders.FirstOrDefault(x => x.Id == this.Order.Id);
+
+                change = -remainToPay;
+                order.PaidByCash += remainToPay;
+
+                db.SaveChanges();
+
+                UpdatePayments();
+            }
+        }
+
+        private void FillPaymentsControls()
+        {
+            flowLayoutPanelMenuItems.Controls.Clear();
+
+            var buttonCash = new Button
+            {
+                Text = "Наличные",
+                Tag = "Cash",
+                Size = new Size(100, 100),
+                Parent = flowLayoutPanelMenuItems
+            };
+            buttonCash.Click += buttonPayments_Click;
+
+            var buttonCredit = new Button
+            {
+                Text = "Банковская карта",
+                Tag = "Credit",
+                Size = new Size(100, 100),
+                Parent = flowLayoutPanelMenuItems
+            };
+            buttonCredit.Click += buttonPayments_Click;
+
+            var buttonGift = new Button
+            {
+                Text = "Подарочная карта",
+                Tag = "Gift",
+                Size = new Size(100, 100),
+                Parent = flowLayoutPanelMenuItems
+            };
+            buttonGift.Click += buttonPayments_Click;
+
+            var buttonQR = new Button
+            {
+                Text = "СБП",
+                Tag = "QR",
+                Size = new Size(100, 100),
+                Parent = flowLayoutPanelMenuItems
+            };
+            buttonQR.Click += buttonPayments_Click;
+
+            AddResetButton();
+        }
+
+        private void buttonPayments_Click(object sender, EventArgs e)
+        {
+            using (var db = new RestManDbContext())
+            {
+                var order = db.Orders.FirstOrDefault(x => x.Id == this.Order.Id);
+
+                switch (((Button)sender).Tag?.ToString())
+                {
+                    case "Cash":
+                        FillCashControls();
+                        return;
+
+                    case "Credit":
+                        order.PaidByCredit = remainToPay - paidByCredit;
+                        break;
+
+                    case "Gift":
+                        {
+                            var editCountForm = new EditCountForm()
+                            {
+                                Count = remainToPay,
+                            };
+                            editCountForm.MaxValue = remainToPay + paidByGiftCard;
+
+                            if (editCountForm.ShowDialog() == DialogResult.OK)
+                            {
+                                order.PaidByGiftCard = editCountForm.Count;
+                            }
+                        }
+                        break;
+
+                    case "QR":
+                        order.PaidByQR = remainToPay - paidByQR;
+                        break;
+
+                    default:
+                        {
+                            order.PaidByCash = 0;
+                            order.PaidByCredit = 0;
+                            order.PaidByGiftCard = 0;
+                            order.PaidByQR = 0;
+                            change = 0;
+                        }
+                        break;
+                }
+
+                db.SaveChanges();
+
+                UpdatePayments();
+            }
+        }
+
+        private void FillCashControls()
+        {
+            flowLayoutPanelMenuItems.Controls.Clear();
+
+            AddBackButton();
+
+            int[] nominals = { 2, 5, 10, 50, 100, 200, 500, 1000, 2000, 5000 };
+            var controls = new Dictionary<int, string>
+            {
+                { remainToPay, remainToPay.ToString() }
+            };
+
+            foreach (var nominal in nominals)
+            {
+                var rest = remainToPay % nominal;
+
+                if (rest != 0)
+                {
+                    var paid = remainToPay - rest + nominal;
+
+                    if (controls.ContainsKey(paid))
+                    {
+                        continue;
+                    }
+
+                    controls.Add(paid, $"{paid} (-{paid - remainToPay})");
+                }
+            }
+
+            foreach (var control in controls)
+            {
+                var button = new Button()
+                {
+                    Text = control.Value,
+                    Tag = control.Key,
+                    Size = new Size(100, 100),
+                    Parent = flowLayoutPanelMenuItems,
+                };
+
+                button.Click += buttonCashPay_Click;
+            }
+
+            var buttonAnotherSum = new Button()
+            {
+                Text = "Другая сумма",
+                Size = new Size(100, 100),
+                Parent = flowLayoutPanelMenuItems,
+            };
+
+            buttonAnotherSum.Click += buttonAnotherSum_Click;
+        }
+
+        private void AddResetButton()
+        {
+            var buttonReset = new Button
+            {
+                Text = "Сбросить",
+                Size = new Size(100, 100),
+                Parent = flowLayoutPanelMenuItems
+            };
+            buttonReset.Click += buttonPayments_Click;
+        }
+
+        private void buttonCashPay_Click(object sender, EventArgs e)
+        {
+            using (var db = new RestManDbContext())
+            {
+                var order = db.Orders.FirstOrDefault(o => o.Id == this.Order.Id);
+
+                int.TryParse(((Button)sender).Tag.ToString(), out var cashPaid);
+
+                order.PaidByCash = cashPaid;
+
+                db.SaveChanges();
+
+                UpdatePayments();
+            }
+        }
+
+        private void buttonAnotherSum_Click(object sender, EventArgs e)
+        {
+            var editCountForm = new EditCountForm();
+            editCountForm.MaxValue = remainToPay + paidByCash;
+
+            if (editCountForm.ShowDialog() == DialogResult.OK)
+            {
+                using (var db = new RestManDbContext())
+                {
+                    var order = db.Orders.FirstOrDefault(o => o.Id == this.Order.Id);
+
+                    order.PaidByCash = editCountForm.Count;
+
+                    db.SaveChanges();
+
+                    UpdatePayments();
+                }
+            }
+        }
+
+        private void UpdatePayments()
+        {
+            GetCurrentOrder();
+            GetPayments();
+            OrderPaymentsHandler();
+            SetPaymentsState();
         }
 
         private void ShowOrderInfo()
@@ -540,6 +853,18 @@ namespace RestMan.UI.Forms
                 Parent = panelInfo,
                 Dock = DockStyle.Top
             };
+
+            if (Order.DeletedAt.HasValue)
+            {
+                new Button()
+                {
+                    Text = "Открыть заказ",
+                    Height = 46,
+                    Dock = DockStyle.Bottom,
+                    Parent = panelInfo,
+                }
+                .Click += buttonOpenOrder_Click;
+            }
         }
 
         private void dataGridViewOrderMenuItems_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -557,6 +882,42 @@ namespace RestMan.UI.Forms
             }
 
             dataGridViewOrderMenuItems.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+        }
+
+        private void dataGridViewOrderMenuItems_Paint(object sender, PaintEventArgs e)
+        {
+            buttonCloseOrder.Enabled = dataGridViewOrderMenuItems.RowCount > 0;
+        }
+
+        private void buttonOpenOrder_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены, что хотите открыть заказ?",
+                "Подтвердите действие",
+                MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                ChangeOrderState(false);
+
+                this.Close();
+            }
+        }
+
+        private void ChangeOrderState(bool toClose)
+        {
+            using (var db = new RestManDbContext())
+            {
+                var order = db.Orders.FirstOrDefault(x => x.Id == this.Order.Id);
+
+                if (toClose)
+                {
+                    order.DeletedAt = DateTime.Now;
+                }
+                else 
+                { 
+                    order.DeletedAt = null;
+                }
+
+                db.SaveChanges();
+            }
         }
     }
 }
