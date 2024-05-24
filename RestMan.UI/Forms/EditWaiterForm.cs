@@ -14,11 +14,10 @@ namespace RestMan.UI.Forms
 {
     public partial class EditWaiterForm : Form
     {
-        public User Waiter;
-        public EditWaiterForm(User waiter)
+        public User Waiter { get; set; }
+        public EditWaiterForm()
         {
             InitializeComponent();
-            Waiter = waiter;
         }
 
         private void EditWaiterForm_Load(object sender, EventArgs e)

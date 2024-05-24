@@ -77,6 +77,12 @@
     <Compile Include="Forms\EditOrderForm.Designer.cs">
       <DependentUpon>EditOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\EditTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditTableForm.Designer.cs">
+      <DependentUpon>EditTableForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\EditWaiterForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditOrderForm.resx">
       <DependentUpon>EditOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditTableForm.resx">
+      <DependentUpon>EditTableForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditWaiterForm.resx">
       <DependentUpon>EditWaiterForm.cs</DependentUpon>

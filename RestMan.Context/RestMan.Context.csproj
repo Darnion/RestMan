@@ -87,6 +87,10 @@
     <Compile Include="Migrations\202405251940511_ActiveUsersCheck.Designer.cs">
       <DependentUpon>202405251940511_ActiveUsersCheck.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202405300802555_OrderChangeAdded.cs" />
+    <Compile Include="Migrations\202405300802555_OrderChangeAdded.Designer.cs">
+      <DependentUpon>202405300802555_OrderChangeAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Hall.cs" />
@@ -132,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405251940511_ActiveUsersCheck.resx">
       <DependentUpon>202405251940511_ActiveUsersCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405300802555_OrderChangeAdded.resx">
+      <DependentUpon>202405300802555_OrderChangeAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -23,5 +23,6 @@ namespace RestMan.Context.Models
         public int? PaidByCash { get; set; } = 0;
         public int? PaidByCredit { get; set; } = 0;
         public int? PaidByQR { get; set; } = 0;
+        public int? ChangeGiven { get; set; } = 0;
     }
 }

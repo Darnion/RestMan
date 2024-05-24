@@ -23,6 +23,8 @@ namespace RestMan.UI.Forms
         private List<Shop> shopList = null;
         private List<Category> categoryList = null;
         private List<OrderMenuItem> orderMenuItemsCurrent = new List<OrderMenuItem>();
+        private List<OrderMenuItem> savedList = new List<OrderMenuItem>();
+        private readonly Order savedOrder;
         private bool isPaymentsState = false;
         private int total = 0;
         private int paidByCash = 0;
@@ -32,12 +34,14 @@ namespace RestMan.UI.Forms
         private int totalPaid = 0;
         private int remainToPay = 0;
         private int change = 0;
+        private bool isSaved = false;
         public Order Order { get; set; }
         public List<OrderMenuItem> OrderMenuItems { get; set; }
         public EditOrderForm(Order order)
         {
             InitializeComponent();
             this.Order = order;
+            this.savedOrder = order;
             OrderMenuItemsHandler();
             OrderPaymentsHandler();
             InitializeMenuControls();
@@ -50,6 +54,11 @@ namespace RestMan.UI.Forms
 
         private void EditOrderForm_Load(object sender, EventArgs e)
         {
+            foreach (var item in this.OrderMenuItems)
+            {
+                savedList.Add((OrderMenuItem)item.Clone());
+            }
+
             toolStripStatusLabelFullname.Text = CurrentUser.User.Fullname;
             toolStripStatusLabelRole.Text = CurrentUser.User.Role.Title;
 
@@ -58,7 +67,10 @@ namespace RestMan.UI.Forms
                 = groupBoxMenuSearch.Enabled 
                 = !Order.DeletedAt.HasValue;
             buttonCloseOrder.Enabled = dataGridViewOrderMenuItems.RowCount > 0;
-            buttonEditWaiter.Visible = buttonCloseOrder.Visible = CurrentUser.IsCashier() || CurrentUser.IsManager();
+            buttonEditWaiter.Visible
+                = buttonCloseOrder.Visible
+                = buttonEditTable.Visible
+                = CurrentUser.IsCashier() || CurrentUser.IsManager();
             dataGridViewOrderMenuItems.ClearSelection();
 
             ShowOrderInfo();
@@ -227,6 +239,36 @@ namespace RestMan.UI.Forms
             paidByCredit = Order.PaidByCredit ?? 0;
             paidByGiftCard = Order.PaidByGiftCard ?? 0;
             paidByQR = Order.PaidByQR ?? 0;
+            totalPaid = paidByCash + paidByCredit + paidByGiftCard + paidByQR;
+            remainToPay = total - totalPaid;
+        }
+
+        private void GetCurrentOrder()
+        {
+            using (var db = new RestManDbContext())
+            {
+                this.Order = db.Orders
+                    .Include(x => x.Waiter)
+                    .Include(x => x.Table)
+                    .FirstOrDefault(x => x.Id == Order.Id);
+            }
+        }
+
+        private void GetPayments()
+        {
+            total = 0;
+
+            foreach (DataGridViewRow row in dataGridViewOrderMenuItems.Rows)
+            {
+                int.TryParse(row.Cells["ColumnTotal"].Value.ToString(), out var value);
+                total += value;
+            }
+
+            paidByCash = Order.PaidByCash ?? 0;
+            paidByCredit = Order.PaidByCredit ?? 0;
+            paidByGiftCard = Order.PaidByGiftCard ?? 0;
+            paidByQR = Order.PaidByQR ?? 0;
+            change = Order.ChangeGiven ?? 0;
             totalPaid = paidByCash + paidByCredit + paidByGiftCard + paidByQR;
             remainToPay = total - totalPaid;
         }
@@ -454,7 +496,10 @@ namespace RestMan.UI.Forms
 
         private void buttonEditWaiter_Click(object sender, EventArgs e)
         {
-            var editWaiterForm = new EditWaiterForm(Order.Waiter);
+            var editWaiterForm = new EditWaiterForm()
+            {
+                Waiter = Order.Waiter,
+            };
 
             if (editWaiterForm.ShowDialog() == DialogResult.OK)
             {
@@ -471,9 +516,9 @@ namespace RestMan.UI.Forms
                         .Include(x => x.Waiter)
                         .FirstOrDefault(x => x.Id == Order.Id);
                 }
-            };
 
-            ShowOrderInfo();
+                ShowOrderInfo();
+            };
         }
 
         private void buttonEditOrderMenuItem_Click(object sender, EventArgs e)
@@ -604,7 +649,9 @@ namespace RestMan.UI.Forms
                     return;
                 }
                 
+                ClearPayments();
 
+                UpdatePayments();
             }
 
             buttonEditWaiter.Visible
@@ -633,7 +680,7 @@ namespace RestMan.UI.Forms
             {
                 var order = db.Orders.FirstOrDefault(x => x.Id == this.Order.Id);
 
-                change = -remainToPay;
+                order.ChangeGiven = -remainToPay;
                 order.PaidByCash += remainToPay;
 
                 db.SaveChanges();
@@ -698,7 +745,7 @@ namespace RestMan.UI.Forms
                         return;
 
                     case "Credit":
-                        order.PaidByCredit = remainToPay - paidByCredit;
+                        order.PaidByCredit = remainToPay + paidByCredit;
                         break;
 
                     case "Gift":
@@ -726,7 +773,7 @@ namespace RestMan.UI.Forms
                             order.PaidByCredit = 0;
                             order.PaidByGiftCard = 0;
                             order.PaidByQR = 0;
-                            change = 0;
+                            order.ChangeGiven = 0;
                         }
                         break;
                 }
@@ -839,7 +886,6 @@ namespace RestMan.UI.Forms
         private void UpdatePayments()
         {
             GetCurrentOrder();
-            GetPayments();
             OrderPaymentsHandler();
             SetPaymentsState();
         }
@@ -864,7 +910,59 @@ namespace RestMan.UI.Forms
                     Parent = panelInfo,
                 }
                 .Click += buttonOpenOrder_Click;
+
+                return;
             }
+
+            new Button()
+            {
+                Text = "Сохранить заказ",
+                Height = 46,
+                Dock = DockStyle.Bottom,
+                Parent = panelInfo,
+            }
+            .Click += buttonSaveOrder_Click;
+
+            new Button()
+            {
+                Text = "Удалить заказ",
+                Height = 46,
+                Dock = DockStyle.Bottom,
+                Parent = panelInfo,
+            }
+            .Click += buttonDeleteOrder_Click;
+        }
+
+        private void buttonDeleteOrder_Click(object sender, EventArgs e)
+        {
+            if (OrderMenuItems.Count != 0 && !CurrentUser.IsManager())
+            {
+                MessageBox.Show("Отказано в доступе", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+                return;
+            }
+
+            if (MessageBox.Show("Вы уверены, что хотите удалить заказ?",
+                "Подтвердите действие",
+                MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                using (var db = new RestManDbContext())
+                {
+                    var order = db.Orders.FirstOrDefault(x => x.Id == Order.Id);
+
+                    db.Orders.Remove(order);
+                    db.SaveChanges();
+                }
+
+                isSaved = true;
+                this.Close();
+            }
+        }
+
+        private void buttonSaveOrder_Click(object sender, EventArgs e)
+        {
+            isSaved = true;
+            this.Close();
         }
 
         private void dataGridViewOrderMenuItems_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -918,6 +1016,133 @@ namespace RestMan.UI.Forms
 
                 db.SaveChanges();
             }
+
+            isSaved = true;
+        }
+
+        private void EditOrderForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isSaved
+                || !CheckForChanges())
+            {
+                return;
+            }
+
+            switch (MessageBox.Show("Вы хотите сохранить изменения?",
+                "Подтвердите действие",
+                MessageBoxButtons.YesNoCancel))
+            {
+                case DialogResult.No:
+                    GoToStartState();
+                    break;
+
+                case DialogResult.Cancel:
+                    e.Cancel = true;
+                    break;
+
+                default:
+
+                    break;
+            }
+
+            if (remainToPay != 0)
+            {
+                ClearPayments();
+            }
+        }
+
+        private bool CheckForChanges()
+        {
+            if (orderMenuItemsCurrent.Count > 0)
+            {
+                return true;
+            }
+
+            if (!savedList.SequenceEqual(OrderMenuItems))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private void GoToStartState()
+        {
+            using (var db = new RestManDbContext())
+            {
+                var order = db.Orders.FirstOrDefault(x => x.Id == Order.Id);
+
+                if (OrderMenuItems.Count == 0)
+                {
+                    db.Orders.Remove(order);
+                    db.SaveChanges();
+
+                    return;
+                }
+
+                order.WaiterId = savedOrder.WaiterId;
+                order.PaidByCash = savedOrder.PaidByCash;
+                order.PaidByCredit = savedOrder.PaidByCredit;
+                order.PaidByGiftCard = savedOrder.PaidByGiftCard;
+                order.PaidByQR = savedOrder.PaidByQR;
+                order.ChangeGiven = savedOrder.ChangeGiven;
+                order.TableId = savedOrder.TableId;
+
+                var orderMenuItems = db.OrderMenuItems.Where(x => x.OrderId == order.Id);
+
+                foreach (var menuItem in orderMenuItems)
+                {
+                    if (!OrderMenuItems.Exists(x => x.Id == menuItem.Id))
+                    {
+                        db.OrderMenuItems.Remove(menuItem);
+                    }
+                }
+
+                db.SaveChanges();
+            }
+        }
+
+        private void ClearPayments()
+        {
+            using (var db = new RestManDbContext())
+            {
+                var order = db.Orders.FirstOrDefault(x => x.Id == Order.Id);
+
+                order.PaidByCash = 0;
+                order.PaidByCredit = 0;
+                order.PaidByGiftCard = 0;
+                order.PaidByQR = 0;
+                order.ChangeGiven = 0;
+
+                db.SaveChanges();
+            }
+        }
+
+        private void buttonEditTable_Click(object sender, EventArgs e)
+        {
+            var editTableForm = new EditTableForm()
+            {
+                Table = Order.Table,
+            };
+
+            if (editTableForm.ShowDialog() == DialogResult.OK)
+            {
+                using (var db = new RestManDbContext())
+                {
+                    var order = db.Orders.FirstOrDefault(x => x.Id == Order.Id);
+
+                    order.TableId = editTableForm.Table.Id;
+
+                    db.SaveChanges();
+
+                    Order = db.Orders
+                        .Include(x => x.Table)
+                        .Include(x => x.Waiter)
+                        .FirstOrDefault(x => x.Id == Order.Id);
+                }
+
+                ShowOrderInfo();
+            };
         }
     }
 }

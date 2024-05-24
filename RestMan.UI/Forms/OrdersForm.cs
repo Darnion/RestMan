@@ -118,7 +118,20 @@ namespace RestMan.UI.Forms
 
         private void buttonAddOrder_Click(object sender, EventArgs e)
         {
+            using (var db = new RestManDbContext())
+            {
+                var order = new Order()
+                {
+                    WaiterId = CurrentUser.User.Id,
+                    ShiftId = CurrentShift.Shift.Id,
+                    TableId = 1,
+                };
 
+                db.Orders.Add(order);
+                db.SaveChanges();
+            }
+
+            InitOrderCards(IsActualOrders);
         }
 
         private void OrdersForm_VisibleChanged(object sender, EventArgs e)
