@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace RestMan.UI.Forms
 {
@@ -42,9 +43,10 @@ namespace RestMan.UI.Forms
             toolStripStatusLabelFullname.Text = CurrentUser.User.Fullname;
             toolStripStatusLabelRole.Text = CurrentUser.User.Role.Title;
 
-            panelControls.Enabled = !Order.DeletedAt.HasValue;
+            panelControls.Enabled = flowLayoutPanelMenuItems.Enabled = groupBoxMenuSearch.Enabled = !Order.DeletedAt.HasValue;
             buttonCloseOrder.Enabled = dataGridViewOrderMenuItems.RowCount > 0;
             buttonEditWaiter.Visible = buttonCloseOrder.Visible = CurrentUser.IsCashier() || CurrentUser.IsManager();
+            dataGridViewOrderMenuItems.ClearSelection();
 
             ShowOrderInfo();
         }
@@ -199,6 +201,8 @@ namespace RestMan.UI.Forms
                     })
                     .ToList();
             }
+
+            dataGridViewOrderMenuItems.ClearSelection();
         }
 
         private void OrderPaymentsHandler()
@@ -300,7 +304,7 @@ namespace RestMan.UI.Forms
 
             var isAllowToDelete = true;
 
-            for (var i = 0; i < selection.Count - 1; i++)
+            for (var i = 0; i < selection.Count; i++)
             {
                 int.TryParse(selection[i].Cells["ColumnId"].Value.ToString(), out orderMenuItemId);
 
@@ -435,12 +439,91 @@ namespace RestMan.UI.Forms
 
         private void buttonEditOrderMenuItem_Click(object sender, EventArgs e)
         {
+            var selectedRow = dataGridViewOrderMenuItems.SelectedRows[0];
+            var rowIndex = selectedRow.Index;
 
+            int.TryParse(selectedRow
+                        .Cells["ColumnCount"]
+                        .Value
+                        .ToString(),
+                        out var count);
+
+            var editCountForm = new EditCountForm()
+            {
+                Count = count,
+            };
+
+            if (editCountForm.ShowDialog() == DialogResult.OK)
+            {
+                int.TryParse(selectedRow
+                        .Cells["ColumnId"]
+                        .Value
+                        .ToString(),
+                        out var id);
+
+                using (var db = new RestManDbContext())
+                {
+                    db.OrderMenuItems.FirstOrDefault(x => x.Id == id).Count = editCountForm.Count;
+                    db.SaveChanges();
+
+                    if (orderMenuItemsCurrent.Exists(x => x.Id == id))
+                    {
+                        orderMenuItemsCurrent.FirstOrDefault(x => x.Id == id).Count = editCountForm.Count;
+                    }
+
+                    if (OrderMenuItems.Exists(x => x.Id == id))
+                    {
+                        OrderMenuItems.FirstOrDefault(x => x.Id == id).Count = editCountForm.Count;
+                    }
+                }
+
+                OrderMenuItemsHandler();
+
+                dataGridViewOrderMenuItems.Rows[rowIndex].Selected = true;
+                dataGridViewOrderMenuItems.FirstDisplayedScrollingRowIndex = rowIndex;
+            };
         }
 
         private void buttonDeleteOrderMenuItem_Click(object sender, EventArgs e)
         {
+            var selectedRows = dataGridViewOrderMenuItems.SelectedRows;
+            var rowIndex = selectedRows[0].Index - 1;
 
+            var element = selectedRows.Count > 1
+                ? selectedRows.Count.ToString()
+                : selectedRows[0].Cells["ColumnTitle"].Value.ToString()
+                  + " "
+                  + selectedRows[0].Cells["ColumnCount"].Value.ToString()
+                  + " шт.";
+
+            if (MessageBox.Show($"Вы уверены, что хотите удалить позиции: {element} из заказа?",
+                "Подтвердите действие",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Asterisk) == DialogResult.OK)
+            {
+                using (var db = new RestManDbContext())
+                {
+                    foreach (DataGridViewRow row in selectedRows)
+                    {
+                        int.TryParse(row.Cells["ColumnId"].Value.ToString(), out var id);
+
+                        var orderMenuItem = db.OrderMenuItems.FirstOrDefault(x => x.Id == id);
+
+                        db.OrderMenuItems.Remove(orderMenuItem);
+                        orderMenuItemsCurrent.Remove(orderMenuItem);
+                        OrderMenuItems.Remove(orderMenuItem);
+                    }
+
+                    db.SaveChanges();
+                }
+
+                OrderMenuItemsHandler();
+
+                if (rowIndex >= 0)
+                {
+                    dataGridViewOrderMenuItems.FirstDisplayedScrollingRowIndex = rowIndex;
+                }
+            }
         }
 
         private void buttonCloseOrder_Click(object sender, EventArgs e)

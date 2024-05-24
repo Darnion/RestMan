@@ -65,6 +65,12 @@
     </Compile>
     <Compile Include="CurrentShift.cs" />
     <Compile Include="CurrentUser.cs" />
+    <Compile Include="Forms\EditCountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditCountForm.Designer.cs">
+      <DependentUpon>EditCountForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\EditOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\AuthForm.resx">
       <DependentUpon>AuthForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditCountForm.resx">
+      <DependentUpon>EditCountForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditOrderForm.resx">
       <DependentUpon>EditOrderForm.cs</DependentUpon>

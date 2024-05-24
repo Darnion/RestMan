@@ -83,6 +83,10 @@
     <Compile Include="Migrations\202405240851487_ContextFixes.Designer.cs">
       <DependentUpon>202405240851487_ContextFixes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202405251940511_ActiveUsersCheck.cs" />
+    <Compile Include="Migrations\202405251940511_ActiveUsersCheck.Designer.cs">
+      <DependentUpon>202405251940511_ActiveUsersCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Hall.cs" />
@@ -125,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405240851487_ContextFixes.resx">
       <DependentUpon>202405240851487_ContextFixes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405251940511_ActiveUsersCheck.resx">
+      <DependentUpon>202405251940511_ActiveUsersCheck.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

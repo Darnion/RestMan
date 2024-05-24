@@ -1,4 +1,5 @@
 ﻿using RestMan.Context;
+using RestMan.Context.Models;
 using RestMan.UI.Common;
 using System;
 using System.Collections.Generic;
@@ -53,13 +54,15 @@ namespace RestMan.UI.Forms
                     return;
                 }
 
+                user.IsOnShift = true;
+                db.SaveChanges();
                 CurrentUser.User = user;
 
                 if (!CurrentUser.IsAdmin() &&
                     (db.Shifts.ToList().LastOrDefault() == null 
                     || db.Shifts.ToList().LastOrDefault().ClosedAt != null))
                 {
-                    db.Shifts.Add(new Context.Models.Shift());
+                    db.Shifts.Add(new Shift());
                     db.SaveChanges();
                 }
 
@@ -89,6 +92,14 @@ namespace RestMan.UI.Forms
                 if (shift != null && DateTime.Now - shift.OpenedAt > new TimeSpan(20, 0, 0))
                 {
                     shift.ClosedAt = DateTime.Now;
+
+                    var users = db.Users.Where(x => x.IsOnShift == true);
+
+                    foreach (User user in users)
+                    {
+                        user.IsOnShift = false;
+                    }
+
                     db.SaveChanges();
                 }
             }

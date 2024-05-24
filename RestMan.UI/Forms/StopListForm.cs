@@ -225,6 +225,7 @@ namespace RestMan.UI.Forms
         {
             toolStripStatusLabelFullname.Text = CurrentUser.User.Fullname;
             toolStripStatusLabelRole.Text = CurrentUser.User.Role.Title;
+            dataGridViewStopList.ClearSelection();
 
             using (var db = new RestManDbContext())
             {
@@ -299,6 +300,8 @@ namespace RestMan.UI.Forms
                                                 .OrderBy(x => x.Title)
                                                 .ToList();
             }
+
+            dataGridViewStopList.ClearSelection();
         }
 
         private void textBoxStopListSearch_TextChanged(object sender, EventArgs e)

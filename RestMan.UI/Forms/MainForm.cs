@@ -1,4 +1,5 @@
 ﻿using RestMan.Context;
+using RestMan.Context.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,6 +51,14 @@ namespace RestMan.UI.Forms
                 {
                     var shift = db.Shifts.SingleOrDefault(x => x.Id == CurrentShift.Shift.Id);
                     shift.ClosedAt = DateTime.Now;
+
+                    var users = db.Users.Where(x => x.IsOnShift == true);
+
+                    foreach (User u in users)
+                    {
+                        u.IsOnShift = false;
+                    }
+
                     db.SaveChanges();
                 }
 
@@ -87,6 +96,29 @@ namespace RestMan.UI.Forms
             this.Hide();
             stopListForm.ShowDialog();
             this.Show();
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void finishShiftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var db = new RestManDbContext())
+            {
+                var user = db.Users.FirstOrDefault(x => x.Id == CurrentUser.User.Id);
+
+                user.IsOnShift = false;
+                db.SaveChanges();
+            }
+
+            this.Close();
+        }
+
+        private void buttonDatabaseAccess_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

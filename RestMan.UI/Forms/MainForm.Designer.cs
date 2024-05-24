@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.finishShiftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelFullname = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelRole = new System.Windows.Forms.ToolStripStatusLabel();
@@ -54,7 +56,9 @@
             // 
             this.menuStrip.Font = new System.Drawing.Font("Book Antiqua", 10F);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
+            this.exitToolStripMenuItem,
+            this.changePasswordToolStripMenuItem,
+            this.finishShiftToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
@@ -71,6 +75,20 @@
             this.exitToolStripMenuItem.Text = "Выход";
             this.exitToolStripMenuItem.ToolTipText = "Вернуться на окно авторизации";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // changePasswordToolStripMenuItem
+            // 
+            this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
+            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.changePasswordToolStripMenuItem.Text = "Сменить пароль";
+            this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
+            // 
+            // finishShiftToolStripMenuItem
+            // 
+            this.finishShiftToolStripMenuItem.Name = "finishShiftToolStripMenuItem";
+            this.finishShiftToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.finishShiftToolStripMenuItem.Text = "Закончить смену";
+            this.finishShiftToolStripMenuItem.Click += new System.EventHandler(this.finishShiftToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
@@ -149,6 +167,7 @@
             this.buttonDatabaseAccess.TabIndex = 4;
             this.buttonDatabaseAccess.Text = "Изменение БД";
             this.buttonDatabaseAccess.UseVisualStyleBackColor = true;
+            this.buttonDatabaseAccess.Click += new System.EventHandler(this.buttonDatabaseAccess_Click);
             // 
             // buttonReports
             // 
@@ -264,6 +283,8 @@
         private System.Windows.Forms.Button buttonCloseShift;
         private System.Windows.Forms.Splitter splitterTop;
         private System.Windows.Forms.Splitter splitterBottom;
+        private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem finishShiftToolStripMenuItem;
     }
 }
 

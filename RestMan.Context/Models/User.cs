@@ -30,5 +30,6 @@ namespace RestMan.Context.Models
         public string Salt { get; set; }
         public long RoleId { get; set; }
         public Role Role { get; set; }
+        public bool IsOnShift { get; set; } = false;
     }
 }
