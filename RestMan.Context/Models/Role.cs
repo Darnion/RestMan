@@ -9,9 +9,10 @@ namespace RestMan.Context.Models
 {
     public class Role
     {
-        public int Id { get; set; }
-        [MaxLength(255)]
+        public long Id { get; set; }
+        
         [Required]
+        [MaxLength(255)]
         public string Title { get; set; }
         public ICollection<User> Users { get; set;}
     }

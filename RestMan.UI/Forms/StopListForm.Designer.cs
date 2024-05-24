@@ -195,6 +195,8 @@
             // 
             // comboBoxCategories
             // 
+            this.comboBoxCategories.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxCategories.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCategories.FormattingEnabled = true;
             this.comboBoxCategories.Location = new System.Drawing.Point(9, 152);
@@ -214,6 +216,8 @@
             // 
             // comboBoxShops
             // 
+            this.comboBoxShops.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxShops.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxShops.FormattingEnabled = true;
             this.comboBoxShops.Location = new System.Drawing.Point(8, 87);
@@ -224,6 +228,8 @@
             // 
             // textBoxStopListSearch
             // 
+            this.textBoxStopListSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxStopListSearch.Location = new System.Drawing.Point(8, 23);
             this.textBoxStopListSearch.Name = "textBoxStopListSearch";
             this.textBoxStopListSearch.Size = new System.Drawing.Size(325, 24);
@@ -254,6 +260,8 @@
             // 
             // textBoxActualListSearch
             // 
+            this.textBoxActualListSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxActualListSearch.Location = new System.Drawing.Point(8, 23);
             this.textBoxActualListSearch.Name = "textBoxActualListSearch";
             this.textBoxActualListSearch.Size = new System.Drawing.Size(325, 24);

@@ -9,7 +9,7 @@ namespace RestMan.Context.Models
 {
     public class Shift
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         [Required]
         public DateTime OpenedAt { get; set; } = DateTime.Now;
         public DateTime? ClosedAt { get; set; }

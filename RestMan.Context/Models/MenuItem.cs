@@ -18,7 +18,7 @@ namespace RestMan.Context.Models
 
         [Required]
         public int Cost { get; set; }
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
         public Category Category { get; set; }
         public bool IsStopListed { get; set; } = false;
     }

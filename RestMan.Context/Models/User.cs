@@ -28,7 +28,7 @@ namespace RestMan.Context.Models
         [Required]
         [MaxLength(255)]
         public string Salt { get; set; }
-        public int RoleId { get; set; }
+        public long RoleId { get; set; }
         public Role Role { get; set; }
     }
 }

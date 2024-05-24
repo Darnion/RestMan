@@ -1,6 +1,6 @@
 ﻿namespace RestMan.UI.UserControls
 {
-    partial class PaymentRow
+    partial class InfoRow
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -29,14 +29,15 @@
         private void InitializeComponent()
         {
             this.panel = new System.Windows.Forms.Panel();
+            this.labelValue = new System.Windows.Forms.Label();
             this.labelTitle = new System.Windows.Forms.Label();
-            this.labelCount = new System.Windows.Forms.Label();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel
             // 
-            this.panel.Controls.Add(this.labelCount);
+            this.panel.BackColor = System.Drawing.SystemColors.Control;
+            this.panel.Controls.Add(this.labelValue);
             this.panel.Controls.Add(this.labelTitle);
             this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel.Font = new System.Drawing.Font("Book Antiqua", 10F);
@@ -44,6 +45,18 @@
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(173, 20);
             this.panel.TabIndex = 0;
+            // 
+            // labelValue
+            // 
+            this.labelValue.AutoSize = true;
+            this.labelValue.Dock = System.Windows.Forms.DockStyle.Right;
+            this.labelValue.Font = new System.Drawing.Font("Book Antiqua", 10F);
+            this.labelValue.Location = new System.Drawing.Point(129, 0);
+            this.labelValue.Name = "labelValue";
+            this.labelValue.Size = new System.Drawing.Size(44, 18);
+            this.labelValue.TabIndex = 1;
+            this.labelValue.Text = "Value";
+            this.labelValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelTitle
             // 
@@ -55,24 +68,14 @@
             this.labelTitle.Size = new System.Drawing.Size(37, 18);
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "Title";
+            this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelCount
-            // 
-            this.labelCount.AutoSize = true;
-            this.labelCount.Dock = System.Windows.Forms.DockStyle.Right;
-            this.labelCount.Font = new System.Drawing.Font("Book Antiqua", 10F);
-            this.labelCount.Location = new System.Drawing.Point(126, 0);
-            this.labelCount.Name = "labelCount";
-            this.labelCount.Size = new System.Drawing.Size(47, 18);
-            this.labelCount.TabIndex = 1;
-            this.labelCount.Text = "Count";
-            // 
-            // PaymentRow
+            // InfoRow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel);
-            this.Name = "PaymentRow";
+            this.Name = "InfoRow";
             this.Size = new System.Drawing.Size(173, 20);
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
@@ -84,6 +87,6 @@
 
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.Label labelCount;
+        private System.Windows.Forms.Label labelValue;
     }
 }

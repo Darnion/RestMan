@@ -124,15 +124,14 @@ namespace RestMan.UI.Forms
                         : CurrentCategory.Id;
                     var shopId = CurrentShop == null
                         ? -1
-                        : CurrentShop.Id; ;
+                        : CurrentShop.Id;
 
                     var actualMenuItems = db.MenuItems
                         .Include(x => x.Category)
                         .Where(x => x.IsStopListed == false
                                     && (x.CategoryId == categoryId
-                                        || x.CategoryId == -1
-                                            && (x.Category.ShopId == shopId
-                                                || shopId == -1))
+                                        || x.Category.ShopId == shopId
+                                                || shopId == -1)
                                     && x.Title.Contains(textBoxActualListSearch.Text))
                         .OrderBy(x => x.Title)
                         .ToList();
@@ -149,8 +148,11 @@ namespace RestMan.UI.Forms
                         button.Click += buttonMenuItem_Click;
                     }
                 }
+
+                return;
             }
-            else if (CurrentCategory != null)
+            
+            if (CurrentCategory != null)
             {
                 flowLayoutPanelActualList.Controls.Clear();
 
@@ -175,8 +177,11 @@ namespace RestMan.UI.Forms
                         button.Click += buttonMenuItem_Click;
                     }
                 }
+
+                return;
             }
-            else if (CurrentShop != null)
+
+            if (CurrentShop != null)
             {
                 flowLayoutPanelActualList.Controls.Clear();
 
@@ -193,21 +198,21 @@ namespace RestMan.UI.Forms
                     button.Parent = flowLayoutPanelActualList;
                     button.Click += buttonCategory_Click;
                 }
+
+                return;
             }
-            else
+
+            flowLayoutPanelActualList.Controls.Clear();
+            foreach (var shop in ShopList)
             {
-                flowLayoutPanelActualList.Controls.Clear();
-                foreach (var shop in ShopList)
+                var button = new Button()
                 {
-                    var button = new Button()
-                    {
-                        Text = shop.Title,
-                        Tag = shop.Id
-                    };
-                    button.Size = new Size(100, 100);
-                    button.Parent = flowLayoutPanelActualList;
-                    button.Click += buttonShop_Click;
-                }
+                    Text = shop.Title,
+                    Tag = shop.Id
+                };
+                button.Size = new Size(100, 100);
+                button.Parent = flowLayoutPanelActualList;
+                button.Click += buttonShop_Click;
             }
         }
 

@@ -11,7 +11,7 @@ namespace RestMan.Context.Models
         [Required]
         [MaxLength(255)]
         public string Title { get; set; }
-        public int ShopId { get; set; }
+        public long ShopId { get; set; }
         public Shop Shop { get; set; }
         public ICollection<MenuItem> MenuItems { get; set;}
     }

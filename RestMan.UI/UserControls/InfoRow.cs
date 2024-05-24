@@ -10,19 +10,23 @@ using System.Windows.Forms;
 
 namespace RestMan.UI.UserControls
 {
-    public partial class PaymentRow : UserControl
+    public partial class InfoRow : UserControl
     {
         public string Title { get; set; }
-        public int Count { get; set; }
-        public PaymentRow()
+        public string Value { get; set; }
+
+        public InfoRow(string title, string value)
         {
             InitializeComponent();
-            Initialize();
+            this.Title = title;
+            this.Value = value;
+            Initialize(title, value);
         }
 
-        private void Initialize()
+        private void Initialize(string title, string value)
         {
-
+            labelTitle.Text = title;
+            labelValue.Text = value;
         }
     }
 }

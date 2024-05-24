@@ -55,6 +55,7 @@ namespace RestMan.UI.UserControls
             var editOrderForm = new EditOrderForm(Order);
             this.ParentForm.Hide();
             editOrderForm.Order = this.Order;
+            editOrderForm.OrderMenuItems = this.OrderMenuItems;
             editOrderForm.ShowDialog();
             this.ParentForm.Show();
         }

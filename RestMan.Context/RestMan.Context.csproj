@@ -79,6 +79,10 @@
     <Compile Include="Migrations\202405191952060_Fix.Designer.cs">
       <DependentUpon>202405191952060_Fix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202405240851487_ContextFixes.cs" />
+    <Compile Include="Migrations\202405240851487_ContextFixes.Designer.cs">
+      <DependentUpon>202405240851487_ContextFixes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Hall.cs" />
@@ -118,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405191952060_Fix.resx">
       <DependentUpon>202405191952060_Fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405240851487_ContextFixes.resx">
+      <DependentUpon>202405240851487_ContextFixes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
