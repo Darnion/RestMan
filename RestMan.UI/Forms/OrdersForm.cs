@@ -37,7 +37,7 @@ namespace RestMan.UI.Forms
                                         && (amICashier
                                             || amIManager
                                             || x.WaiterId == CurrentUser.User.Id))
-                            .OrderBy(x => x.CreatedAt)
+                            .OrderByDescending(x => x.CreatedAt)
                             .ToList();
 
                 foreach (var order in orders)
@@ -81,19 +81,70 @@ namespace RestMan.UI.Forms
                 });
                 comboBoxHalls.DisplayMember = nameof(Hall.Title);
                 comboBoxHalls.SelectedIndex = 0;
+
+                comboBoxWaiter.Items.Clear();
+                comboBoxWaiter.Items.AddRange(db.Users.Where(x => x.IsOnShift == true
+                                                             && x.RoleId != 4
+                                                             && db.Orders.Where(y => y.WaiterId == x.Id
+                                                                                && !y.DeletedAt.HasValue).Count() > 0)
+                                                            .ToArray());
+                comboBoxWaiter.Items.Insert(0, new User()
+                {
+                    Id = -1,
+                    Fullname = "Все официанты",
+                });
+                comboBoxWaiter.DisplayMember = nameof(User.Fullname);
+                comboBoxWaiter.SelectedIndex = 0;
             }
         }
 
         private void comboBoxHalls_SelectedIndexChanged(object sender, EventArgs e)
         {
+            labelTable.Visible = comboBoxTable.Visible = ((Hall)comboBoxHalls.SelectedItem).Id != -1;
+
+            if (sender.Equals(comboBoxHalls))
+            {
+                FillTablesByHall();
+            }
+
             Filter();
+        }
+
+        private void FillTablesByHall()
+        {
+            using (var db = new RestManDbContext())
+            {
+                var hall = (Hall)comboBoxHalls.SelectedItem;
+
+                if (hall == null)
+                {
+                    return;
+                }
+
+                comboBoxTable.Items.Clear();
+                comboBoxTable.Items.AddRange(db.Tables.Where(x => x.HallId == hall.Id
+                                                                && db.Orders.Where(y => y.TableId == x.Id
+                                                                                && !y.DeletedAt.HasValue).Count() > 0)
+                                                                            .ToArray());
+                comboBoxTable.Items.Insert(0, new Table()
+                {
+                    Id = -1,
+                    Title = "Все столы",
+                });
+                comboBoxTable.DisplayMember = nameof(Table.Title);
+                comboBoxTable.SelectedIndex = 0;
+            }
         }
 
         private void Filter()
         {
             var hall = (Hall)comboBoxHalls.SelectedItem;
+            var table = (Table)comboBoxTable.SelectedItem;
+            var waiter = (User)comboBoxWaiter.SelectedItem;
+            
+            var isNotEmpty = int.TryParse(textBoxTotal.Text, out var total);
 
-            if (hall == null)
+            if (hall == null || waiter == null)
             {
                 return;
             }
@@ -109,6 +160,28 @@ namespace RestMan.UI.Forms
                         visible = false;
                     }
 
+                    if (table.Id != -1 && orderCard.Order.TableId != table.Id)
+                    {
+                        visible = false;
+                    }
+
+                    if (waiter.Id != -1 && orderCard.Order.WaiterId != waiter.Id)
+                    {
+                        visible = false;
+                    }
+
+                    var sum = 0;
+
+                    foreach (var item in orderCard.OrderMenuItems)
+                    {
+                        sum += item.Count * item.MenuItem.Cost;
+                    }
+
+                    if (total != sum && isNotEmpty)
+                    {
+                        visible = false;
+                    }
+
                     orderCard.Visible = visible;
                 }
             }
@@ -116,20 +189,36 @@ namespace RestMan.UI.Forms
 
         private void buttonAddOrder_Click(object sender, EventArgs e)
         {
-            using (var db = new RestManDbContext())
+            var editTableForm = new EditTableForm();
+
+            if (editTableForm.ShowDialog() == DialogResult.OK)
             {
-                var order = new Order()
+                var orderDB = new Order();
+
+                using (var db = new RestManDbContext())
                 {
-                    WaiterId = CurrentUser.User.Id,
-                    ShiftId = CurrentShift.Shift.Id,
-                    TableId = 1,
-                };
+                    var order = new Order()
+                    {
+                        WaiterId = CurrentUser.User.Id,
+                        ShiftId = CurrentShift.Shift.Id,
+                        TableId = editTableForm.Table.Id,
+                    };
 
-                db.Orders.Add(order);
-                db.SaveChanges();
+                    db.Orders.Add(order);
+                    db.SaveChanges();
+
+                    orderDB = db.Orders
+                        .Include(x => x.Waiter)
+                        .Include(x => x.Table)
+                        .ToList()
+                        .LastOrDefault();
+                }
+
+                var editOrderForm = new EditOrderForm(orderDB);
+                this.Hide();
+                editOrderForm.ShowDialog();
+                this.Show();
             }
-
-            InitOrderCards(IsActualOrders);
         }
 
         private void OrdersForm_VisibleChanged(object sender, EventArgs e)

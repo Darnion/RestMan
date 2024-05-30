@@ -245,17 +245,6 @@ namespace RestMan.UI.Forms
             remainToPay = total - totalPaid;
         }
 
-        private void GetCurrentOrder()
-        {
-            using (var db = new RestManDbContext())
-            {
-                this.currentOrder = db.Orders
-                    .Include(x => x.Waiter)
-                    .Include(x => x.Table)
-                    .FirstOrDefault(x => x.Id == backupOrder.Id);
-            }
-        }
-
         private void OrderPaymentsHandler()
         {
             panelPayments.Controls.Clear();
@@ -906,8 +895,7 @@ namespace RestMan.UI.Forms
 
         private void EditOrderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (isSaved
-                || !CheckForChanges())
+            if (isSaved)
             {
                 return;
             }
@@ -924,6 +912,11 @@ namespace RestMan.UI.Forms
                     db.Orders.Remove(order);
                     db.SaveChanges();
                 }
+            }
+
+            if (!CheckForChanges())
+            {
+                return;
             }
 
             switch (MessageBox.Show("Вы хотите сохранить изменения?",
