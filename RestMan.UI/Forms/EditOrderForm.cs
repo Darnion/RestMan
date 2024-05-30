@@ -37,12 +37,13 @@ namespace RestMan.UI.Forms
         public EditOrderForm(Order order)
         {
             InitializeComponent();
+            InitializeMenuControls();
+            this.backupOrder = order;
             this.currentOrder = (Order)order.Clone();
-            this.backupOrder = (Order)order.Clone();
             GetCurrentList(currentOrder);
             OrderMenuItemsHandler(currentList);
             OrderPaymentsHandler();
-            InitializeMenuControls();
+            
         }
 
         private void GetCurrentList(Order order)
@@ -99,7 +100,6 @@ namespace RestMan.UI.Forms
                     .ToList();
 
                 menuItemList = db.MenuItems
-                    .Include(x => x.Category)
                     .OrderBy(x => x.Title)
                     .Where(x => x.IsStopListed == false)
                     .ToList();
@@ -216,10 +216,10 @@ namespace RestMan.UI.Forms
                     .Select(x => new
                     {
                         Id = x.Id,
-                        Title = x.MenuItem.Title,
-                        Cost = x.MenuItem.Cost,
+                        Title = menuItemList.FirstOrDefault(y => y.Id == x.MenuItemId).Title,
+                        Cost = menuItemList.FirstOrDefault(y => y.Id == x.MenuItemId).Cost,
                         Count = x.Count,
-                        Total = x.MenuItem.Cost * x.Count
+                        Total = menuItemList.FirstOrDefault(y => y.Id == x.MenuItemId).Cost * x.Count
                     })
                     .ToList();
 
@@ -399,9 +399,7 @@ namespace RestMan.UI.Forms
                     {
                         Id = -1,
                         MenuItemId = menuItemId,
-                        MenuItem = menuItemList.FirstOrDefault(x => x.Id == menuItemId),
                         OrderId = backupOrder.Id,
-                        Order = backupOrder,
                     };
 
                     currentList.Add(orderMenuItem);
@@ -977,8 +975,6 @@ namespace RestMan.UI.Forms
                 order.ChangeGiven = currentOrder.ChangeGiven;
                 order.TableId = currentOrder.TableId;
 
-                var orderMenuItems = db.OrderMenuItems.Where(x => x.OrderId == backupOrder.Id);
-
                 foreach (var item in backupList)
                 {
                     var itemCurrent = currentList.FirstOrDefault(x => x.Id == item.Id);
@@ -990,6 +986,8 @@ namespace RestMan.UI.Forms
                         db.OrderMenuItems.Remove(itemToDelete);
                     }
                 }
+
+                var orderMenuItems = db.OrderMenuItems.Where(x => x.OrderId == backupOrder.Id);
 
                 foreach (var item in currentList)
                 {
