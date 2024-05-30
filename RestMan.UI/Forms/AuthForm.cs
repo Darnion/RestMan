@@ -2,14 +2,9 @@
 using RestMan.Context.Models;
 using RestMan.UI.Common;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RestMan.UI.Forms
@@ -135,7 +130,7 @@ namespace RestMan.UI.Forms
 
         private void textBoxLogin_TextChanged(object sender, EventArgs e)
         {
-            buttonEnter.Enabled = !string.IsNullOrEmpty(textBoxLogin.Text) 
+            buttonEnter.Enabled = !string.IsNullOrEmpty(textBoxLogin.Text)
                 && !string.IsNullOrEmpty(textBoxPassword.Text);
         }
 

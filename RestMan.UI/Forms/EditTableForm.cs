@@ -1,13 +1,8 @@
 ﻿using RestMan.Context;
 using RestMan.Context.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RestMan.UI.Forms
@@ -45,10 +40,19 @@ namespace RestMan.UI.Forms
                 comboBoxTable.Items.Clear();
                 comboBoxTable.Items.AddRange(db.Tables.Where(x => x.HallId == hall.Id).ToArray());
                 comboBoxTable.DisplayMember = nameof(Table.Title);
-                comboBoxTable.SelectedItem = comboBoxTable
-                                            .Items
-                                            .Cast<Table>()
-                                            .FirstOrDefault(x => x.Id == this.Table.Id);
+
+                var table = comboBoxTable
+                            .Items
+                            .Cast<Table>()
+                            .FirstOrDefault(x => x.Id == this.Table.Id);
+
+                if (table == null)
+                {
+                    comboBoxTable.SelectedIndex = 0;
+                    return;
+                }
+
+                comboBoxTable.SelectedItem = table;
             }
         }
 

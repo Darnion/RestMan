@@ -1,8 +1,7 @@
 ﻿namespace RestMan.Context.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class ContextFixes : DbMigration
     {
         public override void Up()
@@ -83,7 +82,7 @@
             AddForeignKey("dbo.Orders", "ShiftId", "dbo.Shifts", "Id", cascadeDelete: true);
             AddForeignKey("dbo.Users", "RoleId", "dbo.Roles", "Id", cascadeDelete: true);
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Users", "RoleId", "dbo.Roles");

@@ -1,8 +1,7 @@
 ﻿namespace RestMan.Context.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class Fix : DbMigration
     {
         public override void Up()
@@ -16,7 +15,7 @@
             CreateIndex("dbo.OrderMenuItems", "MenuItem_Id");
             AddForeignKey("dbo.OrderMenuItems", "MenuItem_Id", "dbo.MenuItems", "Id");
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.OrderMenuItems", "MenuItem_Id", "dbo.MenuItems");

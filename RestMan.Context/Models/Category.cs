@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RestMan.Context.Models
@@ -13,6 +12,6 @@ namespace RestMan.Context.Models
         public string Title { get; set; }
         public long ShopId { get; set; }
         public Shop Shop { get; set; }
-        public ICollection<MenuItem> MenuItems { get; set;}
+        public ICollection<MenuItem> MenuItems { get; set; }
     }
 }

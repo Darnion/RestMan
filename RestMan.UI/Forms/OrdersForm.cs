@@ -2,13 +2,8 @@
 using RestMan.Context.Models;
 using RestMan.UI.UserControls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RestMan.UI.Forms
@@ -20,6 +15,9 @@ namespace RestMan.UI.Forms
         {
             InitializeComponent();
             this.IsActualOrders = isActualOrders;
+            this.Text = isActualOrders
+                ? "Актуальные заказы"
+                : "Завершенные заказы";
         }
 
         private void InitOrderCards(bool isActualOrders)
@@ -94,7 +92,7 @@ namespace RestMan.UI.Forms
         private void Filter()
         {
             var hall = (Hall)comboBoxHalls.SelectedItem;
-            
+
             if (hall == null)
             {
                 return;

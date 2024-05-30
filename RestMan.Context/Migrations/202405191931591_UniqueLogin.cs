@@ -1,8 +1,7 @@
 ﻿namespace RestMan.Context.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class UniqueLogin : DbMigration
     {
         public override void Up()
@@ -17,7 +16,7 @@
             AlterColumn("dbo.Roles", "Title", c => c.String(nullable: false, maxLength: 255));
             CreateIndex("dbo.Users", "Login", unique: true);
         }
-        
+
         public override void Down()
         {
             DropIndex("dbo.Users", new[] { "Login" });

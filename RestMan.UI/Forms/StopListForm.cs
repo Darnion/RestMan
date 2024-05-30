@@ -2,15 +2,11 @@
 using RestMan.Context.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace RestMan.UI.Forms
 {
@@ -132,7 +128,7 @@ namespace RestMan.UI.Forms
                                     && (x.CategoryId == categoryId
                                         || x.Category.ShopId == shopId
                                                 || shopId == -1)
-                                    && x.Title.Contains(textBoxActualListSearch.Text))
+                                    && x.Title.ToLower().Contains(textBoxActualListSearch.Text.ToLower()))
                         .OrderBy(x => x.Title)
                         .ToList();
 
@@ -151,7 +147,7 @@ namespace RestMan.UI.Forms
 
                 return;
             }
-            
+
             if (CurrentCategory != null)
             {
                 flowLayoutPanelActualList.Controls.Clear();
