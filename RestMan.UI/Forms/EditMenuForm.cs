@@ -37,6 +37,14 @@ namespace RestMan.UI.Forms
         private void EditMenuForm_Load(object sender, EventArgs e)
         {
             FillShops();
+
+            if (MenuItem.Id != -1)
+            {
+                comboBoxShop.SelectedItem = comboBoxShop.Items.Cast<Shop>().FirstOrDefault(x => x.Id == MenuItem.Category.ShopId);
+                comboBoxCategory.SelectedItem = comboBoxCategory.Items.Cast<Category>().FirstOrDefault(x => x.Id == MenuItem.CategoryId);
+                textBoxTitle.Text = MenuItem.Title;
+                numericUpDownCost.Value = MenuItem.Cost;
+            }    
         }
 
         private void buttonOk_Click(object sender, EventArgs e)

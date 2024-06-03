@@ -9,6 +9,8 @@ namespace RestMan.UI.Forms
 {
     public partial class AdminMenuForm : Form
     {
+        private Shop currentShop;
+        private Category currentCategory;
         public AdminMenuForm()
         {
             InitializeComponent();
@@ -62,7 +64,10 @@ namespace RestMan.UI.Forms
                     Title = "Все цеха",
                 });
                 comboBoxShop.DisplayMember = nameof(Shop.Title);
-                comboBoxShop.SelectedIndex = 0;
+                comboBoxShop.SelectedItem = comboBoxShop.Items
+                                                        .Cast<Shop>()
+                                                        .FirstOrDefault(x => currentShop == null
+                                                                             || x.Id == currentShop.Id);
             }
         }
 
@@ -85,7 +90,10 @@ namespace RestMan.UI.Forms
                         Title = "Все категории",
                     });
                     comboBoxCategory.DisplayMember = nameof(Category.Title);
-                    comboBoxCategory.SelectedIndex = 0;
+                    comboBoxCategory.SelectedItem = comboBoxCategory.Items
+                                                                    .Cast<Category>()
+                                                                    .FirstOrDefault(x => currentCategory == null
+                                                                                                || x.Id == currentCategory.Id);
                 }
             }
         }
@@ -124,10 +132,14 @@ namespace RestMan.UI.Forms
 
         private void comboBoxShop_SelectedIndexChanged(object sender, EventArgs e)
         {
+            currentCategory = null;
+
             FillCategories();
             Filter();
 
-            buttonDeleteShop.Visible = ((Shop)comboBoxShop.SelectedItem).Id != -1;
+            currentShop = (Shop)comboBoxShop.SelectedItem;
+
+            buttonDeleteShop.Visible = currentShop.Id != -1;
         }
 
         private void textBoxSearch_TextChanged(object sender, EventArgs e)
@@ -139,7 +151,9 @@ namespace RestMan.UI.Forms
         {
             Filter();
 
-            buttonDeleteCategory.Visible = ((Category)comboBoxCategory.SelectedItem).Id != -1;
+            currentCategory = (Category)comboBoxCategory.SelectedItem;
+
+            buttonDeleteCategory.Visible = currentCategory.Id != -1;
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -249,6 +263,8 @@ namespace RestMan.UI.Forms
                 Filter();
             }
 
+            currentShop = null;
+
             FillShops();
         }
 
@@ -271,6 +287,8 @@ namespace RestMan.UI.Forms
 
                 Filter();
             }
+
+            currentCategory = null;
 
             FillCategories();
         }
