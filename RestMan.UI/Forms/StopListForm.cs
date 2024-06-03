@@ -292,7 +292,7 @@ namespace RestMan.UI.Forms
                                                             || categoryId == -1
                                                                 && (x.Category.ShopId == shopId
                                                                     || shopId == -1))
-                                                        && x.Title.Contains(textBoxStopListSearch.Text))
+                                                        && x.Title.ToLower().Contains(textBoxStopListSearch.Text.ToLower()))
                                                 .OrderBy(x => x.Title)
                                                 .ToList();
             }
@@ -309,11 +309,12 @@ namespace RestMan.UI.Forms
         {
             var shopId = ((Shop)comboBoxShops.SelectedItem).Id;
 
+            comboBoxCategories.Items.Clear();
+
             if (labelCategory.Visible = comboBoxCategories.Visible = shopId != -1)
             {
                 using (var db = new RestManDbContext())
                 {
-                    comboBoxCategories.Items.Clear();
                     comboBoxCategories.Items.AddRange(db.Categories
                         .Where(x => x.ShopId == shopId)
                         .ToArray());

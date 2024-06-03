@@ -39,15 +39,15 @@
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.panelControls = new System.Windows.Forms.Panel();
             this.buttonAddOrder = new System.Windows.Forms.Button();
-            this.labelHall = new System.Windows.Forms.Label();
-            this.comboBoxHalls = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanelOrders = new System.Windows.Forms.FlowLayoutPanel();
+            this.textBoxTotal = new System.Windows.Forms.TextBox();
+            this.labelTotal = new System.Windows.Forms.Label();
             this.comboBoxWaiter = new System.Windows.Forms.ComboBox();
             this.labelWaiter = new System.Windows.Forms.Label();
-            this.labelTotal = new System.Windows.Forms.Label();
-            this.textBoxTotal = new System.Windows.Forms.TextBox();
             this.comboBoxTable = new System.Windows.Forms.ComboBox();
             this.labelTable = new System.Windows.Forms.Label();
+            this.comboBoxHalls = new System.Windows.Forms.ComboBox();
+            this.labelHall = new System.Windows.Forms.Label();
+            this.flowLayoutPanelOrders = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
@@ -170,36 +170,26 @@
             this.buttonAddOrder.UseVisualStyleBackColor = true;
             this.buttonAddOrder.Click += new System.EventHandler(this.buttonAddOrder_Click);
             // 
-            // labelHall
+            // textBoxTotal
             // 
-            this.labelHall.AutoSize = true;
-            this.labelHall.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelHall.Location = new System.Drawing.Point(0, 0);
-            this.labelHall.Name = "labelHall";
-            this.labelHall.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.labelHall.Size = new System.Drawing.Size(35, 23);
-            this.labelHall.TabIndex = 1;
-            this.labelHall.Text = "Зал:";
+            this.textBoxTotal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBoxTotal.Location = new System.Drawing.Point(0, 242);
+            this.textBoxTotal.Name = "textBoxTotal";
+            this.textBoxTotal.Size = new System.Drawing.Size(209, 24);
+            this.textBoxTotal.TabIndex = 6;
+            this.textBoxTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxTotal.TextChanged += new System.EventHandler(this.comboBoxHalls_SelectedIndexChanged);
             // 
-            // comboBoxHalls
+            // labelTotal
             // 
-            this.comboBoxHalls.Dock = System.Windows.Forms.DockStyle.Top;
-            this.comboBoxHalls.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxHalls.FormattingEnabled = true;
-            this.comboBoxHalls.Location = new System.Drawing.Point(0, 23);
-            this.comboBoxHalls.Name = "comboBoxHalls";
-            this.comboBoxHalls.Size = new System.Drawing.Size(209, 25);
-            this.comboBoxHalls.TabIndex = 0;
-            this.comboBoxHalls.SelectedIndexChanged += new System.EventHandler(this.comboBoxHalls_SelectedIndexChanged);
-            // 
-            // flowLayoutPanelOrders
-            // 
-            this.flowLayoutPanelOrders.AutoScroll = true;
-            this.flowLayoutPanelOrders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelOrders.Location = new System.Drawing.Point(220, 4);
-            this.flowLayoutPanelOrders.Name = "flowLayoutPanelOrders";
-            this.flowLayoutPanelOrders.Size = new System.Drawing.Size(642, 625);
-            this.flowLayoutPanelOrders.TabIndex = 1;
+            this.labelTotal.AutoSize = true;
+            this.labelTotal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelTotal.Location = new System.Drawing.Point(0, 194);
+            this.labelTotal.Name = "labelTotal";
+            this.labelTotal.Padding = new System.Windows.Forms.Padding(0, 25, 0, 5);
+            this.labelTotal.Size = new System.Drawing.Size(84, 48);
+            this.labelTotal.TabIndex = 5;
+            this.labelTotal.Text = "Стоимость:";
             // 
             // comboBoxWaiter
             // 
@@ -222,27 +212,6 @@
             this.labelWaiter.Size = new System.Drawing.Size(85, 48);
             this.labelWaiter.TabIndex = 4;
             this.labelWaiter.Text = "Официант:";
-            // 
-            // labelTotal
-            // 
-            this.labelTotal.AutoSize = true;
-            this.labelTotal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelTotal.Location = new System.Drawing.Point(0, 194);
-            this.labelTotal.Name = "labelTotal";
-            this.labelTotal.Padding = new System.Windows.Forms.Padding(0, 25, 0, 5);
-            this.labelTotal.Size = new System.Drawing.Size(84, 48);
-            this.labelTotal.TabIndex = 5;
-            this.labelTotal.Text = "Стоимость:";
-            // 
-            // textBoxTotal
-            // 
-            this.textBoxTotal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBoxTotal.Location = new System.Drawing.Point(0, 242);
-            this.textBoxTotal.Name = "textBoxTotal";
-            this.textBoxTotal.Size = new System.Drawing.Size(209, 24);
-            this.textBoxTotal.TabIndex = 6;
-            this.textBoxTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxTotal.TextChanged += new System.EventHandler(this.comboBoxHalls_SelectedIndexChanged);
             // 
             // comboBoxTable
             // 
@@ -267,6 +236,37 @@
             this.labelTable.TabIndex = 4;
             this.labelTable.Text = "Стол:";
             this.labelTable.Visible = false;
+            // 
+            // comboBoxHalls
+            // 
+            this.comboBoxHalls.Dock = System.Windows.Forms.DockStyle.Top;
+            this.comboBoxHalls.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxHalls.FormattingEnabled = true;
+            this.comboBoxHalls.Location = new System.Drawing.Point(0, 23);
+            this.comboBoxHalls.Name = "comboBoxHalls";
+            this.comboBoxHalls.Size = new System.Drawing.Size(209, 25);
+            this.comboBoxHalls.TabIndex = 0;
+            this.comboBoxHalls.SelectedIndexChanged += new System.EventHandler(this.comboBoxHalls_SelectedIndexChanged);
+            // 
+            // labelHall
+            // 
+            this.labelHall.AutoSize = true;
+            this.labelHall.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelHall.Location = new System.Drawing.Point(0, 0);
+            this.labelHall.Name = "labelHall";
+            this.labelHall.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.labelHall.Size = new System.Drawing.Size(35, 23);
+            this.labelHall.TabIndex = 1;
+            this.labelHall.Text = "Зал:";
+            // 
+            // flowLayoutPanelOrders
+            // 
+            this.flowLayoutPanelOrders.AutoScroll = true;
+            this.flowLayoutPanelOrders.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelOrders.Location = new System.Drawing.Point(220, 4);
+            this.flowLayoutPanelOrders.Name = "flowLayoutPanelOrders";
+            this.flowLayoutPanelOrders.Size = new System.Drawing.Size(642, 625);
+            this.flowLayoutPanelOrders.TabIndex = 1;
             // 
             // OrdersForm
             // 

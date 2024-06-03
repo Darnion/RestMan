@@ -37,7 +37,7 @@
             this.toolStripStatusLabelFullname = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelRole = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelControls = new System.Windows.Forms.Panel();
             this.buttonCloseShift = new System.Windows.Forms.Button();
             this.buttonDatabaseAccess = new System.Windows.Forms.Button();
             this.buttonReports = new System.Windows.Forms.Button();
@@ -49,7 +49,7 @@
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelControls.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -124,7 +124,7 @@
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel.Controls.Add(this.panel1, 1, 0);
+            this.tableLayoutPanel.Controls.Add(this.panelControls, 1, 0);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 28);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
@@ -133,19 +133,19 @@
             this.tableLayoutPanel.Size = new System.Drawing.Size(697, 328);
             this.tableLayoutPanel.TabIndex = 2;
             // 
-            // panel1
+            // panelControls
             // 
-            this.panel1.Controls.Add(this.buttonCloseShift);
-            this.panel1.Controls.Add(this.buttonDatabaseAccess);
-            this.panel1.Controls.Add(this.buttonReports);
-            this.panel1.Controls.Add(this.buttonStopList);
-            this.panel1.Controls.Add(this.buttonClosedOrders);
-            this.panel1.Controls.Add(this.buttonOrders);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(212, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(272, 322);
-            this.panel1.TabIndex = 0;
+            this.panelControls.Controls.Add(this.buttonCloseShift);
+            this.panelControls.Controls.Add(this.buttonDatabaseAccess);
+            this.panelControls.Controls.Add(this.buttonReports);
+            this.panelControls.Controls.Add(this.buttonStopList);
+            this.panelControls.Controls.Add(this.buttonClosedOrders);
+            this.panelControls.Controls.Add(this.buttonOrders);
+            this.panelControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControls.Location = new System.Drawing.Point(212, 3);
+            this.panelControls.Name = "panelControls";
+            this.panelControls.Size = new System.Drawing.Size(272, 322);
+            this.panelControls.TabIndex = 0;
             // 
             // buttonCloseShift
             // 
@@ -260,7 +260,7 @@
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.tableLayoutPanel.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.panelControls.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -274,7 +274,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFullname;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelRole;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelControls;
         private System.Windows.Forms.Button buttonDatabaseAccess;
         private System.Windows.Forms.Button buttonReports;
         private System.Windows.Forms.Button buttonStopList;

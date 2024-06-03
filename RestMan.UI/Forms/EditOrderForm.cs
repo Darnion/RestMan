@@ -43,7 +43,7 @@ namespace RestMan.UI.Forms
             GetCurrentList(currentOrder);
             OrderMenuItemsHandler(currentList);
             OrderPaymentsHandler();
-            
+
         }
 
         private void GetCurrentList(Order order)
@@ -153,17 +153,17 @@ namespace RestMan.UI.Forms
                         .OrderBy(x => x.Title)
                         .ToList();
 
-                    foreach (var menuItem in actualMenuItems)
+                foreach (var menuItem in actualMenuItems)
+                {
+                    var button = new Button
                     {
-                        var button = new Button
-                        {
-                            Text = menuItem.Title,
-                            Tag = menuItem.Id,
-                            Size = new Size(100, 100),
-                            Parent = flowLayoutPanelMenuItems
-                        };
-                        button.Click += buttonMenuItem_Click;
-                    }
+                        Text = menuItem.Title,
+                        Tag = menuItem.Id,
+                        Size = new Size(100, 100),
+                        Parent = flowLayoutPanelMenuItems
+                    };
+                    button.Click += buttonMenuItem_Click;
+                }
 
                 return;
             }
@@ -248,7 +248,7 @@ namespace RestMan.UI.Forms
         private void OrderPaymentsHandler()
         {
             panelPayments.Controls.Clear();
-            
+
             if (dataGridViewOrderMenuItems.RowCount > 0)
             {
                 GetPayments();
@@ -735,7 +735,7 @@ namespace RestMan.UI.Forms
 
         private void buttonCashPay_Click(object sender, EventArgs e)
         {
-            
+
             int.TryParse(((Button)sender).Tag.ToString(), out var cashPaid);
 
             currentOrder.PaidByCash = cashPaid;
@@ -953,7 +953,7 @@ namespace RestMan.UI.Forms
 
             return false;
         }
-        
+
         private void SaveOrder()
         {
             using (var db = new RestManDbContext())

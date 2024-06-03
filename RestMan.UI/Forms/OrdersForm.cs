@@ -141,7 +141,7 @@ namespace RestMan.UI.Forms
             var hall = (Hall)comboBoxHalls.SelectedItem;
             var table = (Table)comboBoxTable.SelectedItem;
             var waiter = (User)comboBoxWaiter.SelectedItem;
-            
+
             var isNotEmpty = int.TryParse(textBoxTotal.Text, out var total);
 
             if (hall == null || waiter == null)
