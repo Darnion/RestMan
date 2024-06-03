@@ -91,6 +91,14 @@
     <Compile Include="Migrations\202405300802555_OrderChangeAdded.Designer.cs">
       <DependentUpon>202405300802555_OrderChangeAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202406041138394_AddHallAcronym.cs" />
+    <Compile Include="Migrations\202406041138394_AddHallAcronym.Designer.cs">
+      <DependentUpon>202406041138394_AddHallAcronym.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406041140274_AddHallAcronym1.cs" />
+    <Compile Include="Migrations\202406041140274_AddHallAcronym1.Designer.cs">
+      <DependentUpon>202406041140274_AddHallAcronym1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Hall.cs" />
@@ -139,6 +147,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405300802555_OrderChangeAdded.resx">
       <DependentUpon>202405300802555_OrderChangeAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406041138394_AddHallAcronym.resx">
+      <DependentUpon>202406041138394_AddHallAcronym.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406041140274_AddHallAcronym1.resx">
+      <DependentUpon>202406041140274_AddHallAcronym1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

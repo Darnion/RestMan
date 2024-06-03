@@ -104,7 +104,10 @@ namespace RestMan.UI.Forms
             var categoryId = (Category)comboBoxCategory.SelectedItem == null
                 ? -1
                 : ((Category)comboBoxCategory.SelectedItem).Id;
-            var searchText = textBoxSearch.Text.ToLower() ?? "";
+            var searchText = string.IsNullOrWhiteSpace(textBoxSearch.Text)
+                ? ""
+                : textBoxSearch.Text.ToLower();
+
             using (var db = new RestManDbContext())
             {
                 dataGridViewMenu.DataSource = db.MenuItems

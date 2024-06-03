@@ -66,7 +66,9 @@ namespace RestMan.UI.Forms
 
         private void comboBoxRole_SelectedIndexChanged(object sender, EventArgs e)
         {
-            searchText = textBoxSearch.Text.ToLower() ?? "";
+            searchText = string.IsNullOrWhiteSpace(textBoxSearch.Text)
+                ? ""
+                : textBoxSearch.Text.ToLower();
             sortedRole = (Role)comboBoxRole.SelectedItem;
 
             Filter();

@@ -65,6 +65,20 @@ namespace RestMan.UI.Forms
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
+            using (var db = new RestManDbContext())
+            {
+                var isExist = db.Users.Where(x => x.Login == textBoxLogin.Text).Any();
+
+                if (isExist)
+                {
+                    MessageBox.Show("Пользователь с таким логином уже существует",
+                                    "Ошибка",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Stop);
+                    return;
+                }
+            }
+
             if (!Regex.IsMatch(textBoxLogin.Text,
                 @"^[a-zA-Z\d]{3,15}$"))
             {
@@ -114,9 +128,9 @@ namespace RestMan.UI.Forms
 
         private void textBoxFullname_TextChanged(object sender, EventArgs e)
         {
-            buttonOk.Enabled = !string.IsNullOrEmpty(textBoxFullname.Text)
-                                && !string.IsNullOrEmpty(textBoxLogin.Text)
-                                && !string.IsNullOrEmpty(textBoxPassword.Text)
+            buttonOk.Enabled = !string.IsNullOrWhiteSpace(textBoxFullname.Text)
+                                && !string.IsNullOrWhiteSpace(textBoxLogin.Text)
+                                && !string.IsNullOrWhiteSpace(textBoxPassword.Text)
                                 && comboBoxRole.SelectedItem != null;
         }
 

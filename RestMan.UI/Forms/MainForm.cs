@@ -96,7 +96,10 @@ namespace RestMan.UI.Forms
         }
         private void buttonEditTables_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var adminTablesForm = new AdminTablesForm();
+            this.Hide();
+            adminTablesForm.ShowDialog();
+            this.Show();
         }
 
         private void buttonCloseShift_Click(object sender, EventArgs e)

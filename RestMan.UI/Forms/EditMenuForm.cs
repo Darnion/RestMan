@@ -17,6 +17,7 @@ namespace RestMan.UI.Forms
     {
         private bool isNewShop = false;
         private bool isNewCategory = false;
+        private MenuItem backupMenuItem;
         public MenuItem MenuItem { get; set; }
         public EditMenuForm()
         {
@@ -31,6 +32,12 @@ namespace RestMan.UI.Forms
         {
             InitializeComponent();
             this.MenuItem = menuItem;
+            this.backupMenuItem = new MenuItem()
+            {
+                Id = -1,
+                Title = menuItem.Title,
+                CategoryId = menuItem.CategoryId,
+            };
             this.Text = "Изменение позиции";
         }
 
@@ -104,12 +111,35 @@ namespace RestMan.UI.Forms
                 this.MenuItem.Cost = int.Parse(numericUpDownCost.Value.ToString());
                 this.MenuItem.CategoryId = categoryDB.Id;
 
+                var uniqueItem = db.MenuItems.FirstOrDefault(x => x.Title == MenuItem.Title);
+
                 if (this.MenuItem.Id == -1)
                 {
+                    if (uniqueItem != null && uniqueItem.CategoryId == MenuItem.CategoryId)
+                    {
+                        MessageBox.Show("Такая позиция уже существует",
+                                        "Ошибка",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Stop);
+                        return;
+                    }
+
                     db.MenuItems.Add(this.MenuItem);
                 }
                 else
                 {
+                    if ((backupMenuItem.Title != MenuItem.Title
+                        || backupMenuItem.CategoryId != MenuItem.CategoryId)
+                        && uniqueItem != null
+                        && uniqueItem.CategoryId == MenuItem.CategoryId)
+                    {
+                        MessageBox.Show("Такая позиция уже существует",
+                                        "Ошибка",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Stop);
+                        return;
+                    }
+
                     var menuItemDB = db.MenuItems.FirstOrDefault(x => x.Id == this.MenuItem.Id);
 
                     menuItemDB.Title = this.MenuItem.Title;
@@ -130,9 +160,9 @@ namespace RestMan.UI.Forms
                 FillCategories();
             }
 
-            buttonOk.Enabled = !string.IsNullOrEmpty(comboBoxShop.Text)
-                               && !string.IsNullOrEmpty(comboBoxCategory.Text)
-                               && !string.IsNullOrEmpty(textBoxTitle.Text);
+            buttonOk.Enabled = !string.IsNullOrWhiteSpace(comboBoxShop.Text)
+                               && !string.IsNullOrWhiteSpace(comboBoxCategory.Text)
+                               && !string.IsNullOrWhiteSpace(textBoxTitle.Text);
         }
 
         private void FillCategories()
