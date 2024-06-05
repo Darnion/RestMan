@@ -1,20 +1,18 @@
 ﻿using RestMan.Context;
 using RestMan.Context.Models;
-using RestMan.UI.Common;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RestMan.UI.Forms
 {
     public partial class MainForm : Form
     {
+        private List<Control> controls = new List<Control>();
+        private List<Control> tempControls = new List<Control>();
         public MainForm()
         {
             InitializeComponent();
@@ -41,6 +39,67 @@ namespace RestMan.UI.Forms
             buttonClosedOrders.Visible = CurrentUser.IsCashier() || CurrentUser.IsManager();
             buttonStopList.Visible = buttonReports.Visible = buttonCloseShift.Visible = CurrentUser.IsManager();
             buttonDatabaseAccess.Visible = CurrentUser.IsAdmin();
+
+            controls.Clear();
+
+            var button = new Button()
+            {
+                Size = new Size(272, 46),
+                Dock = DockStyle.Top,
+                Text = "Пользователи",
+            };
+            button.Click += buttonEditUsers_Click;
+            controls.Add(button);
+
+            button = new Button()
+            {
+                Size = new Size(272, 46),
+                Dock = DockStyle.Top,
+                Text = "Столы",
+            };
+            button.Click += buttonEditTables_Click;
+            controls.Add(button);
+
+            button = new Button()
+            {
+                Size = new Size(272, 46),
+                Dock = DockStyle.Top,
+                Text = "Меню",
+            };
+            button.Click += buttonEditMenu_Click;
+            controls.Add(button);
+
+            button = new Button()
+            {
+                Size = new Size(272, 46),
+                Dock = DockStyle.Top,
+                Text = "Назад"
+            };
+            button.Click += buttonDatabaseAccess_Click;
+            controls.Add(button);
+        }
+
+        private void buttonEditUsers_Click(object sender, EventArgs e)
+        {
+            var adminUsersForm = new AdminUsersForm();
+            this.Hide();
+            adminUsersForm.ShowDialog();
+            this.Show();
+        }
+
+        private void buttonEditMenu_Click(object sender, EventArgs e)
+        {
+            var adminMenuForm = new AdminMenuForm();
+            this.Hide();
+            adminMenuForm.ShowDialog();
+            this.Show();
+        }
+        private void buttonEditTables_Click(object sender, EventArgs e)
+        {
+            var adminTablesForm = new AdminTablesForm();
+            this.Hide();
+            adminTablesForm.ShowDialog();
+            this.Show();
         }
 
         private void buttonCloseShift_Click(object sender, EventArgs e)
@@ -120,7 +179,21 @@ namespace RestMan.UI.Forms
 
         private void buttonDatabaseAccess_Click(object sender, EventArgs e)
         {
+            tempControls.Clear();
+            foreach (Control control in panelControls.Controls)
+            {
+                tempControls.Add(control);
+            }
 
+            panelControls.Controls.Clear();
+
+            panelControls.Controls.AddRange(controls.ToArray());
+
+            controls.Clear();
+            foreach (Control control in tempControls)
+            {
+                controls.Add(control);
+            }
         }
     }
 }

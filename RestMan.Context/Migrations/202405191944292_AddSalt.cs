@@ -1,8 +1,7 @@
 ﻿namespace RestMan.Context.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddSalt : DbMigration
     {
         public override void Up()
@@ -33,7 +32,7 @@
             AddForeignKey("dbo.Tables", "Hall_Id", "dbo.Halls", "Id");
             AddForeignKey("dbo.Orders", "Waiter_Id", "dbo.Users", "Id");
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Orders", "Waiter_Id", "dbo.Users");

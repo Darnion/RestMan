@@ -2,15 +2,11 @@
 using RestMan.Context.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace RestMan.UI.Forms
 {
@@ -132,7 +128,7 @@ namespace RestMan.UI.Forms
                                     && (x.CategoryId == categoryId
                                         || x.Category.ShopId == shopId
                                                 || shopId == -1)
-                                    && x.Title.Contains(textBoxActualListSearch.Text))
+                                    && x.Title.ToLower().Contains(textBoxActualListSearch.Text.ToLower()))
                         .OrderBy(x => x.Title)
                         .ToList();
 
@@ -151,7 +147,7 @@ namespace RestMan.UI.Forms
 
                 return;
             }
-            
+
             if (CurrentCategory != null)
             {
                 flowLayoutPanelActualList.Controls.Clear();
@@ -296,7 +292,7 @@ namespace RestMan.UI.Forms
                                                             || categoryId == -1
                                                                 && (x.Category.ShopId == shopId
                                                                     || shopId == -1))
-                                                        && x.Title.Contains(textBoxStopListSearch.Text))
+                                                        && x.Title.ToLower().Contains(textBoxStopListSearch.Text.ToLower()))
                                                 .OrderBy(x => x.Title)
                                                 .ToList();
             }
@@ -313,11 +309,12 @@ namespace RestMan.UI.Forms
         {
             var shopId = ((Shop)comboBoxShops.SelectedItem).Id;
 
+            comboBoxCategories.Items.Clear();
+
             if (labelCategory.Visible = comboBoxCategories.Visible = shopId != -1)
             {
                 using (var db = new RestManDbContext())
                 {
-                    comboBoxCategories.Items.Clear();
                     comboBoxCategories.Items.AddRange(db.Categories
                         .Where(x => x.ShopId == shopId)
                         .ToArray());

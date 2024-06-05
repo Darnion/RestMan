@@ -1,8 +1,7 @@
 ﻿namespace RestMan.Context.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class PayOptionsAdded1 : DbMigration
     {
         public override void Up()
@@ -16,7 +15,7 @@
             DropColumn("dbo.MenuItems", "PaidByCredit");
             DropColumn("dbo.MenuItems", "PaidByQR");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.MenuItems", "PaidByQR", c => c.Int());

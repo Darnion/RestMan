@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestMan.Context.Models
 {
-    public class Order
+    public class Order : ICloneable
     {
         public long Id { get; set; }
         [Required]
@@ -24,5 +20,10 @@ namespace RestMan.Context.Models
         public int? PaidByCredit { get; set; } = 0;
         public int? PaidByQR { get; set; } = 0;
         public int? ChangeGiven { get; set; } = 0;
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }

@@ -46,12 +46,12 @@
             this.buttonCloseOrder = new System.Windows.Forms.Button();
             this.buttonDeleteOrderMenuItem = new System.Windows.Forms.Button();
             this.buttonEditOrderMenuItem = new System.Windows.Forms.Button();
+            this.buttonEditTable = new System.Windows.Forms.Button();
             this.buttonEditWaiter = new System.Windows.Forms.Button();
             this.panelInfo = new System.Windows.Forms.Panel();
             this.panelPayments = new System.Windows.Forms.Panel();
             this.groupBoxMenuSearch = new System.Windows.Forms.GroupBox();
             this.textBoxMenuSearch = new System.Windows.Forms.TextBox();
-            this.buttonEditTable = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
@@ -204,47 +204,6 @@
             this.ColumnTotal.Name = "ColumnTotal";
             this.ColumnTotal.ReadOnly = true;
             // 
-            // ColumnId
-            // 
-            this.ColumnId.DataPropertyName = "Id";
-            this.ColumnId.HeaderText = "Id";
-            this.ColumnId.Name = "ColumnId";
-            this.ColumnId.ReadOnly = true;
-            this.ColumnId.Visible = false;
-            // 
-            // ColumnTitle
-            // 
-            this.ColumnTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ColumnTitle.DataPropertyName = "Title";
-            this.ColumnTitle.HeaderText = "Название";
-            this.ColumnTitle.Name = "ColumnTitle";
-            this.ColumnTitle.ReadOnly = true;
-            this.ColumnTitle.Width = 97;
-            // 
-            // ColumnCost
-            // 
-            this.ColumnCost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColumnCost.DataPropertyName = "Cost";
-            this.ColumnCost.HeaderText = "Цена";
-            this.ColumnCost.Name = "ColumnCost";
-            this.ColumnCost.ReadOnly = true;
-            // 
-            // ColumnCount
-            // 
-            this.ColumnCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColumnCount.DataPropertyName = "Count";
-            this.ColumnCount.HeaderText = "Количество";
-            this.ColumnCount.Name = "ColumnCount";
-            this.ColumnCount.ReadOnly = true;
-            // 
-            // ColumnTotal
-            // 
-            this.ColumnTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColumnTotal.DataPropertyName = "Total";
-            this.ColumnTotal.HeaderText = "Итого";
-            this.ColumnTotal.Name = "ColumnTotal";
-            this.ColumnTotal.ReadOnly = true;
-            // 
             // panelControls
             // 
             this.panelControls.Controls.Add(this.buttonCloseOrder);
@@ -292,6 +251,17 @@
             this.buttonEditOrderMenuItem.Text = "Изменить позицию";
             this.buttonEditOrderMenuItem.UseVisualStyleBackColor = true;
             this.buttonEditOrderMenuItem.Click += new System.EventHandler(this.buttonEditOrderMenuItem_Click);
+            // 
+            // buttonEditTable
+            // 
+            this.buttonEditTable.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonEditTable.Location = new System.Drawing.Point(0, 46);
+            this.buttonEditTable.Name = "buttonEditTable";
+            this.buttonEditTable.Size = new System.Drawing.Size(242, 46);
+            this.buttonEditTable.TabIndex = 1;
+            this.buttonEditTable.Text = "Изменить стол";
+            this.buttonEditTable.UseVisualStyleBackColor = true;
+            this.buttonEditTable.Click += new System.EventHandler(this.buttonEditTable_Click);
             // 
             // buttonEditWaiter
             // 
@@ -342,17 +312,6 @@
             this.textBoxMenuSearch.Size = new System.Drawing.Size(129, 48);
             this.textBoxMenuSearch.TabIndex = 0;
             this.textBoxMenuSearch.TextChanged += new System.EventHandler(this.textBoxMenuSearch_TextChanged);
-            // 
-            // buttonEditTable
-            // 
-            this.buttonEditTable.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonEditTable.Location = new System.Drawing.Point(0, 46);
-            this.buttonEditTable.Name = "buttonEditTable";
-            this.buttonEditTable.Size = new System.Drawing.Size(242, 46);
-            this.buttonEditTable.TabIndex = 1;
-            this.buttonEditTable.Text = "Изменить стол";
-            this.buttonEditTable.UseVisualStyleBackColor = true;
-            this.buttonEditTable.Click += new System.EventHandler(this.buttonEditTable_Click);
             // 
             // EditOrderForm
             // 

@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\RestManIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -57,6 +60,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Authorizator.cs" />
+    <Compile Include="Forms\AdminMenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminMenuForm.Designer.cs">
+      <DependentUpon>AdminMenuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminTablesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminTablesForm.Designer.cs">
+      <DependentUpon>AdminTablesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminUsersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminUsersForm.Designer.cs">
+      <DependentUpon>AdminUsersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AuthForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +92,12 @@
     <Compile Include="Forms\EditCountForm.Designer.cs">
       <DependentUpon>EditCountForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\EditMenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditMenuForm.Designer.cs">
+      <DependentUpon>EditMenuForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\EditOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +109,12 @@
     </Compile>
     <Compile Include="Forms\EditTableForm.Designer.cs">
       <DependentUpon>EditTableForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EditUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditUserForm.Designer.cs">
+      <DependentUpon>EditUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\EditWaiterForm.cs">
       <SubType>Form</SubType>
@@ -127,17 +160,32 @@
     <Compile Include="UserControls\InfoRowView.Designer.cs">
       <DependentUpon>InfoRowView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\AdminMenuForm.resx">
+      <DependentUpon>AdminMenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminTablesForm.resx">
+      <DependentUpon>AdminTablesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminUsersForm.resx">
+      <DependentUpon>AdminUsersForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AuthForm.resx">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditCountForm.resx">
       <DependentUpon>EditCountForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditMenuForm.resx">
+      <DependentUpon>EditMenuForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditOrderForm.resx">
       <DependentUpon>EditOrderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditTableForm.resx">
       <DependentUpon>EditTableForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditUserForm.resx">
+      <DependentUpon>EditUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditWaiterForm.resx">
       <DependentUpon>EditWaiterForm.cs</DependentUpon>

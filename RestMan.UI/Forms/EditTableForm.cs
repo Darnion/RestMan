@@ -1,13 +1,8 @@
 ﻿using RestMan.Context;
 using RestMan.Context.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RestMan.UI.Forms
@@ -24,15 +19,31 @@ namespace RestMan.UI.Forms
         {
             using (var db = new RestManDbContext())
             {
+                var tables = db.Tables.Where(x => db.Orders.Where(y => y.TableId == x.Id
+                                                                && !y.DeletedAt.HasValue).Count() == 0);
+                var halls = db.Halls.Where(x => tables.Any(y => y.HallId == x.Id));
+
+                if (halls.Count() == 0)
+                {
+                    MessageBox.Show("Свободных столов нет!", "Полная посадка!", MessageBoxButtons.OK);
+                    this.Close();
+                    return;
+                }
+
                 comboBoxHall.Items.Clear();
-                comboBoxHall.Items.AddRange(db.Halls.ToArray());
+                comboBoxHall.Items.AddRange(halls.ToArray());
                 comboBoxHall.DisplayMember = nameof(Hall.Title);
+
+                if (Table == null)
+                {
+                    comboBoxHall.SelectedIndex = 0;
+                    return;
+                }
+
                 comboBoxHall.SelectedItem = comboBoxHall
                                             .Items
                                             .Cast<Hall>()
-                                            .FirstOrDefault(x => x.Id == this.Table.HallId);
-
-
+                                            .FirstOrDefault(x => x.Id == Table.HallId);
             }
         }
 
@@ -43,17 +54,28 @@ namespace RestMan.UI.Forms
                 var hall = ((Hall)comboBoxHall.SelectedItem);
 
                 comboBoxTable.Items.Clear();
-                comboBoxTable.Items.AddRange(db.Tables.Where(x => x.HallId == hall.Id).ToArray());
+                comboBoxTable.Items.AddRange(db.Tables.Where(x => x.HallId == hall.Id
+                                                            && db.Orders.Where(y => y.TableId == x.Id
+                                                                                && !y.DeletedAt.HasValue).Count() == 0)
+                                                                        .ToArray());
                 comboBoxTable.DisplayMember = nameof(Table.Title);
+
+                if (Table == null)
+                {
+                    comboBoxTable.SelectedIndex = 0;
+                    return;
+                }
+
                 comboBoxTable.SelectedItem = comboBoxTable
-                                            .Items
-                                            .Cast<Table>()
-                                            .FirstOrDefault(x => x.Id == this.Table.Id);
+                            .Items
+                            .Cast<Table>()
+                            .FirstOrDefault(x => x.Id == this.Table.Id);
             }
         }
 
         private void comboBoxHall_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Table = null;
             GetTablesByHall();
         }
 
