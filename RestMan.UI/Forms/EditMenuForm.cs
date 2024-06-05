@@ -58,7 +58,7 @@ namespace RestMan.UI.Forms
         {
             if (comboBoxShop.SelectedItem == null)
             {
-                if (MessageBox.Show($"Вы хотите создать новый цех:\n{comboBoxShop.Text}?",
+                if (MessageBox.Show($"Вы хотите создать новый цех:\n{comboBoxShop.Text.Trim()}?",
                     "Подтвердите действие",
                     MessageBoxButtons.YesNo) == DialogResult.No)
                 {
@@ -71,7 +71,7 @@ namespace RestMan.UI.Forms
 
             if (comboBoxCategory.SelectedItem == null)
             {
-                if (MessageBox.Show($"Вы хотите создать новую категорию:\n{comboBoxCategory.Text}?",
+                if (MessageBox.Show($"Вы хотите создать новую категорию:\n{comboBoxCategory.Text.Trim()}?",
                     "Подтвердите действие",
                     MessageBoxButtons.YesNo) == DialogResult.No)
                 {
@@ -82,8 +82,8 @@ namespace RestMan.UI.Forms
                 isNewCategory = true;
             }
 
-            var shop = (Shop)comboBoxShop.SelectedItem ?? new Shop() { Title = comboBoxShop.Text };
-            var category = (Category)comboBoxCategory.SelectedItem ?? new Category() { Title = comboBoxCategory.Text };
+            var shop = (Shop)comboBoxShop.SelectedItem ?? new Shop() { Title = comboBoxShop.Text.Trim() };
+            var category = (Category)comboBoxCategory.SelectedItem ?? new Category() { Title = comboBoxCategory.Text.Trim() };
 
             using (var db = new RestManDbContext())
             {
@@ -107,7 +107,7 @@ namespace RestMan.UI.Forms
                 }
 
 
-                this.MenuItem.Title = textBoxTitle.Text;
+                this.MenuItem.Title = textBoxTitle.Text.Trim();
                 this.MenuItem.Cost = int.Parse(numericUpDownCost.Value.ToString());
                 this.MenuItem.CategoryId = categoryDB.Id;
 

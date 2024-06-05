@@ -44,6 +44,9 @@
             this.textBoxAcronym = new System.Windows.Forms.TextBox();
             this.labelAcronym = new System.Windows.Forms.Label();
             this.comboBoxHall = new System.Windows.Forms.ComboBox();
+            this.buttonAddTable = new System.Windows.Forms.Button();
+            this.buttonDeleteTable = new System.Windows.Forms.Button();
+            this.buttonDeleteHall = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
@@ -150,7 +153,10 @@
             // 
             // panelControls
             // 
+            this.panelControls.Controls.Add(this.buttonAddTable);
             this.panelControls.Controls.Add(this.groupBoxHall);
+            this.panelControls.Controls.Add(this.buttonDeleteTable);
+            this.panelControls.Controls.Add(this.buttonDeleteHall);
             this.panelControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControls.Location = new System.Drawing.Point(455, 3);
             this.panelControls.Name = "panelControls";
@@ -180,6 +186,7 @@
             this.buttonSave.TabIndex = 3;
             this.buttonSave.Text = "Сохранить";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Visible = false;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // textBoxAcronym
@@ -211,7 +218,42 @@
             this.comboBoxHall.Size = new System.Drawing.Size(182, 25);
             this.comboBoxHall.TabIndex = 0;
             this.comboBoxHall.SelectedIndexChanged += new System.EventHandler(this.comboBoxHall_SelectedIndexChanged);
+            this.comboBoxHall.TextUpdate += new System.EventHandler(this.comboBoxHall_SelectedIndexChanged);
+            this.comboBoxHall.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxHall_KeyPress);
             this.comboBoxHall.Leave += new System.EventHandler(this.comboBoxHall_Leave);
+            // 
+            // buttonAddTable
+            // 
+            this.buttonAddTable.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonAddTable.Location = new System.Drawing.Point(0, 273);
+            this.buttonAddTable.Name = "buttonAddTable";
+            this.buttonAddTable.Size = new System.Drawing.Size(188, 23);
+            this.buttonAddTable.TabIndex = 1;
+            this.buttonAddTable.Text = "Добавить стол";
+            this.buttonAddTable.UseVisualStyleBackColor = true;
+            this.buttonAddTable.Click += new System.EventHandler(this.buttonAddTable_Click);
+            // 
+            // buttonDeleteTable
+            // 
+            this.buttonDeleteTable.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonDeleteTable.Location = new System.Drawing.Point(0, 296);
+            this.buttonDeleteTable.Name = "buttonDeleteTable";
+            this.buttonDeleteTable.Size = new System.Drawing.Size(188, 23);
+            this.buttonDeleteTable.TabIndex = 2;
+            this.buttonDeleteTable.Text = "Удалить стол";
+            this.buttonDeleteTable.UseVisualStyleBackColor = true;
+            this.buttonDeleteTable.Click += new System.EventHandler(this.buttonDeleteTable_Click);
+            // 
+            // buttonDeleteHall
+            // 
+            this.buttonDeleteHall.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonDeleteHall.Location = new System.Drawing.Point(0, 319);
+            this.buttonDeleteHall.Name = "buttonDeleteHall";
+            this.buttonDeleteHall.Size = new System.Drawing.Size(188, 23);
+            this.buttonDeleteHall.TabIndex = 3;
+            this.buttonDeleteHall.Text = "Удалить зал";
+            this.buttonDeleteHall.UseVisualStyleBackColor = true;
+            this.buttonDeleteHall.Click += new System.EventHandler(this.buttonDeleteHall_Click);
             // 
             // AdminTablesForm
             // 
@@ -259,5 +301,8 @@
         private System.Windows.Forms.Label labelAcronym;
         private System.Windows.Forms.TextBox textBoxAcronym;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonAddTable;
+        private System.Windows.Forms.Button buttonDeleteTable;
+        private System.Windows.Forms.Button buttonDeleteHall;
     }
 }

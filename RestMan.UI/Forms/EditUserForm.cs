@@ -67,7 +67,7 @@ namespace RestMan.UI.Forms
         {
             using (var db = new RestManDbContext())
             {
-                var isExist = db.Users.Where(x => x.Login == textBoxLogin.Text).Any();
+                var isExist = db.Users.Where(x => x.Login == textBoxLogin.Text.Trim()).Any();
 
                 if (isExist)
                 {
@@ -113,14 +113,14 @@ namespace RestMan.UI.Forms
             {
                 var authorizator = new Authorizator();
                 var salt = authorizator.CreateSalt(16);
-                var hashPassword = authorizator.GenerateSHA256Hash(textBoxPassword.Text, salt);
+                var hashPassword = authorizator.GenerateSHA256Hash(textBoxPassword.Text.Trim(), salt);
 
                 this.User.Password = hashPassword;
                 this.User.Salt = salt;
             }
 
-            this.User.Fullname = textBoxFullname.Text;
-            this.User.Login = textBoxLogin.Text;
+            this.User.Fullname = textBoxFullname.Text.Trim();
+            this.User.Login = textBoxLogin.Text.Trim();
             this.User.RoleId = ((Role)comboBoxRole.SelectedItem).Id;
 
             DialogResult = DialogResult.OK;

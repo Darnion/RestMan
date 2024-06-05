@@ -117,7 +117,7 @@ namespace RestMan.UI.Forms
 
                 var authorizator = new Authorizator();
                 var salt = authorizator.CreateSalt(16);
-                var hashPassword = authorizator.GenerateSHA256Hash(textBoxPassword.Text, salt);
+                var hashPassword = authorizator.GenerateSHA256Hash(textBoxPassword.Text.Trim(), salt);
 
                 user.Password = hashPassword;
                 user.Salt = salt;
