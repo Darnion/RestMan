@@ -35,17 +35,25 @@
             this.toolStripStatusLabelFullname = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelRole = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanelControls = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelReport = new System.Windows.Forms.Panel();
+            this.fullReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelSearch = new System.Windows.Forms.Panel();
+            this.groupBoxSearch = new System.Windows.Forms.GroupBox();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
+            this.panelSearch.SuspendLayout();
+            this.groupBoxSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
             // 
             this.menuStrip.Font = new System.Drawing.Font("Book Antiqua", 10F);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
+            this.exitToolStripMenuItem,
+            this.fullReportToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(11, 4, 0, 4);
@@ -92,26 +100,77 @@
             // 
             // tableLayoutPanel
             // 
-            this.tableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel.ColumnCount = 2;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanel, 0, 0);
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanelControls, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.panelReport, 1, 0);
+            this.tableLayoutPanel.Controls.Add(this.panelSearch, 0, 1);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 30);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 1;
+            this.tableLayoutPanel.RowCount = 2;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.Size = new System.Drawing.Size(881, 537);
             this.tableLayoutPanel.TabIndex = 4;
             // 
-            // flowLayoutPanel
+            // flowLayoutPanelControls
             // 
-            this.flowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel.Location = new System.Drawing.Point(4, 4);
-            this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(433, 529);
-            this.flowLayoutPanel.TabIndex = 0;
+            this.flowLayoutPanelControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanelControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelControls.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanelControls.Name = "flowLayoutPanelControls";
+            this.flowLayoutPanelControls.Size = new System.Drawing.Size(436, 425);
+            this.flowLayoutPanelControls.TabIndex = 0;
+            // 
+            // panelReport
+            // 
+            this.panelReport.AutoScroll = true;
+            this.panelReport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelReport.Location = new System.Drawing.Point(445, 3);
+            this.panelReport.Name = "panelReport";
+            this.tableLayoutPanel.SetRowSpan(this.panelReport, 2);
+            this.panelReport.Size = new System.Drawing.Size(433, 531);
+            this.panelReport.TabIndex = 1;
+            // 
+            // fullReportToolStripMenuItem
+            // 
+            this.fullReportToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.fullReportToolStripMenuItem.Name = "fullReportToolStripMenuItem";
+            this.fullReportToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.fullReportToolStripMenuItem.Text = "Полный отчет";
+            this.fullReportToolStripMenuItem.Click += new System.EventHandler(this.fullReportToolStripMenuItem_Click);
+            // 
+            // panelSearch
+            // 
+            this.panelSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSearch.Controls.Add(this.groupBoxSearch);
+            this.panelSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelSearch.Location = new System.Drawing.Point(3, 434);
+            this.panelSearch.Name = "panelSearch";
+            this.panelSearch.Size = new System.Drawing.Size(436, 100);
+            this.panelSearch.TabIndex = 2;
+            // 
+            // groupBoxSearch
+            // 
+            this.groupBoxSearch.Controls.Add(this.textBoxSearch);
+            this.groupBoxSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxSearch.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxSearch.Name = "groupBoxSearch";
+            this.groupBoxSearch.Size = new System.Drawing.Size(434, 98);
+            this.groupBoxSearch.TabIndex = 0;
+            this.groupBoxSearch.TabStop = false;
+            this.groupBoxSearch.Text = "Поиск";
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.textBoxSearch.Location = new System.Drawing.Point(3, 20);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(256, 24);
+            this.textBoxSearch.TabIndex = 2;
             // 
             // ReportsForm
             // 
@@ -123,7 +182,8 @@
             this.Controls.Add(this.menuStrip);
             this.Font = new System.Drawing.Font("Book Antiqua", 10F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(897, 629);
             this.Name = "ReportsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Отчеты";
@@ -133,6 +193,9 @@
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.tableLayoutPanel.ResumeLayout(false);
+            this.panelSearch.ResumeLayout(false);
+            this.groupBoxSearch.ResumeLayout(false);
+            this.groupBoxSearch.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,6 +209,11 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFullname;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelRole;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelControls;
+        private System.Windows.Forms.Panel panelReport;
+        private System.Windows.Forms.ToolStripMenuItem fullReportToolStripMenuItem;
+        private System.Windows.Forms.Panel panelSearch;
+        private System.Windows.Forms.GroupBox groupBoxSearch;
+        private System.Windows.Forms.TextBox textBoxSearch;
     }
 }

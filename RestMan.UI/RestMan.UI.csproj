@@ -160,6 +160,12 @@
     <Compile Include="UserControls\InfoRowView.Designer.cs">
       <DependentUpon>InfoRowView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ReportView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ReportView.Designer.cs">
+      <DependentUpon>ReportView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AdminMenuForm.resx">
       <DependentUpon>AdminMenuForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -217,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\InfoRowView.resx">
       <DependentUpon>InfoRowView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ReportView.resx">
+      <DependentUpon>ReportView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
