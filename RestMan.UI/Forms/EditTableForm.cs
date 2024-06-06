@@ -20,8 +20,11 @@ namespace RestMan.UI.Forms
             using (var db = new RestManDbContext())
             {
                 var tables = db.Tables.Where(x => db.Orders.Where(y => y.TableId == x.Id
+                                                                && y.ShiftId == CurrentShift.Shift.Id
                                                                 && !y.DeletedAt.HasValue).Count() == 0);
-                var halls = db.Halls.Where(x => tables.Any(y => y.HallId == x.Id));
+                var hallsId = tables.Select(x => x.HallId).Distinct().ToList();
+
+                var halls = db.Halls.Where(x => hallsId.Contains(x.Id));
 
                 if (halls.Count() == 0)
                 {
@@ -56,6 +59,7 @@ namespace RestMan.UI.Forms
                 comboBoxTable.Items.Clear();
                 comboBoxTable.Items.AddRange(db.Tables.Where(x => x.HallId == hall.Id
                                                             && db.Orders.Where(y => y.TableId == x.Id
+                                                                                && y.ShiftId == CurrentShift.Shift.Id
                                                                                 && !y.DeletedAt.HasValue).Count() == 0)
                                                                         .ToArray());
                 comboBoxTable.DisplayMember = nameof(Table.Title);
