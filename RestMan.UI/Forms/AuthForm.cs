@@ -1,6 +1,7 @@
 ﻿using RestMan.Context;
 using RestMan.Context.Models;
 using RestMan.UI.Common;
+using RestMan.UI.StaticClasses;
 using System;
 using System.Data.Entity;
 using System.Linq;

@@ -1,10 +1,11 @@
 ﻿using RestMan.Context;
 using RestMan.Context.Models;
+using RestMan.UI.StaticClasses;
 using RestMan.UI.UserControls;
 using System;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
-using System.Data.Entity;
 using System.Windows.Forms;
 
 namespace RestMan.UI.Forms
@@ -281,7 +282,7 @@ namespace RestMan.UI.Forms
             flowLayoutPanelControls.Controls.Clear();
             panelReport.Controls.Clear();
 
-            if (textBoxSearch.TextLength == 0 )
+            if (textBoxSearch.TextLength == 0)
             {
                 FillControls();
 

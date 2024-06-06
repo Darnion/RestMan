@@ -1,13 +1,8 @@
 ﻿using RestMan.Context;
 using RestMan.Context.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MenuItem = RestMan.Context.Models.MenuItem;
 
@@ -51,7 +46,7 @@ namespace RestMan.UI.Forms
                 comboBoxCategory.SelectedItem = comboBoxCategory.Items.Cast<Category>().FirstOrDefault(x => x.Id == MenuItem.CategoryId);
                 textBoxTitle.Text = MenuItem.Title;
                 numericUpDownCost.Value = MenuItem.Cost;
-            }    
+            }
         }
 
         private void buttonOk_Click(object sender, EventArgs e)

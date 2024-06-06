@@ -1,6 +1,6 @@
 ﻿using RestMan.Context.Models;
 
-namespace RestMan.UI
+namespace RestMan.UI.StaticClasses
 {
     public static class CurrentUser
     {

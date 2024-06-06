@@ -1,14 +1,10 @@
 ﻿using RestMan.Context;
 using RestMan.Context.Models;
+using RestMan.UI.StaticClasses;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Entity.Core.Common.CommandTrees;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RestMan.UI.UserControls
@@ -39,7 +35,7 @@ namespace RestMan.UI.UserControls
                                                      || User.Id == -1));
 
                 labelRole.Text = User.Role?.Title;
-                
+
                 paidByCash = orders.Sum(x => x.PaidByCash) ?? 0;
                 labelCash.Text = paidByCash.ToString();
                 paidByCredit = orders.Sum(x => x.PaidByCredit) ?? 0;

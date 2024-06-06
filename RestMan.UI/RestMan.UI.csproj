@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -84,8 +85,8 @@
     <Compile Include="Forms\AuthForm.Designer.cs">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CurrentShift.cs" />
-    <Compile Include="CurrentUser.cs" />
+    <Compile Include="StaticClasses\CurrentShift.cs" />
+    <Compile Include="StaticClasses\CurrentUser.cs" />
     <Compile Include="Forms\EditCountForm.cs">
       <SubType>Form</SubType>
     </Compile>

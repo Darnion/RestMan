@@ -1,13 +1,9 @@
 ﻿using RestMan.Context;
 using RestMan.Context.Models;
+using RestMan.UI.StaticClasses;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RestMan.UI.Forms

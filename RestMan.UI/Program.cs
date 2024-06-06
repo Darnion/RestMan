@@ -1,5 +1,4 @@
 ﻿using RestMan.Context;
-using RestMan.Context.Models;
 using RestMan.UI.Common;
 using RestMan.UI.Forms;
 using System;
