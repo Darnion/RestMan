@@ -69,6 +69,7 @@ namespace RestMan.UI.Forms
             toolStripStatusLabelRole.Text = CurrentUser.User.Role.Title;
 
             buttonAddOrder.Visible = IsActualOrders;
+            labelWaiter.Visible = comboBoxWaiter.Visible = !CurrentUser.IsWaiter();
 
             using (var db = new RestManDbContext())
             {
@@ -82,8 +83,13 @@ namespace RestMan.UI.Forms
                 comboBoxHalls.DisplayMember = nameof(Hall.Title);
                 comboBoxHalls.SelectedIndex = 0;
 
+                var orders = db.Orders.Where(x => x.ShiftId == CurrentShift.Shift.Id)
+                                      .Select(x => x.WaiterId)
+                                      .ToList();
+
                 comboBoxWaiter.Items.Clear();
-                comboBoxWaiter.Items.AddRange(db.Users.Where(x => x.IsOnShift == true
+                comboBoxWaiter.Items.AddRange(db.Users.Where(x => (orders.Contains(x.Id)
+                                                                   || x.IsOnShift == true)
                                                              && x.RoleId != 4
                                                              && db.Orders.Where(y => y.WaiterId == x.Id
                                                                                 && !y.DeletedAt.HasValue).Count() > 0)
