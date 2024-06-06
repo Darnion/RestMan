@@ -12,7 +12,7 @@ namespace RestMan.UI.Forms
     public partial class ReportsForm : Form
     {
         private Size controlSize = new Size(120, 120);
-        private int roleId;
+        private int roleId = -1;
 
         public ReportsForm()
         {
@@ -298,6 +298,7 @@ namespace RestMan.UI.Forms
                                                        || x.IsOnShift == true)
                                                 && (x.RoleId == roleId
                                                     || roleId == -1)
+                                                && x.RoleId != 4
                                                 && x.Fullname.ToLower().Contains(textBoxSearch.Text.ToLower()));
 
                 foreach (var user in users)

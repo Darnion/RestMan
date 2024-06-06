@@ -31,13 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportsForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fullReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelFullname = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelRole = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanelControls = new System.Windows.Forms.FlowLayoutPanel();
             this.panelReport = new System.Windows.Forms.Panel();
-            this.fullReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSearch = new System.Windows.Forms.Panel();
             this.groupBoxSearch = new System.Windows.Forms.GroupBox();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
@@ -69,6 +69,14 @@
             this.exitToolStripMenuItem.Text = "Назад";
             this.exitToolStripMenuItem.ToolTipText = "Вернуться на прошлое окно";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // fullReportToolStripMenuItem
+            // 
+            this.fullReportToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.fullReportToolStripMenuItem.Name = "fullReportToolStripMenuItem";
+            this.fullReportToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.fullReportToolStripMenuItem.Text = "Полный отчет";
+            this.fullReportToolStripMenuItem.Click += new System.EventHandler(this.fullReportToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
@@ -135,14 +143,6 @@
             this.panelReport.Size = new System.Drawing.Size(433, 531);
             this.panelReport.TabIndex = 1;
             // 
-            // fullReportToolStripMenuItem
-            // 
-            this.fullReportToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.fullReportToolStripMenuItem.Name = "fullReportToolStripMenuItem";
-            this.fullReportToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.fullReportToolStripMenuItem.Text = "Полный отчет";
-            this.fullReportToolStripMenuItem.Click += new System.EventHandler(this.fullReportToolStripMenuItem_Click);
-            // 
             // panelSearch
             // 
             this.panelSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -171,6 +171,7 @@
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(256, 24);
             this.textBoxSearch.TabIndex = 2;
+            this.textBoxSearch.TextChanged += new System.EventHandler(this.textBoxSearch_TextChanged);
             // 
             // ReportsForm
             // 

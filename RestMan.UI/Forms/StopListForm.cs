@@ -284,6 +284,7 @@ namespace RestMan.UI.Forms
             var categoryId = (Category)comboBoxCategories.SelectedItem == null
                 ? -1
                 : ((Category)comboBoxCategories.SelectedItem).Id;
+            var searchText = textBoxStopListSearch.Text.ToLower() ?? string.Empty;
             using (var db = new RestManDbContext())
             {
                 dataGridViewStopList.DataSource = db.MenuItems
@@ -292,7 +293,7 @@ namespace RestMan.UI.Forms
                                                             || categoryId == -1
                                                                 && (x.Category.ShopId == shopId
                                                                     || shopId == -1))
-                                                        && x.Title.ToLower().Contains(textBoxStopListSearch.Text.ToLower()))
+                                                        && x.Title.ToLower().Contains(searchText))
                                                 .OrderBy(x => x.Title)
                                                 .ToList();
             }

@@ -560,6 +560,8 @@ namespace RestMan.UI.Forms
                     "Подтвердите действие",
                     MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
+                    SaveOrder();
+
                     ChangeOrderState(true);
 
                     this.Close();
