@@ -91,6 +91,8 @@
             this.dataGridViewMenu.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewMenu.Name = "dataGridViewMenu";
             this.dataGridViewMenu.ReadOnly = true;
+            this.dataGridViewMenu.RowHeadersVisible = false;
+            this.dataGridViewMenu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewMenu.Size = new System.Drawing.Size(701, 393);
             this.dataGridViewMenu.TabIndex = 0;
             this.dataGridViewMenu.SelectionChanged += new System.EventHandler(this.dataGridViewMenu_SelectionChanged);
@@ -343,7 +345,6 @@
             this.Name = "AdminMenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Меню";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.AdminMenuForm_Load);
             this.tableLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMenu)).EndInit();

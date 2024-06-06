@@ -131,6 +131,9 @@
             this.dataGridViewTables.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewTables.Name = "dataGridViewTables";
             this.dataGridViewTables.ReadOnly = true;
+            this.dataGridViewTables.RowHeadersVisible = false;
+            this.dataGridViewTables.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridViewTables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewTables.Size = new System.Drawing.Size(446, 342);
             this.dataGridViewTables.TabIndex = 0;
             // 
@@ -269,7 +272,6 @@
             this.Name = "AdminTablesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Столы";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.AdminTablesForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

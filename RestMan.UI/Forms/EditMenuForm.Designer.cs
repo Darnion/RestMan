@@ -167,7 +167,6 @@
             this.Name = "EditMenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Добавление позиции";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.EditMenuForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCost)).EndInit();
             this.ResumeLayout(false);

@@ -85,6 +85,9 @@
             this.dataGridViewUsers.Location = new System.Drawing.Point(3, 3);
             this.dataGridViewUsers.Name = "dataGridViewUsers";
             this.dataGridViewUsers.ReadOnly = true;
+            this.dataGridViewUsers.RowHeadersVisible = false;
+            this.dataGridViewUsers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridViewUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewUsers.Size = new System.Drawing.Size(552, 360);
             this.dataGridViewUsers.TabIndex = 0;
             this.dataGridViewUsers.SelectionChanged += new System.EventHandler(this.dataGridViewUsers_SelectionChanged);
@@ -278,7 +281,6 @@
             this.Name = "AdminUsersForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Пользователи";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.AdminUsersForm_Load);
             this.tableLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsers)).EndInit();

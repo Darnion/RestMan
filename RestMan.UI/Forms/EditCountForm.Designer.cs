@@ -90,7 +90,6 @@
             this.Name = "EditCountForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Введите количество:";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.EditCountForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCount)).EndInit();
             this.ResumeLayout(false);

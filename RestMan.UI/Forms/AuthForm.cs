@@ -136,6 +136,11 @@ namespace RestMan.UI.Forms
         {
             buttonEnter.Enabled = !string.IsNullOrEmpty(textBoxLogin.Text)
                 && !string.IsNullOrEmpty(textBoxPassword.Text);
+
+            if (sender == textBoxLogin)
+            {
+                textBoxPassword.Text = string.Empty;
+            }
         }
 
         private void AuthForm_Load(object sender, EventArgs e)

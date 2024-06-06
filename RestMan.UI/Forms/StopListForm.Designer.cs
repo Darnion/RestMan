@@ -138,6 +138,8 @@
             this.dataGridViewStopList.Location = new System.Drawing.Point(4, 4);
             this.dataGridViewStopList.Name = "dataGridViewStopList";
             this.dataGridViewStopList.ReadOnly = true;
+            this.dataGridViewStopList.RowHeadersVisible = false;
+            this.dataGridViewStopList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewStopList.Size = new System.Drawing.Size(512, 315);
             this.dataGridViewStopList.TabIndex = 0;
             this.dataGridViewStopList.SelectionChanged += new System.EventHandler(this.dataGridViewStopList_SelectionChanged);
@@ -285,7 +287,6 @@
             this.Name = "StopListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Стоп-лист";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.StopListForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

@@ -157,6 +157,9 @@
             this.dataGridViewOrderMenuItems.Location = new System.Drawing.Point(152, 4);
             this.dataGridViewOrderMenuItems.Name = "dataGridViewOrderMenuItems";
             this.dataGridViewOrderMenuItems.ReadOnly = true;
+            this.dataGridViewOrderMenuItems.RowHeadersVisible = false;
+            this.dataGridViewOrderMenuItems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridViewOrderMenuItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewOrderMenuItems.Size = new System.Drawing.Size(585, 348);
             this.dataGridViewOrderMenuItems.TabIndex = 1;
             this.dataGridViewOrderMenuItems.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridViewOrderMenuItems_RowPostPaint);
@@ -224,7 +227,7 @@
             this.buttonCloseOrder.Name = "buttonCloseOrder";
             this.buttonCloseOrder.Size = new System.Drawing.Size(242, 46);
             this.buttonCloseOrder.TabIndex = 3;
-            this.buttonCloseOrder.Text = "Закрыть заказ";
+            this.buttonCloseOrder.Text = "Оплатить заказ";
             this.buttonCloseOrder.UseVisualStyleBackColor = true;
             this.buttonCloseOrder.Click += new System.EventHandler(this.buttonCloseOrder_Click);
             // 
@@ -328,7 +331,6 @@
             this.Name = "EditOrderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Заказ";
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditOrderForm_FormClosing);
             this.Load += new System.EventHandler(this.EditOrderForm_Load);
             this.menuStrip.ResumeLayout(false);

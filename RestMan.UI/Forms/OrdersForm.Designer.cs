@@ -285,7 +285,6 @@
             this.Name = "OrdersForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Заказы";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.OrdersForm_Load);
             this.VisibleChanged += new System.EventHandler(this.OrdersForm_VisibleChanged);
             this.menuStrip.ResumeLayout(false);

@@ -41,6 +41,7 @@ namespace RestMan.UI.Forms
             buttonClosedOrders.Visible = CurrentUser.IsCashier() || CurrentUser.IsManager();
             buttonStopList.Visible = buttonReports.Visible = buttonCloseShift.Visible = CurrentUser.IsManager();
             buttonDatabaseAccess.Visible = CurrentUser.IsAdmin();
+            finishShiftToolStripMenuItem.Visible = !CurrentUser.IsAdmin();
 
             controls.Clear();
 

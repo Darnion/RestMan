@@ -163,7 +163,6 @@
             this.Name = "EditUserForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Добавление пользователя";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.EditUserForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

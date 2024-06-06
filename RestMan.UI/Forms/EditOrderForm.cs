@@ -65,6 +65,11 @@ namespace RestMan.UI.Forms
 
         private void EditOrderForm_Load(object sender, EventArgs e)
         {
+            if (ParentForm != null)
+            {
+                this.WindowState = ParentForm.WindowState;
+            }
+
             foreach (var item in currentList)
             {
                 backupList.Add((OrderMenuItem)item.Clone());
@@ -477,6 +482,8 @@ namespace RestMan.UI.Forms
 
                 dataGridViewOrderMenuItems.Rows[rowIndex].Selected = true;
                 dataGridViewOrderMenuItems.FirstDisplayedScrollingRowIndex = rowIndex;
+
+                OrderPaymentsHandler();
             };
         }
 
@@ -512,11 +519,30 @@ namespace RestMan.UI.Forms
                 {
                     dataGridViewOrderMenuItems.FirstDisplayedScrollingRowIndex = rowIndex;
                 }
+
+                OrderPaymentsHandler();
             }
         }
 
         private void buttonCloseOrder_Click(object sender, EventArgs e)
         {
+            if (remainToPay == 0)
+            {
+                if (MessageBox.Show("Вы уверены, что хотите закрыть заказ?",
+                    "Подтвердите действие",
+                    MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    SaveOrder();
+
+                    ChangeOrderState(true);
+
+                    this.Close();
+                    return;
+                }
+
+                return;
+            }
+
             isPaymentsState = !isPaymentsState;
 
             SetPaymentsState();
@@ -915,6 +941,8 @@ namespace RestMan.UI.Forms
                     db.Orders.Remove(order);
                     db.SaveChanges();
                 }
+
+                return;
             }
 
             if (!CheckForChanges())
@@ -927,6 +955,10 @@ namespace RestMan.UI.Forms
                 MessageBoxButtons.YesNoCancel))
             {
                 case DialogResult.Yes:
+                    if (remainToPay != 0)
+                    {
+                        ClearPayments();
+                    }
                     SaveOrder();
                     break;
 
@@ -937,11 +969,6 @@ namespace RestMan.UI.Forms
                 default:
 
                     break;
-            }
-
-            if (remainToPay != 0)
-            {
-                ClearPayments();
             }
         }
 
