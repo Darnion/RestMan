@@ -78,7 +78,10 @@ namespace RestMan.UI.Forms
                     CurrentUser.User = null;
                     textBoxLogin.Clear();
                     textBoxPassword.Clear();
-                    this.Show();
+                    if (Application.OpenForms.Count != 0)
+                    {
+                        this.Show();
+                    }
                 }
 
                 return;
