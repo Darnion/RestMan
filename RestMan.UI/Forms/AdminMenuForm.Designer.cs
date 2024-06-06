@@ -343,6 +343,7 @@
             this.Name = "AdminMenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Меню";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.AdminMenuForm_Load);
             this.tableLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMenu)).EndInit();

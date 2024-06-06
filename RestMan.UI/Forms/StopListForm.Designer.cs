@@ -285,6 +285,7 @@
             this.Name = "StopListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Стоп-лист";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.StopListForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

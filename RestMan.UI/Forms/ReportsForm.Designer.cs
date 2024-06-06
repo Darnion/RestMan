@@ -188,6 +188,7 @@
             this.Name = "ReportsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Отчеты";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.ReportsForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

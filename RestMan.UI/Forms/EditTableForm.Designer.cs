@@ -113,6 +113,7 @@
             this.Name = "EditTableForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Выберите стол";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.EditTableForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

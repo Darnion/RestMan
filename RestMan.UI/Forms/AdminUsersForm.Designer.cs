@@ -38,8 +38,8 @@
             this.panelControls = new System.Windows.Forms.Panel();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.groupBoxSearch = new System.Windows.Forms.GroupBox();
-            this.labelRole = new System.Windows.Forms.Label();
             this.comboBoxRole = new System.Windows.Forms.ComboBox();
+            this.labelRole = new System.Windows.Forms.Label();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
@@ -159,16 +159,6 @@
             this.groupBoxSearch.TabStop = false;
             this.groupBoxSearch.Text = "Поиск";
             // 
-            // labelRole
-            // 
-            this.labelRole.AutoSize = true;
-            this.labelRole.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelRole.Location = new System.Drawing.Point(3, 68);
-            this.labelRole.Name = "labelRole";
-            this.labelRole.Size = new System.Drawing.Size(43, 18);
-            this.labelRole.TabIndex = 2;
-            this.labelRole.Text = "Роль:";
-            // 
             // comboBoxRole
             // 
             this.comboBoxRole.Dock = System.Windows.Forms.DockStyle.Top;
@@ -179,6 +169,16 @@
             this.comboBoxRole.Size = new System.Drawing.Size(128, 25);
             this.comboBoxRole.TabIndex = 1;
             this.comboBoxRole.SelectedIndexChanged += new System.EventHandler(this.comboBoxRole_SelectedIndexChanged);
+            // 
+            // labelRole
+            // 
+            this.labelRole.AutoSize = true;
+            this.labelRole.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelRole.Location = new System.Drawing.Point(3, 68);
+            this.labelRole.Name = "labelRole";
+            this.labelRole.Size = new System.Drawing.Size(43, 18);
+            this.labelRole.TabIndex = 2;
+            this.labelRole.Text = "Роль:";
             // 
             // textBoxSearch
             // 
@@ -278,6 +278,7 @@
             this.Name = "AdminUsersForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Пользователи";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.AdminUsersForm_Load);
             this.tableLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsers)).EndInit();

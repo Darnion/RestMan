@@ -269,6 +269,7 @@
             this.Name = "AdminTablesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Столы";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.AdminTablesForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

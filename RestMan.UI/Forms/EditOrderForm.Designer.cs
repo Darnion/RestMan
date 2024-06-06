@@ -328,6 +328,7 @@
             this.Name = "EditOrderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Заказ";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditOrderForm_FormClosing);
             this.Load += new System.EventHandler(this.EditOrderForm_Load);
             this.menuStrip.ResumeLayout(false);

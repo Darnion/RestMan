@@ -84,6 +84,7 @@
             this.Name = "EditWaiterForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Изменение официанта";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.EditWaiterForm_Load);
             this.ResumeLayout(false);
 
