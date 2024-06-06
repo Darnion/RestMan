@@ -50,6 +50,7 @@ namespace RestMan.UI.UserControls
                 labelGift.Text = paidByGift.ToString();
                 total = paidByCash + paidByCredit + paidByQR + paidByGift;
                 labelTotal.Text = total.ToString();
+                labelTotalTitle.Text = $"Итого ({orders.Count()} заказов):";
             }
         }
 
