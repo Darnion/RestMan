@@ -67,11 +67,6 @@ namespace RestMan.UI.Forms
 
         private void OrdersForm_Load(object sender, EventArgs e)
         {
-            if (ParentForm != null)
-            {
-                this.WindowState = ParentForm.WindowState;
-            }
-
             comboBoxSort.SelectedIndex = 0;
             toolStripStatusLabelFullname.Text = CurrentUser.User.Fullname;
             toolStripStatusLabelRole.Text = CurrentUser.User.Role.Title;

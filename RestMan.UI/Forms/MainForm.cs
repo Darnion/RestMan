@@ -43,6 +43,14 @@ namespace RestMan.UI.Forms
             buttonDatabaseAccess.Visible = CurrentUser.IsAdmin();
             finishShiftToolStripMenuItem.Visible = !CurrentUser.IsAdmin();
 
+            if (CurrentUser.IsAdmin()) 
+            {
+                InitAdminControls();
+            }
+        }
+
+        private void InitAdminControls()
+        {
             controls.Clear();
 
             var button = new Button()
@@ -86,6 +94,7 @@ namespace RestMan.UI.Forms
         {
             var adminUsersForm = new AdminUsersForm();
             this.Hide();
+            adminUsersForm.WindowState = this.WindowState;
             adminUsersForm.ShowDialog();
             this.Show();
         }
@@ -94,6 +103,7 @@ namespace RestMan.UI.Forms
         {
             var adminMenuForm = new AdminMenuForm();
             this.Hide();
+            adminMenuForm.WindowState = this.WindowState;
             adminMenuForm.ShowDialog();
             this.Show();
         }
@@ -101,6 +111,7 @@ namespace RestMan.UI.Forms
         {
             var adminTablesForm = new AdminTablesForm();
             this.Hide();
+            adminTablesForm.WindowState = this.WindowState;
             adminTablesForm.ShowDialog();
             this.Show();
         }
@@ -133,6 +144,7 @@ namespace RestMan.UI.Forms
         {
             var ordersForm = new OrdersForm(true);
             this.Hide();
+            ordersForm.WindowState = this.WindowState;
             ordersForm.ShowDialog();
             this.Show();
         }
@@ -141,6 +153,7 @@ namespace RestMan.UI.Forms
         {
             var ordersForm = new OrdersForm(false);
             this.Hide();
+            ordersForm.WindowState = this.WindowState;
             ordersForm.ShowDialog();
             this.Show();
         }
@@ -149,6 +162,7 @@ namespace RestMan.UI.Forms
         {
             var reportsForm = new ReportsForm();
             this.Hide();
+            reportsForm.WindowState = this.WindowState;
             reportsForm.ShowDialog();
             this.Show();
         }
@@ -157,6 +171,7 @@ namespace RestMan.UI.Forms
         {
             var stopListForm = new StopListForm();
             this.Hide();
+            stopListForm.WindowState = this.WindowState;
             stopListForm.ShowDialog();
             this.Show();
         }

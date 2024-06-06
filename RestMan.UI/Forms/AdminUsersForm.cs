@@ -27,11 +27,6 @@ namespace RestMan.UI.Forms
 
         private void AdminUsersForm_Load(object sender, EventArgs e)
         {
-            if (ParentForm != null)
-            {
-                this.WindowState = ParentForm.WindowState;
-            }
-
             toolStripStatusLabelFullname.Text = CurrentUser.User.Fullname;
             toolStripStatusLabelRole.Text = CurrentUser.User.Role.Title;
             dataGridViewUsers.ClearSelection();

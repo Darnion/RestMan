@@ -65,11 +65,6 @@ namespace RestMan.UI.Forms
 
         private void EditOrderForm_Load(object sender, EventArgs e)
         {
-            if (ParentForm != null)
-            {
-                this.WindowState = ParentForm.WindowState;
-            }
-
             foreach (var item in currentList)
             {
                 backupList.Add((OrderMenuItem)item.Clone());
