@@ -45,7 +45,6 @@ namespace RestMan.UI.Forms
 
         private void comboBoxHall_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             FillAcronym();
             Filter();
 
@@ -99,6 +98,7 @@ namespace RestMan.UI.Forms
                     dataGridViewTables.DataSource = db.Tables.Include(x => x.Hall)
                                                          .Where(x => x.HallId == hall.Id
                                                                      || hall.Id == -1)
+                                                         .OrderBy(x => x.Title)
                                                          .ToList();
                 }
             }
