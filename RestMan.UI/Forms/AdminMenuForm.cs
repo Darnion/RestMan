@@ -195,8 +195,13 @@ namespace RestMan.UI.Forms
                 {
                     Filter();
 
-                    dataGridViewMenu.Rows[rowIndex].Selected = true;
-                    dataGridViewMenu.FirstDisplayedScrollingRowIndex = rowIndex;
+                    if (rowIndex <= dataGridViewMenu.RowCount
+                        && dataGridViewMenu.RowCount > 0
+                        && rowIndex >= 0)
+                    {
+                        dataGridViewMenu.Rows[rowIndex].Selected = true;
+                        dataGridViewMenu.FirstDisplayedScrollingRowIndex = rowIndex;
+                    }
 
                     FillShops();
                 }
