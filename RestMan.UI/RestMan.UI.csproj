@@ -249,8 +249,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\done.png" />
+    <Content Include="Resources\order.png" />
+    <Content Include="Resources\report.png" />
     <Content Include="Resources\RestManIcon.ico" />
     <Content Include="Resources\RestManLogo.png" />
+    <Content Include="Resources\RestManLogoSmall.jpg" />
+    <Content Include="Resources\stop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

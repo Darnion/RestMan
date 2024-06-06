@@ -150,9 +150,11 @@
             // buttonCloseShift
             // 
             this.buttonCloseShift.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonCloseShift.Location = new System.Drawing.Point(0, 230);
+            this.buttonCloseShift.Font = new System.Drawing.Font("Book Antiqua", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonCloseShift.ForeColor = System.Drawing.Color.Maroon;
+            this.buttonCloseShift.Location = new System.Drawing.Point(0, 250);
             this.buttonCloseShift.Name = "buttonCloseShift";
-            this.buttonCloseShift.Size = new System.Drawing.Size(272, 46);
+            this.buttonCloseShift.Size = new System.Drawing.Size(272, 50);
             this.buttonCloseShift.TabIndex = 5;
             this.buttonCloseShift.Text = "Закрыть смену";
             this.buttonCloseShift.UseVisualStyleBackColor = true;
@@ -161,9 +163,14 @@
             // buttonDatabaseAccess
             // 
             this.buttonDatabaseAccess.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonDatabaseAccess.Location = new System.Drawing.Point(0, 184);
+            this.buttonDatabaseAccess.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.buttonDatabaseAccess.FlatAppearance.BorderSize = 0;
+            this.buttonDatabaseAccess.FlatAppearance.CheckedBackColor = System.Drawing.Color.BurlyWood;
+            this.buttonDatabaseAccess.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.buttonDatabaseAccess.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.buttonDatabaseAccess.Location = new System.Drawing.Point(0, 200);
             this.buttonDatabaseAccess.Name = "buttonDatabaseAccess";
-            this.buttonDatabaseAccess.Size = new System.Drawing.Size(272, 46);
+            this.buttonDatabaseAccess.Size = new System.Drawing.Size(272, 50);
             this.buttonDatabaseAccess.TabIndex = 4;
             this.buttonDatabaseAccess.Text = "Изменение БД";
             this.buttonDatabaseAccess.UseVisualStyleBackColor = true;
@@ -172,9 +179,16 @@
             // buttonReports
             // 
             this.buttonReports.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonReports.Location = new System.Drawing.Point(0, 138);
+            this.buttonReports.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.buttonReports.FlatAppearance.BorderSize = 0;
+            this.buttonReports.FlatAppearance.CheckedBackColor = System.Drawing.Color.BurlyWood;
+            this.buttonReports.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.buttonReports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.buttonReports.Image = ((System.Drawing.Image)(resources.GetObject("buttonReports.Image")));
+            this.buttonReports.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonReports.Location = new System.Drawing.Point(0, 150);
             this.buttonReports.Name = "buttonReports";
-            this.buttonReports.Size = new System.Drawing.Size(272, 46);
+            this.buttonReports.Size = new System.Drawing.Size(272, 50);
             this.buttonReports.TabIndex = 3;
             this.buttonReports.Text = "Отчеты";
             this.buttonReports.UseVisualStyleBackColor = true;
@@ -183,9 +197,16 @@
             // buttonStopList
             // 
             this.buttonStopList.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonStopList.Location = new System.Drawing.Point(0, 92);
+            this.buttonStopList.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.buttonStopList.FlatAppearance.BorderSize = 0;
+            this.buttonStopList.FlatAppearance.CheckedBackColor = System.Drawing.Color.BurlyWood;
+            this.buttonStopList.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.buttonStopList.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.buttonStopList.Image = global::RestMan.UI.Properties.Resources.stop;
+            this.buttonStopList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonStopList.Location = new System.Drawing.Point(0, 100);
             this.buttonStopList.Name = "buttonStopList";
-            this.buttonStopList.Size = new System.Drawing.Size(272, 46);
+            this.buttonStopList.Size = new System.Drawing.Size(272, 50);
             this.buttonStopList.TabIndex = 2;
             this.buttonStopList.Text = "Стоп-лист";
             this.buttonStopList.UseVisualStyleBackColor = true;
@@ -194,9 +215,16 @@
             // buttonClosedOrders
             // 
             this.buttonClosedOrders.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonClosedOrders.Location = new System.Drawing.Point(0, 46);
+            this.buttonClosedOrders.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.buttonClosedOrders.FlatAppearance.BorderSize = 0;
+            this.buttonClosedOrders.FlatAppearance.CheckedBackColor = System.Drawing.Color.BurlyWood;
+            this.buttonClosedOrders.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.buttonClosedOrders.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.buttonClosedOrders.Image = global::RestMan.UI.Properties.Resources.done;
+            this.buttonClosedOrders.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonClosedOrders.Location = new System.Drawing.Point(0, 50);
             this.buttonClosedOrders.Name = "buttonClosedOrders";
-            this.buttonClosedOrders.Size = new System.Drawing.Size(272, 46);
+            this.buttonClosedOrders.Size = new System.Drawing.Size(272, 50);
             this.buttonClosedOrders.TabIndex = 1;
             this.buttonClosedOrders.Text = "Завершенные заказы";
             this.buttonClosedOrders.UseVisualStyleBackColor = true;
@@ -205,9 +233,16 @@
             // buttonOrders
             // 
             this.buttonOrders.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonOrders.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.buttonOrders.FlatAppearance.BorderSize = 0;
+            this.buttonOrders.FlatAppearance.CheckedBackColor = System.Drawing.Color.BurlyWood;
+            this.buttonOrders.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.buttonOrders.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.buttonOrders.Image = global::RestMan.UI.Properties.Resources.order;
+            this.buttonOrders.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonOrders.Location = new System.Drawing.Point(0, 0);
             this.buttonOrders.Name = "buttonOrders";
-            this.buttonOrders.Size = new System.Drawing.Size(272, 46);
+            this.buttonOrders.Size = new System.Drawing.Size(272, 50);
             this.buttonOrders.TabIndex = 0;
             this.buttonOrders.Text = "Заказы";
             this.buttonOrders.UseVisualStyleBackColor = true;
@@ -274,7 +309,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFullname;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelRole;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.Panel panelControls;
         private System.Windows.Forms.Button buttonDatabaseAccess;
         private System.Windows.Forms.Button buttonReports;
         private System.Windows.Forms.Button buttonStopList;
@@ -285,6 +319,7 @@
         private System.Windows.Forms.Splitter splitterBottom;
         private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem finishShiftToolStripMenuItem;
+        private System.Windows.Forms.Panel panelControls;
     }
 }
 

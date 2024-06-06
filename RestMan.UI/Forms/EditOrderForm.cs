@@ -107,7 +107,6 @@ namespace RestMan.UI.Forms
 
                 menuItemList = db.MenuItems
                     .OrderBy(x => x.Title)
-                    .Where(x => x.IsStopListed == false)
                     .ToList();
             }
 
@@ -131,7 +130,8 @@ namespace RestMan.UI.Forms
                     .Where(x => (x.CategoryId == categoryId
                                     || x.Category.ShopId == shopId
                                             || shopId == -1)
-                                && x.Title.ToLower().Contains(textBoxMenuSearch.Text.ToLower()))
+                                && x.Title.ToLower().Contains(textBoxMenuSearch.Text.ToLower())
+                                && x.IsStopListed == false)
                     .OrderBy(x => x.Title)
                     .ToList();
 
@@ -259,7 +259,7 @@ namespace RestMan.UI.Forms
             {
                 GetPayments();
 
-                if (change > 0)
+                if (change != 0)
                 {
                     new InfoRowView("Выдано сдачи: ", change.ToString())
                     {
@@ -268,7 +268,7 @@ namespace RestMan.UI.Forms
                     };
                 }
 
-                if (totalPaid > 0)
+                if (totalPaid != 0)
                 {
                     new InfoRowView("Осталось оплатить: ", remainToPay.ToString())
                     {
@@ -278,7 +278,7 @@ namespace RestMan.UI.Forms
                     };
                 }
 
-                if (paidByGiftCard > 0)
+                if (paidByGiftCard != 0)
                 {
                     new InfoRowView("Оплачено подарочной картой: ", paidByGiftCard.ToString())
                     {
@@ -287,7 +287,7 @@ namespace RestMan.UI.Forms
                     };
                 }
 
-                if (paidByQR > 0)
+                if (paidByQR != 0)
                 {
                     new InfoRowView("Оплачено СБП: ", paidByQR.ToString())
                     {
@@ -296,7 +296,7 @@ namespace RestMan.UI.Forms
                     };
                 }
 
-                if (paidByCredit > 0)
+                if (paidByCredit != 0)
                 {
                     new InfoRowView("Оплачено банковской картой: ", paidByCredit.ToString())
                     {
@@ -305,7 +305,7 @@ namespace RestMan.UI.Forms
                     };
                 }
 
-                if (paidByCash > 0)
+                if (paidByCash != 0)
                 {
                     new InfoRowView("Оплачено наличными: ", paidByCash.ToString())
                     {
@@ -669,16 +669,27 @@ namespace RestMan.UI.Forms
                     return;
 
                 case "Credit":
-                    currentOrder.PaidByCredit = remainToPay + paidByCredit;
+                    {
+                        var editCountForm = new EditCountForm
+                        {
+                            Count = remainToPay,
+                            MaxValue = 1000000,
+                        };
+
+                        if (editCountForm.ShowDialog() == DialogResult.OK)
+                        {
+                            currentOrder.PaidByCredit = editCountForm.Count;
+                        }
+                    }
                     break;
 
                 case "Gift":
                     {
-                        var editCountForm = new EditCountForm()
+                        var editCountForm = new EditCountForm
                         {
                             Count = remainToPay,
+                            MaxValue = remainToPay + paidByGiftCard
                         };
-                        editCountForm.MaxValue = remainToPay + paidByGiftCard;
 
                         if (editCountForm.ShowDialog() == DialogResult.OK)
                         {
@@ -688,7 +699,18 @@ namespace RestMan.UI.Forms
                     break;
 
                 case "QR":
-                    currentOrder.PaidByQR = remainToPay - paidByQR;
+                    {
+                        var editCountForm = new EditCountForm
+                        {
+                            Count = remainToPay,
+                            MaxValue = 1000000,
+                        };
+
+                        if (editCountForm.ShowDialog() == DialogResult.OK)
+                        {
+                            currentOrder.PaidByQR = editCountForm.Count;
+                        }
+                    }
                     break;
 
                 default:
