@@ -68,8 +68,9 @@ namespace RestMan.UI.Forms
             using (var db = new RestManDbContext())
             {
                 var isExist = db.Users.Where(x => x.Login == textBoxLogin.Text.Trim()).Any();
+                var isEditedUser = User?.Login == textBoxLogin.Text.Trim();
 
-                if (isExist)
+                if (isExist && !isEditedUser)
                 {
                     MessageBox.Show("Пользователь с таким логином уже существует",
                                     "Ошибка",
