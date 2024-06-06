@@ -122,7 +122,7 @@ namespace RestMan.UI.Forms
                     db.SaveChanges();
                 }
 
-                this.Close();
+                Application.Exit();
             }
         }
 
