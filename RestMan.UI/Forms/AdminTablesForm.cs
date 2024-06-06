@@ -39,7 +39,7 @@ namespace RestMan.UI.Forms
         {
             using (var db = new RestManDbContext())
             {
-                dataGridViewTables.DataSource = db.Tables.Include(x => x.Hall).ToList();
+                dataGridViewTables.DataSource = db.Tables.Include(x => x.Hall).OrderBy(x => x.Title).ToList();
             }
         }
 
