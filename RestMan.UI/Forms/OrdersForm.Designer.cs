@@ -38,6 +38,11 @@
             this.splitterBottom = new System.Windows.Forms.Splitter();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.panelControls = new System.Windows.Forms.Panel();
+            this.groupBoxSort = new System.Windows.Forms.GroupBox();
+            this.radioButtonDesc = new System.Windows.Forms.RadioButton();
+            this.radioButtonAsc = new System.Windows.Forms.RadioButton();
+            this.comboBoxSort = new System.Windows.Forms.ComboBox();
+            this.labelPadding = new System.Windows.Forms.Label();
             this.buttonAddOrder = new System.Windows.Forms.Button();
             this.textBoxTotal = new System.Windows.Forms.TextBox();
             this.labelTotal = new System.Windows.Forms.Label();
@@ -52,6 +57,7 @@
             this.statusStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.panelControls.SuspendLayout();
+            this.groupBoxSort.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -128,6 +134,7 @@
             // 
             // tableLayoutPanel
             // 
+            this.tableLayoutPanel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel.ColumnCount = 2;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -144,6 +151,8 @@
             // 
             // panelControls
             // 
+            this.panelControls.Controls.Add(this.groupBoxSort);
+            this.panelControls.Controls.Add(this.labelPadding);
             this.panelControls.Controls.Add(this.buttonAddOrder);
             this.panelControls.Controls.Add(this.textBoxTotal);
             this.panelControls.Controls.Add(this.labelTotal);
@@ -158,6 +167,67 @@
             this.panelControls.Name = "panelControls";
             this.panelControls.Size = new System.Drawing.Size(209, 625);
             this.panelControls.TabIndex = 0;
+            // 
+            // groupBoxSort
+            // 
+            this.groupBoxSort.Controls.Add(this.radioButtonDesc);
+            this.groupBoxSort.Controls.Add(this.radioButtonAsc);
+            this.groupBoxSort.Controls.Add(this.comboBoxSort);
+            this.groupBoxSort.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxSort.Location = new System.Drawing.Point(0, 291);
+            this.groupBoxSort.Name = "groupBoxSort";
+            this.groupBoxSort.Size = new System.Drawing.Size(209, 92);
+            this.groupBoxSort.TabIndex = 8;
+            this.groupBoxSort.TabStop = false;
+            this.groupBoxSort.Text = "Сортировка";
+            // 
+            // radioButtonDesc
+            // 
+            this.radioButtonDesc.AutoSize = true;
+            this.radioButtonDesc.Checked = true;
+            this.radioButtonDesc.Dock = System.Windows.Forms.DockStyle.Top;
+            this.radioButtonDesc.Location = new System.Drawing.Point(3, 67);
+            this.radioButtonDesc.Name = "radioButtonDesc";
+            this.radioButtonDesc.Size = new System.Drawing.Size(203, 22);
+            this.radioButtonDesc.TabIndex = 6;
+            this.radioButtonDesc.TabStop = true;
+            this.radioButtonDesc.Text = "По убыванию";
+            this.radioButtonDesc.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonAsc
+            // 
+            this.radioButtonAsc.AutoSize = true;
+            this.radioButtonAsc.Dock = System.Windows.Forms.DockStyle.Top;
+            this.radioButtonAsc.Location = new System.Drawing.Point(3, 45);
+            this.radioButtonAsc.Name = "radioButtonAsc";
+            this.radioButtonAsc.Size = new System.Drawing.Size(203, 22);
+            this.radioButtonAsc.TabIndex = 5;
+            this.radioButtonAsc.Text = "По возрастанию";
+            this.radioButtonAsc.UseVisualStyleBackColor = true;
+            this.radioButtonAsc.CheckedChanged += new System.EventHandler(this.radioButtonAsc_CheckedChanged);
+            // 
+            // comboBoxSort
+            // 
+            this.comboBoxSort.Dock = System.Windows.Forms.DockStyle.Top;
+            this.comboBoxSort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSort.FormattingEnabled = true;
+            this.comboBoxSort.Items.AddRange(new object[] {
+            "По времени создания",
+            "По сумме",
+            "По столу"});
+            this.comboBoxSort.Location = new System.Drawing.Point(3, 20);
+            this.comboBoxSort.Name = "comboBoxSort";
+            this.comboBoxSort.Size = new System.Drawing.Size(203, 25);
+            this.comboBoxSort.TabIndex = 4;
+            this.comboBoxSort.SelectedIndexChanged += new System.EventHandler(this.comboBoxSort_SelectedIndexChanged);
+            // 
+            // labelPadding
+            // 
+            this.labelPadding.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelPadding.Location = new System.Drawing.Point(0, 266);
+            this.labelPadding.Name = "labelPadding";
+            this.labelPadding.Size = new System.Drawing.Size(209, 25);
+            this.labelPadding.TabIndex = 7;
             // 
             // buttonAddOrder
             // 
@@ -294,6 +364,8 @@
             this.tableLayoutPanel.ResumeLayout(false);
             this.panelControls.ResumeLayout(false);
             this.panelControls.PerformLayout();
+            this.groupBoxSort.ResumeLayout(false);
+            this.groupBoxSort.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -314,11 +386,16 @@
         private System.Windows.Forms.ComboBox comboBoxHalls;
         private System.Windows.Forms.Label labelHall;
         private System.Windows.Forms.Button buttonAddOrder;
-        private System.Windows.Forms.ComboBox comboBoxWaiter;
         private System.Windows.Forms.Label labelWaiter;
         private System.Windows.Forms.TextBox textBoxTotal;
         private System.Windows.Forms.Label labelTotal;
         private System.Windows.Forms.ComboBox comboBoxTable;
         private System.Windows.Forms.Label labelTable;
+        private System.Windows.Forms.Label labelPadding;
+        private System.Windows.Forms.GroupBox groupBoxSort;
+        private System.Windows.Forms.RadioButton radioButtonDesc;
+        private System.Windows.Forms.RadioButton radioButtonAsc;
+        private System.Windows.Forms.ComboBox comboBoxSort;
+        private System.Windows.Forms.ComboBox comboBoxWaiter;
     }
 }

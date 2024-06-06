@@ -128,6 +128,7 @@
             // 
             // panelControls
             // 
+            this.panelControls.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelControls.Controls.Add(this.buttonAdd);
             this.panelControls.Controls.Add(this.groupBoxSearch);
             this.panelControls.Controls.Add(this.buttonEdit);

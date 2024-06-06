@@ -3,6 +3,7 @@ using RestMan.Context.Models;
 using RestMan.UI.Common;
 using System;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -35,6 +36,22 @@ namespace RestMan.UI.Forms
         private void EditUserForm_Load(object sender, EventArgs e)
         {
             FillRoles();
+
+            buttonEditColor.BackColor =
+                buttonEditColor.FlatAppearance.MouseOverBackColor =
+                buttonEditColor.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            buttonEditColor.Text = "-- не выбран --";
+
+            var color = User?.DisplayColor ?? 0;
+
+            buttonEditColor.BackColor =
+                buttonEditColor.FlatAppearance.MouseOverBackColor =
+                buttonEditColor.FlatAppearance.MouseDownBackColor = Color.FromArgb(color);
+
+            if (buttonEditColor.BackColor != Color.FromArgb(0))
+            {
+                buttonEditColor.Text = string.Empty;
+            }
 
             if (this.User != null)
             {
@@ -123,6 +140,10 @@ namespace RestMan.UI.Forms
             this.User.Fullname = textBoxFullname.Text.Trim();
             this.User.Login = textBoxLogin.Text.Trim();
             this.User.RoleId = ((Role)comboBoxRole.SelectedItem).Id;
+            if (buttonEditColor.Text != "-- не выбран --")
+            {
+                this.User.DisplayColor = buttonEditColor.BackColor.ToArgb();
+            }
 
             DialogResult = DialogResult.OK;
         }
@@ -141,6 +162,18 @@ namespace RestMan.UI.Forms
                 || char.IsWhiteSpace(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void buttonEditColor_Click(object sender, EventArgs e)
+        {
+            var colorDialog = new ColorDialog();
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                buttonEditColor.BackColor =
+                    buttonEditColor.FlatAppearance.MouseOverBackColor =
+                    buttonEditColor.FlatAppearance.MouseDownBackColor = colorDialog.Color;
+                buttonEditColor.Text = string.Empty;
             }
         }
     }

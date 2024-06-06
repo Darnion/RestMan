@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.SqlTypes;
 
 namespace RestMan.Context.Models
 {
@@ -14,6 +15,8 @@ namespace RestMan.Context.Models
         [Required]
         [MaxLength(8)]
         public string Acronym { get; set; }
+
+        public int? DisplayColor { get; set; }
 
         public ICollection<Table> Tables { get; set; }
 

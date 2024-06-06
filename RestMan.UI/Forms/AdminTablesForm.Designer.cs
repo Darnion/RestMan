@@ -41,6 +41,8 @@
             this.panelControls = new System.Windows.Forms.Panel();
             this.buttonAddTable = new System.Windows.Forms.Button();
             this.groupBoxHall = new System.Windows.Forms.GroupBox();
+            this.buttonEditColor = new System.Windows.Forms.Button();
+            this.labelColor = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.textBoxAcronym = new System.Windows.Forms.TextBox();
             this.labelAcronym = new System.Windows.Forms.Label();
@@ -156,6 +158,7 @@
             // 
             // panelControls
             // 
+            this.panelControls.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelControls.Controls.Add(this.buttonAddTable);
             this.panelControls.Controls.Add(this.groupBoxHall);
             this.panelControls.Controls.Add(this.buttonDeleteTable);
@@ -179,6 +182,8 @@
             // 
             // groupBoxHall
             // 
+            this.groupBoxHall.Controls.Add(this.buttonEditColor);
+            this.groupBoxHall.Controls.Add(this.labelColor);
             this.groupBoxHall.Controls.Add(this.buttonSave);
             this.groupBoxHall.Controls.Add(this.textBoxAcronym);
             this.groupBoxHall.Controls.Add(this.labelAcronym);
@@ -186,15 +191,41 @@
             this.groupBoxHall.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxHall.Location = new System.Drawing.Point(0, 0);
             this.groupBoxHall.Name = "groupBoxHall";
-            this.groupBoxHall.Size = new System.Drawing.Size(188, 136);
+            this.groupBoxHall.Size = new System.Drawing.Size(188, 185);
             this.groupBoxHall.TabIndex = 0;
             this.groupBoxHall.TabStop = false;
             this.groupBoxHall.Text = "Зал";
             // 
+            // buttonEditColor
+            // 
+            this.buttonEditColor.BackColor = System.Drawing.Color.Transparent;
+            this.buttonEditColor.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonEditColor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonEditColor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonEditColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEditColor.Location = new System.Drawing.Point(3, 109);
+            this.buttonEditColor.Name = "buttonEditColor";
+            this.buttonEditColor.Size = new System.Drawing.Size(182, 26);
+            this.buttonEditColor.TabIndex = 4;
+            this.buttonEditColor.UseVisualStyleBackColor = false;
+            this.buttonEditColor.Click += new System.EventHandler(this.buttonEditColor_Click);
+            // 
+            // labelColor
+            // 
+            this.labelColor.AutoSize = true;
+            this.labelColor.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelColor.Location = new System.Drawing.Point(3, 89);
+            this.labelColor.Name = "labelColor";
+            this.labelColor.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            this.labelColor.Size = new System.Drawing.Size(72, 20);
+            this.labelColor.TabIndex = 5;
+            this.labelColor.Text = "Цвет зала";
+            this.labelColor.Click += new System.EventHandler(this.labelColor_Click);
+            // 
             // buttonSave
             // 
             this.buttonSave.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonSave.Location = new System.Drawing.Point(3, 107);
+            this.buttonSave.Location = new System.Drawing.Point(3, 156);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(182, 26);
             this.buttonSave.TabIndex = 3;
@@ -307,5 +338,7 @@
         private System.Windows.Forms.Button buttonAddTable;
         private System.Windows.Forms.Button buttonDeleteTable;
         private System.Windows.Forms.Button buttonDeleteHall;
+        private System.Windows.Forms.Button buttonEditColor;
+        private System.Windows.Forms.Label labelColor;
     }
 }

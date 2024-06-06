@@ -26,7 +26,7 @@ namespace RestMan.UI.Forms
 
                 comboBoxWaiter.DataSource = db.Users
                     .Where(x => (x.RoleId == 1 || x.RoleId == 2 || x.RoleId == 3)
-                                && (orders.Contains(x.Id)
+                                && (x.Id == Waiter.Id
                                     || x.IsOnShift == true))
                     .ToArray();
 
@@ -54,7 +54,7 @@ namespace RestMan.UI.Forms
 
                 comboBoxWaiter.DataSource = db.Users
                     .Where(x => (x.RoleId == 1 || x.RoleId == 2 || x.RoleId == 3)
-                                && (orders.Contains(x.Id)
+                                && (x.Id == Waiter.Id
                                     || x.IsOnShift == true)
                                 && x.Fullname.ToLower().Contains(searchText))
                     .ToArray();
@@ -76,6 +76,11 @@ namespace RestMan.UI.Forms
         private void textBoxSearch_TextChanged(object sender, EventArgs e)
         {
             Filter();
+        }
+
+        private void groupBoxSearch_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

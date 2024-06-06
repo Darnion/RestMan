@@ -32,6 +32,7 @@ namespace RestMan.UI.Forms
 
                 var orders = db.Orders
                             .Include(x => x.Table)
+                            .Include(x => x.Table.Hall)
                             .Include(x => x.Waiter)
                             .Where(x => x.DeletedAt.HasValue != isActualOrders
                                         && x.ShiftId == CurrentShift.Shift.Id
@@ -71,6 +72,7 @@ namespace RestMan.UI.Forms
                 this.WindowState = ParentForm.WindowState;
             }
 
+            comboBoxSort.SelectedIndex = 0;
             toolStripStatusLabelFullname.Text = CurrentUser.User.Fullname;
             toolStripStatusLabelRole.Text = CurrentUser.User.Role.Title;
 
@@ -212,8 +214,10 @@ namespace RestMan.UI.Forms
                     var order = new Order()
                     {
                         WaiterId = CurrentUser.User.Id,
+                        Waiter = db.Users.FirstOrDefault(x => x.Id == CurrentUser.User.Id),
                         ShiftId = CurrentShift.Shift.Id,
                         TableId = editTableForm.Table.Id,
+                        Table = db.Tables.Include(x => x.Hall).FirstOrDefault(x => x.Id == editTableForm.Table.Id)
                     };
 
                     db.Orders.Add(order);
@@ -239,6 +243,45 @@ namespace RestMan.UI.Forms
             {
                 InitOrderCards(IsActualOrders);
             }
+        }
+
+        private void radioButtonAsc_CheckedChanged(object sender, EventArgs e)
+        {
+            Sort();
+        }
+
+        private void comboBoxSort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Sort();
+        }
+
+        private void Sort()
+        {
+            var controls = new OrderCardView[flowLayoutPanelOrders.Controls.Count];
+
+            flowLayoutPanelOrders.Controls.CopyTo(controls, 0);
+
+            flowLayoutPanelOrders.Controls.Clear();
+
+            switch (comboBoxSort.SelectedIndex)
+            {
+                case 1:
+                    controls = controls.OrderBy(x => x.Total).ToArray();
+                    break;
+                case 2:
+                    controls = controls.OrderBy(x => x.Order.Table.Title).ToArray();
+                    break;
+                default:
+                    controls = controls.OrderBy(x => x.Order.CreatedAt).ToArray();
+                    break;
+            }
+
+            if (radioButtonDesc.Checked)
+            {
+                controls = controls.Reverse().ToArray();
+            }
+
+            flowLayoutPanelOrders.Controls.AddRange(controls);
         }
     }
 }

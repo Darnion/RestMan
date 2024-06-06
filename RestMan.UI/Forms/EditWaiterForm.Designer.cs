@@ -41,6 +41,7 @@
             // 
             // panel
             // 
+            this.panel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel.Controls.Add(this.groupBoxSearch);
             this.panel.Controls.Add(this.buttonCancel);
             this.panel.Controls.Add(this.buttonOk);
@@ -61,6 +62,7 @@
             this.groupBoxSearch.TabIndex = 6;
             this.groupBoxSearch.TabStop = false;
             this.groupBoxSearch.Text = "Поиск";
+            this.groupBoxSearch.Enter += new System.EventHandler(this.groupBoxSearch_Enter);
             // 
             // textBoxSearch
             // 

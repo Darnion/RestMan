@@ -3,6 +3,7 @@ using RestMan.Context.Models;
 using RestMan.UI.StaticClasses;
 using System;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -46,15 +47,40 @@ namespace RestMan.UI.Forms
 
         private void comboBoxHall_SelectedIndexChanged(object sender, EventArgs e)
         {
+            FillColor();
             FillAcronym();
             Filter();
 
             textBoxAcronym.Enabled = !string.IsNullOrWhiteSpace(comboBoxHall.Text)
                                      && ((Hall)comboBoxHall.SelectedItem)?.Id != -1;
 
+            labelColor.Visible =
+            buttonEditColor.Visible =
             buttonAddTable.Enabled =
             buttonDeleteHall.Enabled = comboBoxHall.SelectedIndex != -1
                                        && ((Hall)comboBoxHall.SelectedItem)?.Id != -1;
+        }
+
+        private void FillColor()
+        {
+            buttonEditColor.BackColor = Color.Transparent;
+            buttonEditColor.Text = "-- не выбран --";
+
+            var hall = (Hall)comboBoxHall.SelectedItem;
+
+            if (hall != null)
+            {
+                int.TryParse(hall.DisplayColor.ToString(), out var color);
+
+                buttonEditColor.BackColor =
+                    buttonEditColor.FlatAppearance.MouseOverBackColor =
+                    buttonEditColor.FlatAppearance.MouseDownBackColor = Color.FromArgb(color);
+
+                if (buttonEditColor.BackColor != Color.FromArgb(0))
+                {
+                    buttonEditColor.Text = string.Empty;
+                }
+            }
         }
 
         private void FillHalls()
@@ -85,7 +111,6 @@ namespace RestMan.UI.Forms
                                         ? hall.Acronym
                                         : null;
             }
-
         }
 
         private void Filter()
@@ -114,18 +139,22 @@ namespace RestMan.UI.Forms
         private void textBoxAcronym_TextChanged(object sender, EventArgs e)
         {
             var acronym = ((Hall)comboBoxHall.SelectedItem)?.Acronym ?? string.Empty;
+            int color = ((Hall)comboBoxHall.SelectedItem)?.DisplayColor ?? 0;
 
             buttonSave.Visible = !string.IsNullOrWhiteSpace(textBoxAcronym.Text)
-                                 && textBoxAcronym.Text != acronym;
+                                 && (textBoxAcronym.Text != acronym
+                                 || buttonEditColor.BackColor != Color.FromArgb(color));
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
             using (var db = new RestManDbContext())
             {
-                var isAcronymExist = db.Halls.Where(x => x.Acronym == textBoxAcronym.Text).Any();
+                var selectedHall = (Hall)comboBoxHall.SelectedItem;
 
-                if (isAcronymExist)
+                var hallWithAcronym = db.Halls.FirstOrDefault(x => x.Acronym == textBoxAcronym.Text);
+
+                if (selectedHall?.Id != hallWithAcronym?.Id)
                 {
                     MessageBox.Show("Такое сокращение уже существует",
                         "Ошибка",
@@ -134,8 +163,6 @@ namespace RestMan.UI.Forms
 
                     return;
                 }
-
-                var selectedHall = (Hall)comboBoxHall.SelectedItem;
 
                 if (selectedHall == null)
                 {
@@ -161,6 +188,7 @@ namespace RestMan.UI.Forms
 
                 hallDB.Title = comboBoxHall.Text.Trim();
                 hallDB.Acronym = textBoxAcronym.Text.Trim();
+                hallDB.DisplayColor = buttonEditColor.BackColor.ToArgb();
 
                 var tables = db.Tables.Where(x => x.HallId == hallDB.Id);
                 var number = 0;
@@ -262,6 +290,30 @@ namespace RestMan.UI.Forms
         private void comboBoxHall_KeyPress(object sender, KeyPressEventArgs e)
         {
             comboBoxHall.SelectedIndex = -1;
+        }
+
+        private void buttonEditColor_Click(object sender, EventArgs e)
+        {
+            var acronym = ((Hall)comboBoxHall.SelectedItem)?.Acronym ?? string.Empty;
+            int color = ((Hall)comboBoxHall.SelectedItem)?.DisplayColor ?? 0;
+
+            var colorDialog = new ColorDialog();
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                buttonEditColor.BackColor =
+                    buttonEditColor.FlatAppearance.MouseOverBackColor =
+                    buttonEditColor.FlatAppearance.MouseDownBackColor = colorDialog.Color;
+                buttonEditColor.Text = string.Empty;
+            }
+
+            buttonSave.Visible = !string.IsNullOrWhiteSpace(textBoxAcronym.Text)
+                                 && (textBoxAcronym.Text != acronym
+                                 || buttonEditColor.BackColor != Color.FromArgb(color));
+        }
+
+        private void labelColor_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

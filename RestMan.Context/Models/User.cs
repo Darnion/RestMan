@@ -26,5 +26,6 @@ namespace RestMan.Context.Models
         public long RoleId { get; set; }
         public Role Role { get; set; }
         public bool IsOnShift { get; set; } = false;
+        public int? DisplayColor { get; set; }
     }
 }

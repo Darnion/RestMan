@@ -37,6 +37,8 @@
             this.labelWaiterCaption = new System.Windows.Forms.Label();
             this.labelSum = new System.Windows.Forms.Label();
             this.labelTableNumber = new System.Windows.Forms.Label();
+            this.buttonHallColor = new System.Windows.Forms.Button();
+            this.buttonWaiterColor = new System.Windows.Forms.Button();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,6 +46,8 @@
             // 
             this.panel.BackColor = System.Drawing.Color.Transparent;
             this.panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel.Controls.Add(this.buttonWaiterColor);
+            this.panel.Controls.Add(this.buttonHallColor);
             this.panel.Controls.Add(this.labelDeletedAt);
             this.panel.Controls.Add(this.labelDeletedCaption);
             this.panel.Controls.Add(this.labelCreatedAt);
@@ -148,6 +152,24 @@
             this.labelTableNumber.Text = "Стол ";
             this.labelTableNumber.Click += new System.EventHandler(this.OrderCard_Click);
             // 
+            // buttonHallColor
+            // 
+            this.buttonHallColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonHallColor.Location = new System.Drawing.Point(1, 162);
+            this.buttonHallColor.Name = "buttonHallColor";
+            this.buttonHallColor.Size = new System.Drawing.Size(99, 18);
+            this.buttonHallColor.TabIndex = 8;
+            this.buttonHallColor.UseVisualStyleBackColor = true;
+            // 
+            // buttonWaiterColor
+            // 
+            this.buttonWaiterColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonWaiterColor.Location = new System.Drawing.Point(99, 162);
+            this.buttonWaiterColor.Name = "buttonWaiterColor";
+            this.buttonWaiterColor.Size = new System.Drawing.Size(99, 18);
+            this.buttonWaiterColor.TabIndex = 9;
+            this.buttonWaiterColor.UseVisualStyleBackColor = true;
+            // 
             // OrderCardView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -175,5 +197,7 @@
         private System.Windows.Forms.Label labelCreatedCaption;
         private System.Windows.Forms.Label labelDeletedAt;
         private System.Windows.Forms.Label labelDeletedCaption;
+        private System.Windows.Forms.Button buttonHallColor;
+        private System.Windows.Forms.Button buttonWaiterColor;
     }
 }

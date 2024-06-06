@@ -39,6 +39,8 @@
             this.comboBoxRole = new System.Windows.Forms.ComboBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonEditColor = new System.Windows.Forms.Button();
+            this.labelColor = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelFullname
@@ -121,7 +123,7 @@
             // buttonOk
             // 
             this.buttonOk.Enabled = false;
-            this.buttonOk.Location = new System.Drawing.Point(18, 232);
+            this.buttonOk.Location = new System.Drawing.Point(18, 281);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 28);
             this.buttonOk.TabIndex = 8;
@@ -132,18 +134,44 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(135, 232);
+            this.buttonCancel.Location = new System.Drawing.Point(135, 281);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 28);
             this.buttonCancel.TabIndex = 9;
             this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
+            // buttonEditColor
+            // 
+            this.buttonEditColor.BackColor = System.Drawing.Color.Transparent;
+            this.buttonEditColor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonEditColor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonEditColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEditColor.Location = new System.Drawing.Point(18, 249);
+            this.buttonEditColor.Name = "buttonEditColor";
+            this.buttonEditColor.Size = new System.Drawing.Size(192, 26);
+            this.buttonEditColor.TabIndex = 10;
+            this.buttonEditColor.UseVisualStyleBackColor = false;
+            this.buttonEditColor.Click += new System.EventHandler(this.buttonEditColor_Click);
+            // 
+            // labelColor
+            // 
+            this.labelColor.AutoSize = true;
+            this.labelColor.Location = new System.Drawing.Point(15, 229);
+            this.labelColor.Name = "labelColor";
+            this.labelColor.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            this.labelColor.Size = new System.Drawing.Size(44, 20);
+            this.labelColor.TabIndex = 11;
+            this.labelColor.Text = "Цвет:";
+            // 
             // EditUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(224, 268);
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(224, 315);
+            this.Controls.Add(this.buttonEditColor);
+            this.Controls.Add(this.labelColor);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.comboBoxRole);
@@ -181,5 +209,7 @@
         private System.Windows.Forms.ComboBox comboBoxRole;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonEditColor;
+        private System.Windows.Forms.Label labelColor;
     }
 }

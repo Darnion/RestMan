@@ -10,6 +10,7 @@ namespace RestMan.UI.UserControls
     public partial class OrderCardView : UserControl
     {
         public Order Order { get; set; }
+        public int Total { get; set; }
         public List<OrderMenuItem> OrderMenuItems { get; set; }
         public bool IsOrderCard = true;
         public OrderCardView(Order order, List<OrderMenuItem> orderMenuItems, bool isOrderCard)
@@ -28,7 +29,22 @@ namespace RestMan.UI.UserControls
             labelCreatedAt.Text = order.CreatedAt.ToString();
             labelDeletedAt.Text = order.DeletedAt.ToString();
 
+            int hallColor = order.Table.Hall.DisplayColor ?? Color.Transparent.ToArgb();
+
+            buttonHallColor.BackColor =
+                buttonHallColor.FlatAppearance.MouseOverBackColor =
+                buttonHallColor.FlatAppearance.MouseDownBackColor = Color.FromArgb(hallColor);
+
+            int waiterColor = order.Waiter.DisplayColor ?? Color.Transparent.ToArgb();
+
+            buttonWaiterColor.BackColor =
+                buttonWaiterColor.FlatAppearance.MouseOverBackColor =
+                buttonWaiterColor.FlatAppearance.MouseDownBackColor = Color.FromArgb(waiterColor);
+
             labelDeletedAt.Visible = labelDeletedCaption.Visible = order.DeletedAt != null;
+
+            buttonHallColor.Visible = IsOrderCard && order.Table.Hall.DisplayColor != null;
+            buttonWaiterColor.Visible = IsOrderCard && order.Waiter.DisplayColor != null;
 
             if (IsOrderCard)
             {
@@ -46,6 +62,7 @@ namespace RestMan.UI.UserControls
                     sum += cost * count;
                 }
 
+                Total = sum;
                 labelSum.Text += sum + " руб.";
 
                 return;
