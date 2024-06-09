@@ -109,10 +109,10 @@ SET IDENTITY_INSERT [dbo].[MenuItems] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Halls] ON 
 
-INSERT [dbo].[Halls] ([Id], [Title], [Acronym]) VALUES (1, N'Веранда', N'В')
-INSERT [dbo].[Halls] ([Id], [Title], [Acronym]) VALUES (2, N'Детский', N'Д')
-INSERT [dbo].[Halls] ([Id], [Title], [Acronym]) VALUES (3, N'Основной', N'О')
-INSERT [dbo].[Halls] ([Id], [Title], [Acronym]) VALUES (4, N'Банкетный', N'Б')
+INSERT [dbo].[Halls] ([Id], [Title], [Acronym], [DisplayColor]) VALUES (1, N'Веранда', N'В', -15426304)
+INSERT [dbo].[Halls] ([Id], [Title], [Acronym], [DisplayColor]) VALUES (2, N'Детский', N'Д', -32704)
+INSERT [dbo].[Halls] ([Id], [Title], [Acronym], [DisplayColor]) VALUES (3, N'Основной', N'О', -16776961)
+INSERT [dbo].[Halls] ([Id], [Title], [Acronym], [DisplayColor]) VALUES (4, N'Банкетный', N'Б', -65536)
 SET IDENTITY_INSERT [dbo].[Halls] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Tables] ON 
@@ -141,21 +141,21 @@ SET IDENTITY_INSERT [dbo].[Roles] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Users] ON 
 
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (1, N'Конев Ефим Викторович', N'admin', N'dJ59JsjBOAGT6Zmo5hoEOOZcCIPsnLpGv5nfN4IY610=', 4, N'BMuJNR1X9/J4j48SuPUiWw==', 1)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (2, N'Кисель Александр Игоревич', N'waiter', N'PjIp9feBIQFrEvzBtPQLg8GijWxVgYGvdNZwBimcT6o=', 1, N'yswSxsYVX0FMkXzB8w6Gxw==', 1)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (3, N'Николаев Вячеслав Алексеевич', N'cashier', N'2jfjFsvXvrsfCXfYiC/pjYfzNY6CUiEvmbgl/+Q3aL4=', 2, N'jlPBGPcw31Sfht04M8LNyA==', 1)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (4, N'Прохоренко Владимир Сергеевич', N'manager', N'yAbtRl2WD09AyRNEtDXd8daXfRMq1toJ0LZfMCO96WE=', 3, N'WsBvKzImYBRZ1jdnnk0fyg==', 1)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (5, N'Кочетков Денис Александрович', N'kdacash', N'TMTbWZXR2gXw6bbo/ghc8hRpJRjc8YV4jFcS5MMTxis=', 2, N'Ul0BmrCbBmy4CNakiFiEpA==', 0)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (6, N'Никифорова Юлия Сергеевна', N'nysman', N'LAiY+TaL2vLl/P8qkpVVA7uo1b+3mJGXSW+6XbWS+co=', 3, N'tRdPNK78FPDBNqjVZN3R1Q==', 0)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (7, N'Иванов Антон Петрович', N'iapman', N'EO8YyWr4+i/TcVJo/mP8qITzHkHp3xarHFIZ5aDFjHY=', 3, N'YBEEnOTWSlLBIPLpl4tXLQ==', 0)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (8, N'Баринов Виктор Петрович', N'bvpman', N'mOYCZQeaN573m4zKV6/NA6ua0kKNH8nuijhGzdIqpZo=', 3, N'i+XUjxTs8r+1I8PW3+23kQ==', 0)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (9, N'Коршикова Эльвина Павловна', N'kepwait', N'QbFCYbGvsSchzvVXsG2nOJ3Njbs6qIARcS06igW96LA=', 1, N'oE95MKm5DRA1u6LtyQHaPg==', 0)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (10, N'Меньшиков Данила Александрович', N'mdawait', N'1/ClEZ+2gBIc8u6FIg96xEdiYxUqyXxxKB+RcEEctQM=', 1, N'FNcqQ++a0U48oCM67irQ/Q==', 0)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (11, N'Корнев Виктор Павлович', N'kvpwait', N'DKm/KSg+gPjbYDSnZMbyZqED33B4xWbK/mM31eGgGOo=', 1, N'EGpY7BYmqy9YNX2O0uxqyA==', 0)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (12, N'Пегушин Григорий Степанович', N'pgswait', N'hvJsqYRq37NBrrbF1yhACfV/Jga7fnKKys9ud2+qG0w=', 1, N'CuwUL4blBxGxvzvMiGSqfQ==', 0)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (13, N'Ким Егор Сергеевич', N'keswait', N'rylXeA8S9yugtzM62swAdMC9hzhflP6j5M/q5G9ftT0=', 1, N'6XavJT/UStf9BoG1io3cAA==', 0)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (14, N'Бельский Михаил Сергеевич', N'bmswait', N'etnQQHrBD4AoeuZgAl4TZyGYWwdfW6+kFg7VpsDioA8=', 1, N'580slc6j8BBWRnu3M6Z2og==', 0)
-INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift]) VALUES (15, N'Юнусов Петр Степанович', N'ypswait', N'KFEGCCkrrcSZtxCB7lxFZPJtWaEx41JDMHUd8N9w6uA=', 1, N'ddcvzVvVUHbLVemZN6fx8g==', 0)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (1, N'Конев Ефим Викторович', N'admin', N'dJ59JsjBOAGT6Zmo5hoEOOZcCIPsnLpGv5nfN4IY610=', 4, N'BMuJNR1X9/J4j48SuPUiWw==', 1, NULL)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (2, N'Кисель Александр Игоревич', N'waiter', N'PjIp9feBIQFrEvzBtPQLg8GijWxVgYGvdNZwBimcT6o=', 1, N'yswSxsYVX0FMkXzB8w6Gxw==', 1, NULL)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (3, N'Николаев Вячеслав Алексеевич', N'cashier', N'2jfjFsvXvrsfCXfYiC/pjYfzNY6CUiEvmbgl/+Q3aL4=', 2, N'jlPBGPcw31Sfht04M8LNyA==', 1, NULL)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (4, N'Прохоренко Владимир Сергеевич', N'manager', N'yAbtRl2WD09AyRNEtDXd8daXfRMq1toJ0LZfMCO96WE=', 3, N'WsBvKzImYBRZ1jdnnk0fyg==', 1, -8355648)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (5, N'Кочетков Денис Александрович', N'kdacash', N'TMTbWZXR2gXw6bbo/ghc8hRpJRjc8YV4jFcS5MMTxis=', 2, N'Ul0BmrCbBmy4CNakiFiEpA==', 0, NULL)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (6, N'Никифорова Юлия Сергеевна', N'nysman', N'LAiY+TaL2vLl/P8qkpVVA7uo1b+3mJGXSW+6XbWS+co=', 3, N'tRdPNK78FPDBNqjVZN3R1Q==', 1, NULL)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (7, N'Иванов Антон Петрович', N'iapman', N'EO8YyWr4+i/TcVJo/mP8qITzHkHp3xarHFIZ5aDFjHY=', 3, N'YBEEnOTWSlLBIPLpl4tXLQ==', 0, NULL)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (8, N'Баринов Виктор Петрович', N'bvpman', N'mOYCZQeaN573m4zKV6/NA6ua0kKNH8nuijhGzdIqpZo=', 3, N'i+XUjxTs8r+1I8PW3+23kQ==', 1, NULL)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (9, N'Коршикова Эльвина Павловна', N'kepwait', N'QbFCYbGvsSchzvVXsG2nOJ3Njbs6qIARcS06igW96LA=', 1, N'oE95MKm5DRA1u6LtyQHaPg==', 0, NULL)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (10, N'Меньшиков Данила Александрович', N'mdawait', N'1/ClEZ+2gBIc8u6FIg96xEdiYxUqyXxxKB+RcEEctQM=', 1, N'FNcqQ++a0U48oCM67irQ/Q==', 0, NULL)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (11, N'Корнев Виктор Павлович', N'kvpwait', N'DKm/KSg+gPjbYDSnZMbyZqED33B4xWbK/mM31eGgGOo=', 1, N'EGpY7BYmqy9YNX2O0uxqyA==', 0, NULL)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (12, N'Пегушин Григорий Степанович', N'pgswait', N'hvJsqYRq37NBrrbF1yhACfV/Jga7fnKKys9ud2+qG0w=', 1, N'CuwUL4blBxGxvzvMiGSqfQ==', 0, NULL)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (13, N'Ким Егор Сергеевич', N'keswait', N'rylXeA8S9yugtzM62swAdMC9hzhflP6j5M/q5G9ftT0=', 1, N'6XavJT/UStf9BoG1io3cAA==', 0, NULL)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (14, N'Бельский Михаил Сергеевич', N'bmswait', N'etnQQHrBD4AoeuZgAl4TZyGYWwdfW6+kFg7VpsDioA8=', 1, N'580slc6j8BBWRnu3M6Z2og==', 0, NULL)
+INSERT [dbo].[Users] ([Id], [Fullname], [Login], [Password], [RoleId], [Salt], [IsOnShift], [DisplayColor]) VALUES (15, N'Юнусов Петр Степанович', N'ypswait', N'KFEGCCkrrcSZtxCB7lxFZPJtWaEx41JDMHUd8N9w6uA=', 1, N'ddcvzVvVUHbLVemZN6fx8g==', 1, NULL)
 SET IDENTITY_INSERT [dbo].[Users] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Shifts] ON 
@@ -172,23 +172,35 @@ INSERT [dbo].[Shifts] ([Id], [OpenedAt], [ClosedAt]) VALUES (9, CAST(N'2024-05-2
 INSERT [dbo].[Shifts] ([Id], [OpenedAt], [ClosedAt]) VALUES (10, CAST(N'2024-05-30T10:21:09.417' AS DateTime), CAST(N'2024-06-03T18:36:34.863' AS DateTime))
 INSERT [dbo].[Shifts] ([Id], [OpenedAt], [ClosedAt]) VALUES (11, CAST(N'2024-06-03T18:36:38.113' AS DateTime), CAST(N'2024-06-05T18:16:18.050' AS DateTime))
 INSERT [dbo].[Shifts] ([Id], [OpenedAt], [ClosedAt]) VALUES (12, CAST(N'2024-06-05T18:16:31.330' AS DateTime), CAST(N'2024-06-06T20:26:10.837' AS DateTime))
-INSERT [dbo].[Shifts] ([Id], [OpenedAt], [ClosedAt]) VALUES (13, CAST(N'2024-06-06T20:26:14.573' AS DateTime), NULL)
+INSERT [dbo].[Shifts] ([Id], [OpenedAt], [ClosedAt]) VALUES (13, CAST(N'2024-06-06T20:26:14.573' AS DateTime), CAST(N'2024-06-07T16:46:08.917' AS DateTime))
+INSERT [dbo].[Shifts] ([Id], [OpenedAt], [ClosedAt]) VALUES (14, CAST(N'2024-06-07T16:46:12.853' AS DateTime), CAST(N'2024-06-08T14:14:53.700' AS DateTime))
+INSERT [dbo].[Shifts] ([Id], [OpenedAt], [ClosedAt]) VALUES (15, CAST(N'2024-06-08T14:14:57.200' AS DateTime), CAST(N'2024-06-09T17:32:05.380' AS DateTime))
+INSERT [dbo].[Shifts] ([Id], [OpenedAt], [ClosedAt]) VALUES (16, CAST(N'2024-06-09T17:32:10.660' AS DateTime), NULL)
 SET IDENTITY_INSERT [dbo].[Shifts] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Orders] ON 
 
 INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (1, CAST(N'2024-05-18T21:51:46.210' AS DateTime), 1, NULL, 4, NULL, NULL, NULL, NULL, 2, NULL)
 INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (2, CAST(N'2024-05-18T21:51:46.210' AS DateTime), 2, CAST(N'2024-05-18T23:51:46.210' AS DateTime), 4, NULL, NULL, NULL, NULL, 2, NULL)
-INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (3, CAST(N'2024-05-18T21:51:46.210' AS DateTime), 1, NULL, 10, 0, 0, 0, 0, 3, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (3, CAST(N'2024-05-18T21:51:46.210' AS DateTime), 1, NULL, 15, 0, 0, 0, 0, 3, 0)
 INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (5, CAST(N'2024-05-18T21:51:46.210' AS DateTime), 2, CAST(N'2024-05-30T11:00:00.963' AS DateTime), 10, 0, 0, 0, 500, 3, NULL)
-INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (8, CAST(N'2024-05-30T12:29:51.130' AS DateTime), 4, NULL, 10, 0, 0, 0, 0, 3, 0)
-INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (16, CAST(N'2024-05-30T21:00:34.377' AS DateTime), 3, NULL, 10, 0, 0, 0, 0, 4, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (8, CAST(N'2024-05-30T12:29:51.130' AS DateTime), 4, NULL, 15, 0, 0, 0, 0, 3, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (16, CAST(N'2024-05-30T21:00:34.377' AS DateTime), 3, NULL, 15, 0, -480, 1000, 0, 4, 480)
 INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (27, CAST(N'2024-05-30T22:52:13.480' AS DateTime), 2, NULL, 10, 0, 0, 0, 0, 4, 0)
-INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (28, CAST(N'2024-05-30T22:52:21.170' AS DateTime), 10, NULL, 10, 0, 0, 0, 0, 4, 0)
-INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (29, CAST(N'2024-05-30T22:52:24.130' AS DateTime), 5, NULL, 10, 0, 0, 0, 0, 4, 0)
-INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (30, CAST(N'2024-05-30T22:52:28.610' AS DateTime), 11, NULL, 10, 0, 0, 0, 0, 4, 0)
-INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (31, CAST(N'2024-06-06T21:30:22.737' AS DateTime), 6, NULL, 13, 0, 0, 0, 0, 2, 0)
-INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (32, CAST(N'2024-06-07T02:48:48.393' AS DateTime), 7, CAST(N'2024-06-07T03:20:03.703' AS DateTime), 13, 0, 0, 1440, 0, 2, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (28, CAST(N'2024-05-30T22:52:21.170' AS DateTime), 10, NULL, 16, 0, 0, 0, 0, 4, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (29, CAST(N'2024-05-30T22:52:24.130' AS DateTime), 5, NULL, 16, 0, 0, 0, 0, 4, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (31, CAST(N'2024-06-06T21:30:22.737' AS DateTime), 6, NULL, 16, 0, 0, 0, 0, 13, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (32, CAST(N'2024-06-07T02:48:48.393' AS DateTime), 7, CAST(N'2024-06-07T03:20:03.703' AS DateTime), 16, 0, 0, 1440, 0, 2, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (37, CAST(N'2024-06-08T14:34:24.017' AS DateTime), 2, NULL, 15, 0, 0, 0, 0, 2, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (38, CAST(N'2024-06-08T17:18:17.157' AS DateTime), 11, NULL, 16, 0, 0, 0, 0, 4, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (39, CAST(N'2024-06-08T17:18:21.837' AS DateTime), 7, NULL, 16, 0, 0, 0, 0, 4, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (40, CAST(N'2024-06-08T17:18:24.473' AS DateTime), 8, NULL, 16, 0, 0, 0, 0, 4, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (41, CAST(N'2024-06-08T17:18:27.743' AS DateTime), 9, NULL, 16, 0, 0, 0, 0, 4, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (42, CAST(N'2024-06-08T17:18:31.020' AS DateTime), 12, NULL, 16, 0, 0, 0, 0, 4, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (44, CAST(N'2024-06-09T18:50:53.063' AS DateTime), 1, NULL, 16, 0, 0, 0, 0, 4, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (45, CAST(N'2024-06-09T18:52:56.030' AS DateTime), 2, NULL, 16, 0, 0, 0, 0, 2, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (46, CAST(N'2024-06-09T18:54:04.723' AS DateTime), 3, NULL, 16, 0, 0, 0, 0, 4, 0)
+INSERT [dbo].[Orders] ([Id], [CreatedAt], [TableId], [DeletedAt], [ShiftId], [PaidByGiftCard], [PaidByCash], [PaidByCredit], [PaidByQR], [WaiterId], [ChangeGiven]) VALUES (47, CAST(N'2024-06-09T19:07:30.210' AS DateTime), 4, NULL, 16, 0, 0, 0, 0, 2, 0)
 SET IDENTITY_INSERT [dbo].[Orders] OFF
 GO
 SET IDENTITY_INSERT [dbo].[OrderMenuItems] ON 
@@ -221,7 +233,31 @@ INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (1
 INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (131, 32, 1, 3)
 INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (132, 32, 3, 4)
 INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (133, 31, 1, 7)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (134, 31, 1, 33)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (135, 31, 2, 32)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (136, 31, 1, 54)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (137, 31, 1, 53)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (138, 31, 1, 30)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (139, 31, 2, 29)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (140, 37, 1, 33)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (141, 37, 1, 31)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (142, 37, 1, 13)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (143, 37, 2, 18)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (144, 37, 1, 14)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (145, 37, 1, 15)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (146, 37, 1, 33)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (147, 37, 1, 31)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (148, 37, 1, 28)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (149, 37, 1, 59)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (150, 37, 1, 6)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (151, 47, 1, 33)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (152, 47, 1, 31)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (153, 46, 1, 13)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (154, 46, 1, 18)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (155, 46, 1, 15)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (156, 46, 1, 12)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (157, 45, 1, 59)
+INSERT [dbo].[OrderMenuItems] ([Id], [OrderId], [Count], [MenuItemId]) VALUES (158, 45, 1, 6)
 SET IDENTITY_INSERT [dbo].[OrderMenuItems] OFF
 GO
-
 ```
