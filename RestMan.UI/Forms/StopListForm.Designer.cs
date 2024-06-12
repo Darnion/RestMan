@@ -120,8 +120,8 @@
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 30);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 2;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 59F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41F));
             this.tableLayoutPanel.Size = new System.Drawing.Size(867, 538);
             this.tableLayoutPanel.TabIndex = 5;
             // 
@@ -141,7 +141,7 @@
             this.dataGridViewStopList.ReadOnly = true;
             this.dataGridViewStopList.RowHeadersVisible = false;
             this.dataGridViewStopList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewStopList.Size = new System.Drawing.Size(512, 315);
+            this.dataGridViewStopList.Size = new System.Drawing.Size(512, 309);
             this.dataGridViewStopList.TabIndex = 0;
             this.dataGridViewStopList.SelectionChanged += new System.EventHandler(this.dataGridViewStopList_SelectionChanged);
             // 
@@ -166,9 +166,9 @@
             // 
             this.flowLayoutPanelActualList.AutoScroll = true;
             this.flowLayoutPanelActualList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelActualList.Location = new System.Drawing.Point(4, 326);
+            this.flowLayoutPanelActualList.Location = new System.Drawing.Point(4, 320);
             this.flowLayoutPanelActualList.Name = "flowLayoutPanelActualList";
-            this.flowLayoutPanelActualList.Size = new System.Drawing.Size(512, 208);
+            this.flowLayoutPanelActualList.Size = new System.Drawing.Size(512, 214);
             this.flowLayoutPanelActualList.TabIndex = 1;
             // 
             // groupBoxStopListFilter
@@ -182,7 +182,7 @@
             this.groupBoxStopListFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxStopListFilter.Location = new System.Drawing.Point(523, 4);
             this.groupBoxStopListFilter.Name = "groupBoxStopListFilter";
-            this.groupBoxStopListFilter.Size = new System.Drawing.Size(340, 315);
+            this.groupBoxStopListFilter.Size = new System.Drawing.Size(340, 309);
             this.groupBoxStopListFilter.TabIndex = 2;
             this.groupBoxStopListFilter.TabStop = false;
             this.groupBoxStopListFilter.Text = "Поиск по стоп-листу";
@@ -243,7 +243,7 @@
             // 
             this.buttonDeleteFromStopList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDeleteFromStopList.Location = new System.Drawing.Point(81, 276);
+            this.buttonDeleteFromStopList.Location = new System.Drawing.Point(81, 270);
             this.buttonDeleteFromStopList.Name = "buttonDeleteFromStopList";
             this.buttonDeleteFromStopList.Size = new System.Drawing.Size(178, 33);
             this.buttonDeleteFromStopList.TabIndex = 0;
@@ -256,9 +256,9 @@
             // 
             this.groupBoxActualListFilter.Controls.Add(this.textBoxActualListSearch);
             this.groupBoxActualListFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxActualListFilter.Location = new System.Drawing.Point(523, 326);
+            this.groupBoxActualListFilter.Location = new System.Drawing.Point(523, 320);
             this.groupBoxActualListFilter.Name = "groupBoxActualListFilter";
-            this.groupBoxActualListFilter.Size = new System.Drawing.Size(340, 208);
+            this.groupBoxActualListFilter.Size = new System.Drawing.Size(340, 214);
             this.groupBoxActualListFilter.TabIndex = 3;
             this.groupBoxActualListFilter.TabStop = false;
             this.groupBoxActualListFilter.Text = "Поиск по актуальным позициям";
