@@ -48,6 +48,11 @@ namespace RestMan.UI.Forms
                                             .Items
                                             .Cast<Hall>()
                                             .FirstOrDefault(x => x.Id == Table.HallId);
+
+                if (comboBoxHall.SelectedItem == null)
+                {
+                    comboBoxHall.SelectedIndex = 0;
+                }
             }
         }
 
